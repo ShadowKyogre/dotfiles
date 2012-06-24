@@ -1,0 +1,17 @@
+import rlcompleter, readline
+try:
+	import dateutil
+except ImportError as e:
+	pass
+try:
+	import datetime
+except ImportError as e:
+        pass
+try:
+	import swisseph
+except ImportError as e:
+        pass
+import pprint
+import sys
+sys.displayhook = pprint.pprint
+readline.parse_and_bind('tab: complete')
