@@ -37,7 +37,7 @@ set smartindent
 :imap <C-n> <Esc>:tabnew<CR>
 
 " Get Visual block to work
-:nmap <S-C-B> <Esc>v<C-Q>
+:map <S-C-B> <Esc>v<C-Q>
 :imap <S-C-B> <Esc>v<C-Q>
 
 filetype plugin on
