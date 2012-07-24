@@ -3,15 +3,29 @@ try:
 	import dateutil
 except ImportError as e:
 	pass
+
 try:
 	import datetime
 except ImportError as e:
         pass
+
 try:
 	import swisseph
 except ImportError as e:
         pass
+
+try:
+	import random
+except ImportError as e:
+	pass
+
 import pprint
 import sys
 sys.displayhook = pprint.pprint
 readline.parse_and_bind('tab: complete')
+
+def sample_multi(entries, min=0, max=None):
+	if max is None:
+		max = len(entries)
+	this_many = random.randint(min,len(max))
+	return random.sample(entries, this_many)
