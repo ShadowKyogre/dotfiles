@@ -27,5 +27,5 @@ readline.parse_and_bind('tab: complete')
 def sample_multi(entries, min=0, max=None):
 	if max is None:
 		max = len(entries)
-	this_many = random.randint(min,len(max))
+	this_many = random.randint(min,max)
 	return random.sample(entries, this_many)
