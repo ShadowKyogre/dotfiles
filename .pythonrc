@@ -33,4 +33,10 @@ def sample_multi(entries, min=0, max=None):
 	this_many = random.randint(min,max)
 	return random.sample(entries, this_many)
 
-c
+def mat_list(string):
+	el_separator = re.compile(r',|, | ')
+	result = []
+	for sublist in string.strip().split(';'):
+		print(el_separator.split(sublist))
+		result.append([ float(s) for s in el_separator.split(sublist) ])
+	return result
