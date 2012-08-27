@@ -21,6 +21,9 @@ except ImportError as e:
 
 import pprint
 import sys
+import random
+import re
+
 sys.displayhook = pprint.pprint
 readline.parse_and_bind('tab: complete')
 
@@ -29,3 +32,10 @@ def sample_multi(entries, min=0, max=None):
 		max = len(entries)
 	this_many = random.randint(min,max)
 	return random.sample(entries, this_many)
+
+def mat_list(string):
+	el_separator = re.compile(r'(,|,|, | )')
+	result = []
+	for sublist in string.strip().split(';'):
+		result.append([ float(s) for s in el_separator.split(sublist) ])
+	return result
