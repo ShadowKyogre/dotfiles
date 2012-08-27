@@ -36,6 +36,7 @@ def sample_multi(entries, min=0, max=None):
 def mat_list(string):
 	"""
 	Takes a MATLAB style string and translates it into an appropriate array.
+	replaces _convert_from_string in here: https://github.com/numpy/numpy/blob/master/numpy/matrixlib/defmatrix.py
 	"""
 	el_sep = re.compile(r',|, | ')
 	result = []
