@@ -45,7 +45,7 @@ def mat_list(string):
 		if len(result) > 0:
 			if len(result[0]) != len(result[-1]):
 				raise ValueError("Array given is uneven!")
-	if len(result) > 1:
-		return result
-	else:
+	if len(result) == 1:
 		return result[0]
+	else:
+		return result
