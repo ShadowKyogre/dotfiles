@@ -41,7 +41,6 @@ def mat_list(string):
 	el_sep = re.compile(r',|, | ')
 	result = []
 	for sublist in re.split(r'\n|;',string.strip()):
-		print(el_separator.split(sublist))
 		result.append([ complex(s) for s in el_sep.split(sublist) ])
 		if len(result) > 0:
 			if len(result[0]) != len(result[-1]):
