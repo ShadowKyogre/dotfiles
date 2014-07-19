@@ -2,6 +2,7 @@
 [ -z "$PS1" ] && return
 #for pkg in *; do ( cd "$pkg"; makepkg -i ); done
 stty stop ''
+source "${HOME}/.bash_private"
 
 ###One-Time Greetings###
 #img2txt $HOME/.face.icon -H 20 -W 40 -f utf8 > .avatar.txt;cat .avatar.txt
@@ -24,10 +25,12 @@ export QT_IM_MODULE='uim'
 export XMODIFIERS=@im='uim'
 export PYTHONSTARTUP=~/.pythonrc
 PATH="$HOME/bin:$HOME/bin/compiz_pipes:$PATH"
-
 ###Aliases###
+alias ytmp4="youtube-dl -f mp4 -a"
+alias ytmp3="youtube-dl -x --audio-format mp3 -a"
+alias pyserve="python -m http.server"
 alias reload='source ~/.bashrc'
-alias ls='ls --color=auto -X'
+alias ls='ls --color=auto -X --block-size=MB'
 alias udb='yaourt -Sy'
 alias pkgin='yaourt -S'
 #alias abbin='sudo bauerbill -S --aur --abs --editor $EDITOR'
@@ -52,6 +55,7 @@ alias ftype='file -b --mime-type'
 alias ftail='tail -n+1'
 alias xml2xsd='java -jar /usr/share/java/trang.jar'
 alias vim='vim -p'
+alias less='less -r'
 
 # alias urepo='spaceman --update-repos'
 # alias pkgin='sudo spaceman -i'
@@ -73,7 +77,7 @@ alias vim='vim -p'
 # #alias nicc='sudo yaourt -Sc'
 # alias allcc='sudo rm -rfv /var/cache/spaceman/pkg/*'
 
-alias saneperms='find . -type f -exec chmod a-x {} \;'
+alias saneperms='find . -type f -exec chmod a-x -v {} \;'
 alias history='history|cut -c 8-|zenity --list --column History'
 alias grep='grep --color=auto'
 alias myip='curl www.whatismyip.org'
@@ -93,7 +97,8 @@ clean_dropbox()
 {
 	IFS="
 "
-	files=$(find  ~/Dropbox -name "*'s conflicted copy*")
+	#files=$(find  ~/Dropbox -name "*'s conflicted copy*")
+	files=$(find ~/Dropbox -regextype posix-extended -regex '.*\([0-9]+\).*')
 	if ! test -z "${files}";then
 		rm -vi $files
 	else
@@ -152,7 +157,7 @@ pgwall()
 
 fswidget()
 {
-	gdmap -f $HOME & disown -a
+	 gdmap -f $HOME & disown -a
 	sleep 10
 	import -window "Graphical Disk Map 0.8.1" test.jpg
 	killall gdmap
@@ -188,6 +193,22 @@ massbuild()
 	bldpkg
 	done
 }
+
+countdown()
+(
+  IFS=:
+  set -- $*
+  secs=$(( ${1#0} * 3600 + ${2#0} * 60 + ${3#0} ))
+  while [ $secs -gt 0 ]
+  do
+    sleep 1 &
+    printf "\r%02d:%02d:%02d" $((secs/3600)) $(( (secs/60)%60)) $((secs%60))
+    secs=$(( $secs - 1 ))
+    wait
+  done
+  echo
+  ffplay -autoexit /usr/share/sounds/KDE-Sys-App-Error-Critical.ogg
+)
 
 function bashtips {
 cat <<EOF
@@ -286,10 +307,27 @@ wgit()
 	if (( $# == 2 ));then
 		git clone "git@github.com:${1}/${2}.git"
 	elif (( $# == 1 ));then
-		git clone "git@github.com:ShadowKyogre/${2}.git"
+		git clone "git@github.com:ShadowKyogre/${1}.git"
 	else
 		git clone "git@github.com:${1}/${2}.git" -b "${3}"
 	fi
+}
+
+grepplog()
+{
+cd ~/.purple/logs"/${2,,}"
+if [ $# -gt 4 ];then
+	tar -jcvf "${5}" $(grep -lr "${1}" "${3,,}/${4,,}")
+elif [ $# -eq 4 ];then
+	grep -lr "${1}" "${3,,}/${4,,}"
+else
+	echo "Not enough arguments!"
+fi
+cd -
+}
+
+list_exe_icons() {
+    wrestool -l "$1" | grep group_icon | awk '{ print $2}' | cut -f2 -d=
 }
 
 ###Colors for reference###
