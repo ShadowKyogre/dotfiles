@@ -31,6 +31,8 @@ set nobackup
 set nowritebackup
 set spell
 set smartindent
+set linebreak
+set display+=lastline
 
 " Things for new files
 :nmap <C-n> :tabnew<CR>
