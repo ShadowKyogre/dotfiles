@@ -23,9 +23,15 @@ function __fish_complete_cd --description 'Completions for the cd command'
 		# Squelch descriptions per issue 254
 		#eval printf '\%s\\n' $ctoken\*/
 		#printf '\%s\\n' $ctoken\*/
-		set expanded (echo $ctoken|sed "s|^~/|$HOME|")
-		for ctk in (find (dirname $expanded) -maxdepth 1 -type d -name (basename $expanded))
-			printf '%s\n' $ctk
+		set expanded (echo $ctoken|sed "s|^~/|$HOME/|")
+		if test -d $expanded
+			for ctk in (find $expanded -maxdepth 1 -type d)
+				printf '%s\n' $ctk
+			end
+		else
+			for ctk in (find (dirname $expanded) -maxdepth 1 -type d -wholename (basename $expanded)\*)
+				printf '%s\n' $ctk
+			end
 		end
 	else
 		# This is a relative search path
@@ -48,11 +54,12 @@ function __fish_complete_cd --description 'Completions for the cd command'
 						printf '%s\n' $ctk
 					end
 				else
-					for ctk in (find . -maxdepth 1 -type d -name $ctoken)
+					for ctk in (find . -maxdepth 1 -type d -wholename $ctoken\*)
 						printf '%s\n' $ctk
 					end
 				end
 			else
+
 				printf '"%s\tin "'$i'"\n"' $ctoken\*/
 			end
 		end
