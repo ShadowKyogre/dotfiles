@@ -1,4 +1,4 @@
-function pset
+function pset --no-scope-shadowing
 	set -l _options
     set -l _variables
     for _item in $argv
