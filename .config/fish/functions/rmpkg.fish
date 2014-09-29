@@ -1,3 +1,3 @@
 function rmpkg
-	sudo yaourt -R $argv; 
+	yaourt -R $argv; 
 end

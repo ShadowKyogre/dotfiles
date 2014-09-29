@@ -1,3 +1,3 @@
 function allcc
-	sudo yaourt -Scc $argv; 
+	yaourt -Scc $argv; 
 end

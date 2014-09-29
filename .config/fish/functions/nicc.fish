@@ -1,3 +1,3 @@
 function nicc
-	sudo yaourt -Sc $argv; 
+	yaourt -Sc $argv; 
 end

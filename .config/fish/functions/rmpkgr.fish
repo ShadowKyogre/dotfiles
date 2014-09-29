@@ -1,3 +1,3 @@
 function rmpkgr
-	sudo yaourt -Rsnc $argv; 
+	yaourt -Rsnc $argv; 
 end

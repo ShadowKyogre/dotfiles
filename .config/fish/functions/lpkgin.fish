@@ -1,3 +1,3 @@
 function lpkgin
-	sudo yaourt -U $argv; 
+	yaourt -U $argv; 
 end
