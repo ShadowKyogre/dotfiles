@@ -11,3 +11,15 @@ function fish_prompt
 	end
 	printf "%s>%s--< %s" (set_color 5F00AF) (set_color red) (set_color normal)
 end
+
+#alias completions
+complete -c pkgin -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
+complete -c pkgs -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
+complete -c pkgq -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
+complete -c pkgu -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
+complete -c getpkg -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
+complete -c lpkgin -xa '(__fish_complete_suffix pkg.tar.gz)'
+complete -c pkgi -xa "(pacman -Q | tr ' ' \t)"
+complete -c lspkg -xa "(pacman -Q | tr ' ' \t)"
+complete -c pkgiq -xa "(pacman -Q | tr ' ' \t)"
+complete -c pkgis -xa "(pacman -Q | tr ' ' \t)"
