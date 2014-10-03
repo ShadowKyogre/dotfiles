@@ -7,6 +7,7 @@ set nocp
 set clipboard=unnamed
 source $VIMRUNTIME/mswin.vim
 behave xterm
+set mousemodel=popup
 
 " folding stuff
 set foldmethod=syntax
@@ -41,10 +42,16 @@ set display+=lastline
 :nmap <C-n> :tabnew<CR>
 :imap <C-n> <Esc>:tabnew<CR>
 
+
+" Use the arrow keys to move through soft wrapped lines
+:imap <Down> <C-o>gj
+:imap <Up> <C-o>gk
+
 " Get Visual block to work
 :map <S-C-B> <Esc>v<C-Q>
 :imap <S-C-B> <Esc>v<C-Q>
 
+execute pathogen#infect()
 filetype plugin on
 syntax on
 
