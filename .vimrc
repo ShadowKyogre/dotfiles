@@ -68,6 +68,7 @@ set tags+=~/.vim/tags/cpp
 
 if has("gui_running")
 	colors darkblue
+	:map <F11> :call FullScreen()<CR>
 endif
 
 command! -nargs=* Hc call DoPrint('<args>')
@@ -76,6 +77,17 @@ function! DoPrint(args)
   color default
   exec 'hardcopy '.a:args
   exec 'color '.colorsave
+endfunction
+
+let g:fullScreened = 0
+function! FullScreen()
+	if g:fullScreened == 0
+		let g:fullScreened = 1
+		set guioptions-=T guioptions-=m
+	else
+		let g:fullScreened = 0
+		set guioptions+=T guioptions+=m
+	endif
 endfunction
 
 " see https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
