@@ -1,5 +1,5 @@
 function transfer
-	set ARGS "-i"
+	set ARGS "--progress-bar" "-i"
         for i in $argv
                 set ARGS $ARGS "-F" "filedata=@$i"
         end
