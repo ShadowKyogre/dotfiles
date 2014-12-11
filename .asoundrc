@@ -1,0 +1,83 @@
+## output device
+#pcm.loopout {
+#  type dmix
+#  ipc_key 328211
+#  slave.pcm "hw:Loopback,0,0"
+##  slave.pcm "hw:2,0,0"
+#}
+#
+## input device
+#pcm.loopin {
+#  type dsnoop
+#  ipc_key 686592
+#  slave.pcm "hw:Loopback,1,0"
+##  slave.pcm "hw:2,1,0"
+#}
+#
+## duplex plug device
+#pcm.loop {
+#  type plug
+#  slave {
+#    pcm {
+#      type asym
+#      playback.pcm "loopout"
+#      capture.pcm "loopin"
+#    }
+#  }
+#}
+
+pcm.mic {
+	type plug
+	slave.pcm "hw:U0x46d0x807,0,0"
+	route_policy "duplicate"
+	ttable {
+		0 {
+			0 1.0
+		}
+		1 {
+			0 1.0
+		}
+	}
+}
+
+pcm.mout {
+  type plug
+  slave.pcm mdev
+  #slave.pcm "hw:0,0"
+  route_policy "duplicate"
+}
+
+pcm.mdev {
+        type multi
+
+		slaves {
+			a {
+				pcm "hw:Loopback,0,0"
+				#pcm "mic"
+				channels 2
+			}
+			b {
+				pcm "hw:0,0"
+				channels 2
+			}
+		}
+		
+		bindings {
+			0 {
+				slave a 
+				channel 0
+			}
+			1 {
+				slave a
+				channel 1
+			}
+			2 {
+				slave b
+				channel 0
+			}
+			3 {
+				slave b
+				channel 1
+			}
+		}
+}
