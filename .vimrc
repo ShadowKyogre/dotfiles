@@ -92,53 +92,53 @@ endfunction
 
 " see https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
 function! WordCount()
-    let currentmode = mode()
-    if !exists('g:lastmode_wc')
-        let g:lastmode_wc = currentmode
-    endif
-    " if we modify file, open a new buffer, be in visual ever, or switch modes
-    " since last run, we recompute.
+	let currentmode = mode()
+	if !exists('g:lastmode_wc')
+		let g:lastmode_wc = currentmode
+	endif
+	" if we modify file, open a new buffer, be in visual ever, or switch modes
+	" since last run, we recompute.
 
-    if &modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
-        let g:lastmode_wc = currentmode
-        let l:old_position = getpos('.')
-        let l:old_status = v:statusmsg
+	if &modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
+		let g:lastmode_wc = currentmode
+		let l:old_position = getpos('.')
+		let l:old_status = v:statusmsg
 		if currentmode == 's'
 			silent execute "insert \<C-o>"
 		endif
 		silent execute "normal! g\<C-g>"
-        if v:statusmsg == '--No lines in buffer--'
-            let b:wordcount = 0
-        else
-            let b:split_wc = split(v:statusmsg)
+		if v:statusmsg == '--No lines in buffer--'
+			let b:wordcount = 0
+		else
+			let b:split_wc = split(v:statusmsg)
 			if len(b:split_wc) == 0
 				let b:wordcount = 0
 			else
-	            if index(b:split_wc, 'Selected') < 0
-	                let b:wordcount = str2nr(b:split_wc[11])
-	            else
-	                let b:wordcount = str2nr(b:split_wc[5])
-	            endif
+				if index(b:split_wc, 'Selected') < 0
+					let b:wordcount = str2nr(b:split_wc[11])
+				else
+					let b:wordcount = str2nr(b:split_wc[5])
+				endif
 			endif
-            let v:statusmsg = l:old_status
-        endif
-        call setpos('.', l:old_position)
-        return b:wordcount
-    else
-        return b:wordcount
-    endif
+			let v:statusmsg = l:old_status
+		endif
+		call setpos('.', l:old_position)
+		return b:wordcount
+	else
+		return b:wordcount
+	endif
 endfunction
 
-set statusline=%t       "tail of the filename
+set statusline=%t	   "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 set statusline+=%{&ff}] "file format
-set statusline+=%h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%y      "filetype
-set statusline+=%=      "left/right separator
+set statusline+=%h	  "help file flag
+set statusline+=%m	  "modified flag
+set statusline+=%r	  "read only flag
+set statusline+=%y	  "filetype
+set statusline+=%=	  "left/right separator
 set statusline+=%l[%c]/%L   "cursor line[column]/total lines
-set statusline+=\ wc:%{WordCount()}    "word count
+set statusline+=\ wc:%{WordCount()}	"word count
 set laststatus=2
 
 let g:xml_syntax_folding=1
