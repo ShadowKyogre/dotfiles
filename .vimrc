@@ -147,4 +147,4 @@ au FileType yaml setlocal expandtab
 
 highlight SpecialKey ctermfg=1
 set list
-set listchars=tab:T>
+set listchars=tab:»·
