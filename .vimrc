@@ -144,7 +144,13 @@ set laststatus=2
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
+au FileType python setlocal list
+au FileType python setlocal listchars=tab:»·
+au FileType c setlocal list
+au FileType c setlocal listchars=tab:»·
+au FileType cpp setlocal list
+au FileType cpp setlocal listchars=tab:»·
+au FileType vim setlocal list
+au FileType vim setlocal listchars=tab:»·
 
 highlight SpecialKey ctermfg=1
-set list
-set listchars=tab:»·
