@@ -1,3 +1,5 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+
 " stuffs
 set mouse=a 
 set hlsearch
@@ -7,6 +9,7 @@ set nocp
 set clipboard=unnamed
 source $VIMRUNTIME/mswin.vim
 behave xterm
+set ttymouse=xterm2
 set mousemodel=popup
 
 " folding stuff
@@ -51,13 +54,20 @@ set display+=lastline
 :map <S-C-B> <Esc>v<C-Q>
 :imap <S-C-B> <Esc>v<C-Q>
 
+" increment with keypad
+:noremap <C-kPlus> <C-A>
+:noremap <C-kMinus> <C-X>
+
 execute pathogen#infect()
 filetype plugin on
 syntax on
 
 " Turn on omni completion
-set ofu=syntaxcomplete#Complete
-set completeopt=menuone,preview
+" set omnifunc=syntaxcomplete#Complete
+" set completeopt=menuone,preview
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:jedi#show_call_signatures = "0"
 
 " Printing options
 set pdev=Virtual_PDF_Printer
@@ -70,6 +80,13 @@ if has("gui_running")
 	colors darkblue
 	:map <F11> :call FullScreen()<CR>
 endif
+
+:map <S-F11> :call ToggleStatus()<CR>
+
+" ---- FUNCS AND CMDS
+
+command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
+command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
 
 command! -nargs=* Hc call DoPrint('<args>')
 function! DoPrint(args)
@@ -87,6 +104,14 @@ function! FullScreen()
 	else
 		let g:fullScreened = 0
 		set guioptions+=T guioptions+=m
+	endif
+endfunction
+
+function! ToggleStatus()
+	if &laststatus > 0
+		set laststatus=0
+	else
+		set laststatus=2
 	endif
 endfunction
 
@@ -129,6 +154,8 @@ function! WordCount()
 	endif
 endfunction
 
+" ---- STATUSLINE
+
 set statusline=%t	   "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 set statusline+=%{&ff}] "file format
@@ -141,9 +168,13 @@ set statusline+=%l[%c]/%L   "cursor line[column]/total lines
 set statusline+=\ wc:%{WordCount()}	"word count
 set laststatus=2
 
+" ---- FTYPES
+
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
+
+" ---- TAB VISIBILITY
 
 highlight SpecialKey ctermfg=1
 set list
