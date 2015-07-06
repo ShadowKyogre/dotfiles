@@ -7,12 +7,12 @@ except ImportError as e:
 try:
 	import datetime
 except ImportError as e:
-        pass
+		pass
 
 try:
 	import swisseph
 except ImportError as e:
-        pass
+		pass
 
 try:
 	import random
@@ -25,7 +25,21 @@ import random
 import re
 
 sys.displayhook = pprint.pprint
-readline.parse_and_bind('tab: complete')
+# readline.parse_and_bind('tab: complete')
+
+try:
+	from jedi.utils import setup_readline
+	setup_readline()
+except ImportError:
+	# Fallback to the stdlib readline completer if it is installed.
+	# Taken from http://docs.python.org/2/library/rlcompleter.html
+	print("Jedi is not installed, falling back to readline")
+	try:
+		import readline
+		import rlcompleter
+		readline.parse_and_bind("tab: complete")
+	except ImportError:
+		print("Readline is not installed either. No tab completion is enabled.")
 
 def sample_multi(entries, min=0, max=None):
 	if max is None:
