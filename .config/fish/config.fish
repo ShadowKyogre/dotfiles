@@ -21,5 +21,13 @@ complete -c getpkg -xa "(pacman -Sl | cut --delim ' ' --fields 2- | tr ' ' \t)"
 complete -c lpkgin -xa '(__fish_complete_suffix pkg.tar.gz)'
 complete -c pkgi -xa "(pacman -Q | tr ' ' \t)"
 complete -c lspkg -xa "(pacman -Q | tr ' ' \t)"
-complete -c pkgiq -xa "(pacman -Q | tr ' ' \t)"
+complete -c rmpkg -xa "(pacman -Q | tr ' ' \t)"
+complete -c rmpkgr -xa "(pacman -Q | tr ' ' \t)"
 complete -c pkgis -xa "(pacman -Q | tr ' ' \t)"
+complete -c burp -s c -l category -xa "(burp -c f 2>&1|tail -n+3|sed 's/\t//g')"
+complete -c burp -xa '(__fish_complete_suffix src.tar.gz)'
+
+#other completions
+complete -c qpdfview -xa '(__fish_complete_suffix pdf)'
+complete -c lowriter -xa '(__fish_complete_suffix odt)'
+complete -c localc -xa '(__fish_complete_suffix ods)'

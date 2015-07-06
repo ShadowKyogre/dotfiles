@@ -1,3 +1,3 @@
 function pkgs
-	yaourt -Ss $argv; 
+	pacaur -Ss $argv; 
 end

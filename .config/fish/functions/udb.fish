@@ -1,3 +1,3 @@
 function udb
-	yaourt -Sy $argv; 
+	pacaur -Sy $argv; 
 end

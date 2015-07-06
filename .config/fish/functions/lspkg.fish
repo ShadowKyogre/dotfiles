@@ -1,3 +1,3 @@
 function lspkg
-	yaourt -Ql $argv; 
+	pacaur -Ql $argv; 
 end

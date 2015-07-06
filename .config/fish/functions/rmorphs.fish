@@ -1,3 +1,3 @@
 function rmorphs
-	yaourt -Qdtq | sudo yaourt -Rs - $argv; 
+	pacaur -Qdtq | sudo pacaur -Rs - $argv; 
 end

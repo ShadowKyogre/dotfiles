@@ -1,3 +1,3 @@
 function pkgu
-	yaourt -Syua $argv; 
+	pacaur -Syu $argv; 
 end

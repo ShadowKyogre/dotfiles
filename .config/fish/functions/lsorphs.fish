@@ -1,3 +1,3 @@
 function lsorphs
-	yaourt -Qdt $argv; 
+	pacaur -Qdt $argv; 
 end

@@ -1,3 +1,3 @@
 function rmpkgr
-	yaourt -Rsnc $argv; 
+	pacaur -Rsnc $argv; 
 end

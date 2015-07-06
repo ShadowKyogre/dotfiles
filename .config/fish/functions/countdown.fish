@@ -13,7 +13,7 @@ function countdown
 	end
 
 	if test (count $argv) -eq 2
-		smplayer -actions "compact play" $argv[2] >/dev/null ^/dev/null &
+		vlc --qt-start-minimized --qt-notification=0 --qt-minimal-view $argv[2] >/dev/null ^/dev/null &
 	end
 
 	while test $secs -gt 0

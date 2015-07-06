@@ -1,3 +1,3 @@
 function getpkg
-	yaourt -G $argv; 
+	pacaur -d $argv; 
 end

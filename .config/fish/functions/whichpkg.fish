@@ -1,3 +1,3 @@
 function whichpkg
-	yaourt -Qo $argv; 
+	pacaur -Qo $argv; 
 end

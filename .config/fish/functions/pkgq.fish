@@ -1,3 +1,3 @@
 function pkgq
-	yaourt -Si $argv; 
+	pacaur -Si $argv; 
 end

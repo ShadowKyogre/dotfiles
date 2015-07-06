@@ -1,3 +1,3 @@
 function allcc
-	yaourt -Scc $argv; 
+	pacaur -Scc $argv; 
 end

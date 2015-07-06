@@ -1,3 +1,3 @@
 function pkgis
-	yaourt -Qs $argv; 
+	pacaur -Qs $argv; 
 end

@@ -1,3 +1,3 @@
 function lpkgin
-	yaourt -U $argv; 
+	pacaur -U $argv; 
 end

@@ -1,3 +1,3 @@
 function rmpkg
-	yaourt -R $argv; 
+	pacaur -R $argv; 
 end

@@ -1,3 +1,3 @@
 function nicc
-	yaourt -Sc $argv; 
+	pacaur -Sc $argv; 
 end
