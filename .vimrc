@@ -62,8 +62,10 @@ set display+=lastline
 " :imap <S-C-B> <Esc>v<C-Q>
 
 " increment with keypad
-:noremap <C-kPlus> <C-A>
-:noremap <C-kMinus> <C-X>
+:nnoremap <kPlus> <C-A>
+:nnoremap <kMinus> <C-X>
+:nnoremap + <C-A>
+:nnoremap - <C-X>
 
 execute pathogen#infect()
 filetype plugin on
