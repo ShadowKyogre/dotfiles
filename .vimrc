@@ -9,7 +9,9 @@ set nocp
 set clipboard=unnamedplus
 " source $VIMRUNTIME/mswin.vim
 behave xterm
-set ttymouse=xterm2
+if !has('nvim')
+	set ttymouse=xterm2
+endif
 set mousemodel=popup
 
 " folding stuff
@@ -45,9 +47,26 @@ set display+=lastline
 :nmap <C-n> :tabnew<CR>
 :imap <C-n> <Esc>:tabnew<CR>
 
+" always center current line after movement
+:nnoremap <C-U> 11kzz
+:nnoremap <C-D> 11jzz
+:nnoremap <Down> gjzz
+:nnoremap <Up> gkzz
+:nnoremap j jzz
+:nnoremap k kzz
+:nnoremap # #zz
+:nnoremap * *zz
+:nnoremap n nzz
+:nnoremap N Nzz
+:nnoremap G Gzz
+:nnoremap <PageUp> <C-b>zz
+:nnoremap <PageDown> <C-f>zz
+
 " Use the arrow keys to move through soft wrapped lines
-:imap <Down> <C-o>gj
-:imap <Up> <C-o>gk
+:imap <Down> <C-o>gj<C-o>zz
+:imap <Up> <C-o>gk<C-o>zz
+:imap <PageUp> <C-o><C-b><C-o>zz
+:imap <PageDown> <C-o><C-f><C-o>zz
 
 " Undo remap changes
 :nnoremap U <C-r>
@@ -56,6 +75,10 @@ set display+=lastline
 
 " hop out of insert mode quickly
 :imap ii <Esc>
+
+if has('nvim')
+	:tnoremap ii <C-\><C-n>
+endif
 
 " Get Visual block to work
 " :map <S-C-B> <Esc>v<C-Q>
@@ -84,6 +107,10 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 " add tags
 set tags+=~/.vim/tags/cpp
+
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
 
 if has("gui_running")
 	colors darkblue
@@ -192,7 +219,9 @@ set listchars=tab:▸\ ,eol:¬
 
 set synmaxcol=128
 set ttyfast " u got a fast terminal
-set ttyscroll=3
+if !has('nvim')
+	set ttyscroll=3
+endif
 set lazyredraw " to avoid scrolling problems
 
 " rainbow parentheses
@@ -204,10 +233,14 @@ let g:buffergator_autodismiss_on_select = 0
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_autoupdate = 1
 
+" map \r to rainbow toggle
+:nnoremap <Leader>r :RainbowParenthesesToggle<CR>
+
 " map \u in normal mode to undo tree
 :nnoremap <Leader>u :UndotreeToggle<CR>
 
-" map \m to Voom
-:nnoremap <Leader>m :Voom<CR>
+" map \v to Voom
+:nnoremap <Leader>v :VoomToggle<CR>
+
 " convenience ft settings for Voom
 let g:voom_ft_modes = {'markdown': 'markdown', 'asciidoc': 'asciidoc', 'python': 'python'}
