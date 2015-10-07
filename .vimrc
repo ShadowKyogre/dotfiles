@@ -6,8 +6,8 @@ set hlsearch
 set background=dark
 set backspace=indent,eol,start
 set nocp
-set clipboard=unnamed
-source $VIMRUNTIME/mswin.vim
+set clipboard=unnamedplus
+" source $VIMRUNTIME/mswin.vim
 behave xterm
 set ttymouse=xterm2
 set mousemodel=popup
@@ -45,14 +45,21 @@ set display+=lastline
 :nmap <C-n> :tabnew<CR>
 :imap <C-n> <Esc>:tabnew<CR>
 
-
 " Use the arrow keys to move through soft wrapped lines
 :imap <Down> <C-o>gj
 :imap <Up> <C-o>gk
 
+" Undo remap changes
+:nnoremap U <C-r>
+:inoremap <c-u> <c-g>u<c-u>
+:inoremap <c-w> <c-g>u<c-w>
+
+" hop out of insert mode quickly
+:imap ii <Esc>
+
 " Get Visual block to work
-:map <S-C-B> <Esc>v<C-Q>
-:imap <S-C-B> <Esc>v<C-Q>
+" :map <S-C-B> <Esc>v<C-Q>
+" :imap <S-C-B> <Esc>v<C-Q>
 
 " increment with keypad
 :noremap <C-kPlus> <C-A>
@@ -173,9 +180,32 @@ set laststatus=2
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
+au BufRead,BufNewFile *.adoc setlocal autoindent filetype=asciidoc
 
 " ---- TAB VISIBILITY
 
 highlight SpecialKey ctermfg=1
 set list
-set listchars=tab:»·
+set listchars=tab:▸\ ,eol:¬
+
+set synmaxcol=128
+set ttyfast " u got a fast terminal
+set ttyscroll=3
+set lazyredraw " to avoid scrolling problems
+
+" rainbow parentheses
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+" buffergator
+let g:buffergator_autodismiss_on_select = 0
+let g:buffergator_autoexpand_on_split = 0
+let g:buffergator_autoupdate = 1
+
+" map \u in normal mode to undo tree
+:nnoremap <Leader>u :UndotreeToggle<CR>
+
+" map \m to Voom
+:nnoremap <Leader>m :Voom<CR>
+" convenience ft settings for Voom
+let g:voom_ft_modes = {'markdown': 'markdown', 'asciidoc': 'asciidoc', 'python': 'python'}
