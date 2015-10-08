@@ -6,7 +6,18 @@ set hlsearch
 set background=dark
 set backspace=indent,eol,start
 set nocp
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
+
+" don't force set clipboard to always clip
+" instead, use these convenience bindings
+
+:noremap ty "+y
+:noremap tY "+Y
+:noremap tp "+p
+:noremap tP "+P
+:noremap td "+d
+:noremap tD "+D
+
 " source $VIMRUNTIME/mswin.vim
 behave xterm
 if !has('nvim')
@@ -221,7 +232,7 @@ set laststatus=2
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
-au BufRead,BufNewFile *.adoc setlocal autoindent filetype=asciidoc
+au BufRead,BufNewFile *.adoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=ant filetype=asciidoc
 
 " ---- TAB VISIBILITY
 
@@ -256,6 +267,10 @@ let g:buffergator_autoupdate = 1
 
 " map \g to Goyo
 :nnoremap <Leader>g :Goyo<CR>
+
+" map to \c to LanguageToolCheck and \C to LanguageToolClear
+:nnoremap <Leader>c :LanguageToolCheck<CR>
+:nnoremap <Leader>C :LanguageToolClear<CR>
 
 if has("gui_running") 
 	autocmd! User GoyoEnter nested call FullScreen(1)
