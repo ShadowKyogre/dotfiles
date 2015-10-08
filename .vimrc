@@ -48,25 +48,29 @@ set display+=lastline
 :imap <C-n> <Esc>:tabnew<CR>
 
 " always center current line after movement
+:nnoremap <ScrollWheelUp> 3kzz
+:nnoremap <ScrollWheelDown> 3jzz
 :nnoremap <C-U> 11kzz
 :nnoremap <C-D> 11jzz
 :nnoremap <Down> gjzz
 :nnoremap <Up> gkzz
-:nnoremap j jzz
-:nnoremap k kzz
+:nnoremap j gjzz
+:nnoremap k gkzz
 :nnoremap # #zz
 :nnoremap * *zz
 :nnoremap n nzz
 :nnoremap N Nzz
 :nnoremap G Gzz
-:nnoremap <PageUp> <C-b>zz
-:nnoremap <PageDown> <C-f>zz
+:nnoremap <PageUp> <PageUp>zz
+:nnoremap <PageDown> <PageDown>zz
 
 " Use the arrow keys to move through soft wrapped lines
-:imap <Down> <C-o>gj<C-o>zz
-:imap <Up> <C-o>gk<C-o>zz
-:imap <PageUp> <C-o><C-b><C-o>zz
-:imap <PageDown> <C-o><C-f><C-o>zz
+:inoremap <Down> <C-o>gj<C-o>zz
+:inoremap <Up> <C-o>gk<C-o>zz
+:inoremap <PageUp> <C-o><PageUp><C-o>zz
+:inoremap <PageDown> <C-o><PageDown><C-o>zz
+:inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
+:inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
 
 " Undo remap changes
 :nnoremap U <C-r>
@@ -241,6 +245,14 @@ let g:buffergator_autoupdate = 1
 
 " map \v to Voom
 :nnoremap <Leader>v :VoomToggle<CR>
+
+" map \g to Goyo
+:nnoremap <Leader>g :Goyo<CR>
+
+if has("gui_running") 
+	autocmd! User GoyoEnter nested call FullScreen()
+	autocmd! User GoyoLeave nested call FullScreen()
+endif
 
 " convenience ft settings for Voom
 let g:voom_ft_modes = {'markdown': 'markdown', 'asciidoc': 'asciidoc', 'python': 'python'}
