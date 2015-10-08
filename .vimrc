@@ -137,13 +137,19 @@ function! DoPrint(args)
 endfunction
 
 let g:fullScreened = 0
-function! FullScreen()
+function! FullScreen(...)
 	if g:fullScreened == 0
 		let g:fullScreened = 1
 		set guioptions-=T guioptions-=m
+		if a:0 > 0
+			set guioptions-=r
+		endif
 	else
 		let g:fullScreened = 0
 		set guioptions+=T guioptions+=m
+		if a:0 > 0
+			set guioptions+=r
+		endif
 	endif
 endfunction
 
@@ -250,8 +256,8 @@ let g:buffergator_autoupdate = 1
 :nnoremap <Leader>g :Goyo<CR>
 
 if has("gui_running") 
-	autocmd! User GoyoEnter nested call FullScreen()
-	autocmd! User GoyoLeave nested call FullScreen()
+	autocmd! User GoyoEnter nested call FullScreen(1)
+	autocmd! User GoyoLeave nested call FullScreen(1)
 endif
 
 " convenience ft settings for Voom
