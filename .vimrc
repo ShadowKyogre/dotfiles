@@ -119,6 +119,8 @@ highlight ExtraWhitespace ctermbg=darkred guibg=darkred
 if has("gui_running")
 	colors darkblue
 	:map <F11> :call FullScreen()<CR>
+else
+	colors delek
 endif
 
 :map <S-F11> :call ToggleStatus()<CR>
