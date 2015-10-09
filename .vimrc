@@ -275,6 +275,10 @@ let g:buffergator_autoupdate = 1
 if has("gui_running") 
 	autocmd! User GoyoEnter nested call FullScreen(1)
 	autocmd! User GoyoLeave nested call FullScreen(1)
+	:nnoremap <Leader>l :Limelight!! 0.75<CR>
+else
+	let g:limelight_conceal_ctermfg=233 
+	:nnoremap <Leader>l :Limelight!!<CR>
 endif
 
 " convenience ft settings for Voom
