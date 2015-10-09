@@ -252,15 +252,20 @@ let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
 " buffergator
+let g:buffergator_suppress_keymaps = 1
 let g:buffergator_autodismiss_on_select = 0
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_autoupdate = 1
 
+" -- LEADER KEY MAPPINGS
+" map \b to buffergator
+:nnoremap <Leader>b :BuffergatorToggle<CR>
+
 " map \r to rainbow toggle
 :nnoremap <Leader>r :RainbowParenthesesToggle<CR>
 
-" map \u in normal mode to undo tree
-:nnoremap <Leader>u :UndotreeToggle<CR>
+" map \t in normal mode to undo tree
+:nnoremap <Leader>t :UndotreeToggle<CR>
 
 " map \v to Voom
 :nnoremap <Leader>v :VoomToggle<CR>
@@ -275,11 +280,12 @@ let g:buffergator_autoupdate = 1
 if has("gui_running") 
 	autocmd! User GoyoEnter nested call FullScreen(1)
 	autocmd! User GoyoLeave nested call FullScreen(1)
-	:nnoremap <Leader>l :Limelight!! 0.75<CR>
+	:nnoremap <Leader>f :Limelight!! 0.75<CR>
 else
-	let g:limelight_conceal_ctermfg=233 
-	:nnoremap <Leader>l :Limelight!!<CR>
+	let g:limelight_conceal_ctermfg=235
+	:nnoremap <Leader>f :Limelight!!<CR>
 endif
+" -- /LEADER KEY MAPPINGS
 
 " convenience ft settings for Voom
 let g:voom_ft_modes = {'markdown': 'markdown', 'asciidoc': 'asciidoc', 'python': 'python'}
