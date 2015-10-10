@@ -19,8 +19,10 @@ set nocp
 :noremap tD "+D
 
 " source $VIMRUNTIME/mswin.vim
-behave xterm
-if !has('nvim')
+if $DISPLAY != "" || has("gui_running")
+	behave xterm
+endif
+if !has('nvim') && $DISPLAY != "" 
 	set ttymouse=xterm2
 endif
 set mousemodel=popup
@@ -57,6 +59,10 @@ set display+=lastline
 " Things for new files
 :nmap <C-n> :tabnew<CR>
 :imap <C-n> <Esc>:tabnew<CR>
+
+" spelling keybindings
+:inoremap <C-l> <esc>[sz=
+:nnoremap <C-i> gi
 
 " always center current line after movement
 :nnoremap <ScrollWheelUp> 3kzz
@@ -131,7 +137,7 @@ if has("gui_running")
 	colors darkblue
 	:map <F11> :call FullScreen()<CR>
 else
-	colors delek
+	colors elflord
 endif
 
 :map <S-F11> :call ToggleStatus()<CR>
@@ -183,7 +189,7 @@ function! WordCount()
 	" if we modify file, open a new buffer, be in visual ever, or switch modes
 	" since last run, we recompute.
 
-	if &modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
+	if &buftype != 'terminal' && (&modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc)
 		let g:lastmode_wc = currentmode
 		let l:old_position = getpos('.')
 		let l:old_status = v:statusmsg
@@ -208,8 +214,10 @@ function! WordCount()
 		endif
 		call setpos('.', l:old_position)
 		return b:wordcount
-	else
+	elseif &buftype != 'terminal'
 		return b:wordcount
+	else
+		return 'N/A'
 	endif
 endfunction
 
@@ -276,6 +284,15 @@ let g:buffergator_autoupdate = 1
 " map to \c to LanguageToolCheck and \C to LanguageToolClear
 :nnoremap <Leader>c :LanguageToolCheck<CR>
 :nnoremap <Leader>C :LanguageToolClear<CR>
+
+:nnoremap <Leader>de :Etymology<CR>
+:nnoremap <Leader>dr :ReverseDict<CR>
+:nnoremap <Leader>ds :SoundsLike<CR>
+:nnoremap <Leader>dss :SpelledLike<CR>
+:vnoremap <Leader>de :EtymologyV<CR>
+:vnoremap <Leader>dr :ReverseDictV<CR>
+:vnoremap <Leader>ds :SoundsLikeV<CR>
+:vnoremap <Leader>dss :SpelledLikeV<CR>
 
 if has("gui_running") 
 	autocmd! User GoyoEnter nested call FullScreen(1)
