@@ -285,13 +285,17 @@ let g:buffergator_autoupdate = 1
 :nnoremap <Leader>c :LanguageToolCheck<CR>
 :nnoremap <Leader>C :LanguageToolClear<CR>
 
-:nnoremap <Leader>de :Etymology<CR>
-:nnoremap <Leader>dr :ReverseDict<CR>
-:nnoremap <Leader>ds :SoundsLike<CR>
+:nnoremap <Leader>d   :Wordnet <C-r>=expand('<cword>')<CR><CR>
+:nnoremap <Leader>dd  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
+:nnoremap <Leader>de  :Etymology<CR>
+:nnoremap <Leader>dr  :ReverseDict<CR>
+:nnoremap <Leader>ds  :SoundsLike<CR>
 :nnoremap <Leader>dss :SpelledLike<CR>
-:vnoremap <Leader>de :EtymologyV<CR>
-:vnoremap <Leader>dr :ReverseDictV<CR>
-:vnoremap <Leader>ds :SoundsLikeV<CR>
+:vnoremap <Leader>d   <Esc>:Wordnet <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+:vnoremap <Leader>dd  <Esc>:WordnetSyns <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+:vnoremap <Leader>de  :EtymologyV<CR>
+:vnoremap <Leader>dr  :ReverseDictV<CR>
+:vnoremap <Leader>ds  :SoundsLikeV<CR>
 :vnoremap <Leader>dss :SpelledLikeV<CR>
 
 if has("gui_running") 
