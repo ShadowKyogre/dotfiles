@@ -133,11 +133,10 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=darkred guibg=darkred
 
+
+colors sk_inkpot
 if has("gui_running")
-	colors darkblue
 	:map <F11> :call FullScreen()<CR>
-else
-	colors elflord
 endif
 
 :map <S-F11> :call ToggleStatus()<CR>
