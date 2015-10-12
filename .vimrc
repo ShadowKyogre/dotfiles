@@ -191,15 +191,19 @@ function! WordCount()
 	if &buftype != 'terminal' && (&modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc)
 		let g:lastmode_wc = currentmode
 		let l:old_position = getpos('.')
-		let l:old_status = v:statusmsg
-		if currentmode == 's'
-			silent execute "insert \<C-o>"
-		endif
-		silent execute "normal! g\<C-g>"
-		if v:statusmsg == '--No lines in buffer--'
+		"let l:old_status = v:statusmsg
+		
+		redir => wordCountMsg
+			if currentmode == 's'
+				silent execute "insert \<C-o>"
+			endif
+			silent execute "normal! g\<C-g>"
+		redir END
+
+		if wordCountMsg =~ '--No lines in buffer--'
 			let b:wordcount = 0
 		else
-			let b:split_wc = split(v:statusmsg)
+			let b:split_wc = split(wordCountMsg)
 			if len(b:split_wc) == 0
 				let b:wordcount = 0
 			else
@@ -209,7 +213,7 @@ function! WordCount()
 					let b:wordcount = str2nr(b:split_wc[5])
 				endif
 			endif
-			let v:statusmsg = l:old_status
+			"let v:statusmsg = l:old_status
 		endif
 		call setpos('.', l:old_position)
 		return b:wordcount
@@ -239,7 +243,7 @@ set laststatus=2
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
-au BufRead,BufNewFile *.adoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=ant filetype=asciidoc
+au BufRead,BufNewFile *.adoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=nt filetype=asciidoc
 
 " ---- TAB VISIBILITY
 
