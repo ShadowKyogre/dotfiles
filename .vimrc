@@ -57,8 +57,8 @@ set linebreak
 set display+=lastline
 
 " Things for new files
-:nmap <C-n> :tabnew<CR>
-:imap <C-n> <Esc>:tabnew<CR>
+:nnoremap <C-n> :tabnew<CR>
+:inoremap <C-n> <Esc>:tabnew<CR>
 
 " spelling keybindings
 :inoremap <C-l> <esc>[sz=
@@ -95,10 +95,12 @@ set display+=lastline
 :inoremap <c-w> <c-g>u<c-w>
 
 " hop out of insert mode quickly
-:imap ii <Esc>
+:nnoremap jj <Esc>
+:vnoremap jj <Esc>
+:inoremap jj <Esc>
 
 if has('nvim')
-	:tnoremap ii <C-\><C-n>
+	:tnoremap jj <C-\><C-n>
 endif
 
 " Get Visual block to work
@@ -178,6 +180,27 @@ function! ToggleStatus()
 		set laststatus=2
 	endif
 endfunction
+
+" http://vim.wikia.com/wiki/Word_frequency_statistics_for_a_file
+function! WordFrequency(caseSensitive) range
+  let all = split(join(getline(a:firstline, a:lastline)), '\A\+')
+  let frequencies = {}
+  for word in all
+    if a:caseSensitive
+        let frequencies[word] = get(frequencies, word, 0) + 1
+    else
+        let frequencies[tolower(word)] = get(frequencies, word, 0) + 1
+    endif
+  endfor
+  vertical belowright new
+  setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
+  for [key,value] in items(frequencies)
+    call append('$', key."\t".value)
+  endfor
+  sort i
+  call setline(1, "count\twords")
+endfunction
+command! -bang -range=% WordFrequency <line1>,<line2>call WordFrequency(<bang>0)
 
 " see https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
 function! WordCount()
