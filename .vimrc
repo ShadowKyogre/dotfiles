@@ -1,5 +1,11 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
+" don't clutter filesystem with lots of swap files
+set directory=$HOME/.vim/swap//
+if !isdirectory(&directory)
+	call mkdir(&directory, "p")
+endif
+
 " stuffs
 set mouse=a 
 set hlsearch
@@ -8,11 +14,15 @@ set backspace=indent,eol,start
 set nocp
 " set clipboard=unnamedplus
 
+" make Y behave like other capitals
+:noremap Y y$
+
 " don't force set clipboard to always clip
 " instead, use these convenience bindings
 
 :noremap ty "+y
-:noremap tY "+Y
+:vnoremap tY "+y
+:nnoremap tY "+y$
 :noremap tp "+p
 :noremap tP "+P
 :noremap td "+d
@@ -60,6 +70,9 @@ set display+=lastline
 :nnoremap <C-n> :tabnew<CR>
 :inoremap <C-n> <Esc>:tabnew<CR>
 
+" Quit all one-handed mapping
+:nnoremap ZA :qa<CR>
+
 " spelling keybindings
 :inoremap <C-l> <esc>[sz=
 :nnoremap <C-i> gi
@@ -94,13 +107,8 @@ set display+=lastline
 :inoremap <c-u> <c-g>u<c-u>
 :inoremap <c-w> <c-g>u<c-w>
 
-" hop out of insert mode quickly
-:nnoremap jj <Esc>
-:vnoremap jj <Esc>
-:inoremap jj <Esc>
-
 if has('nvim')
-	:tnoremap jj <C-\><C-n>
+	:tnoremap <C-[> <C-\><C-n>
 endif
 
 " Get Visual block to work
