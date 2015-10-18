@@ -21,6 +21,11 @@ if has("gui_running")
 else
 	hi Normal guifg=#cfbfad guibg=#080026 guisp=#080026 gui=NONE ctermfg=187 ctermbg=NONE cterm=NONE
 endif
+
+hi SpellBad       term=reverse   ctermbg=125 gui=undercurl guisp=Red
+hi SpellCap       term=reverse   ctermbg=18  gui=undercurl guisp=Blue
+hi SpellRare      term=reverse   ctermbg=54  gui=undercurl guisp=Magenta
+hi SpellLocal     term=underline ctermbg=25  gui=undercurl guisp=Cyan
 "hi CTagsImport -- no settings --
 "hi CTagsGlobalVariable -- no settings --
 "hi SpellRare -- no settings --
