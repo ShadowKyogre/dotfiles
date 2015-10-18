@@ -15,25 +15,27 @@ set nocp
 " set clipboard=unnamedplus
 
 " make Y behave like other capitals
-:noremap Y y$
+noremap Y y$
 
 " don't force set clipboard to always clip
 " instead, use these convenience bindings
 
-:noremap ty "+y
-:vnoremap tY "+y
-:nnoremap tY "+y$
-:noremap tp "+p
-:noremap tP "+P
-:noremap td "+d
-:noremap tD "+D
+noremap ty "+y
+vnoremap tY "+y
+nnoremap tY "+y$
+noremap tp "+p
+noremap tP "+P
+noremap td "+d
+noremap tD "+D
 
 " source $VIMRUNTIME/mswin.vim
 if $DISPLAY != "" || has("gui_running")
 	behave xterm
 endif
-if !has('nvim') && $DISPLAY != "" 
+if (!has('nvim') && !empty($DISPLAY)) || $TERM =~ "screen"
 	set ttymouse=xterm2
+elseif $TERM =~ "fbterm"
+	set ttymouse=xterm
 endif
 set mousemodel=popup
 
@@ -67,45 +69,44 @@ set linebreak
 set display+=lastline
 
 " Things for new files
-:nnoremap <C-n> :tabnew<CR>
-:inoremap <C-n> <Esc>:tabnew<CR>
+nnoremap <C-n> :tabnew<CR>
+inoremap <C-n> <Esc>:tabnew<CR>
 
 " Quit all one-handed mapping
-:nnoremap ZA :qa<CR>
+nnoremap ZA :qa<CR>
 
-" spelling keybindings
-:inoremap <C-l> <esc>[sz=
-:nnoremap <C-i> gi
+" go back to last insert keybindings
+nnoremap <C-i> gi
 
 " always center current line after movement
-:nnoremap <ScrollWheelUp> 3kzz
-:nnoremap <ScrollWheelDown> 3jzz
-:nnoremap <C-U> 11kzz
-:nnoremap <C-D> 11jzz
-:nnoremap <Down> gjzz
-:nnoremap <Up> gkzz
-:nnoremap j gjzz
-:nnoremap k gkzz
-:nnoremap # #zz
-:nnoremap * *zz
-:nnoremap n nzz
-:nnoremap N Nzz
-:nnoremap G Gzz
-:nnoremap <PageUp> <PageUp>zz
-:nnoremap <PageDown> <PageDown>zz
+nnoremap <ScrollWheelUp> 3kzz
+nnoremap <ScrollWheelDown> 3jzz
+nnoremap <C-U> 11kzz
+nnoremap <C-D> 11jzz
+nnoremap <Down> gjzz
+nnoremap <Up> gkzz
+nnoremap j gjzz
+nnoremap k gkzz
+nnoremap # #zz
+nnoremap * *zz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap G Gzz
+nnoremap <PageUp> <PageUp>zz
+nnoremap <PageDown> <PageDown>zz
 
 " Use the arrow keys to move through soft wrapped lines
-:inoremap <Down> <C-o>gj<C-o>zz
-:inoremap <Up> <C-o>gk<C-o>zz
-:inoremap <PageUp> <C-o><PageUp><C-o>zz
-:inoremap <PageDown> <C-o><PageDown><C-o>zz
-:inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
-:inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
+inoremap <Down> <C-o>gj<C-o>zz
+inoremap <Up> <C-o>gk<C-o>zz
+inoremap <PageUp> <C-o><PageUp><C-o>zz
+inoremap <PageDown> <C-o><PageDown><C-o>zz
+inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
+inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
 
 " Undo remap changes
-:nnoremap U <C-r>
-:inoremap <c-u> <c-g>u<c-u>
-:inoremap <c-w> <c-g>u<c-w>
+nnoremap U <C-r>
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
 if has('nvim')
 	:tnoremap <C-[> <C-\><C-n>
@@ -116,12 +117,13 @@ endif
 " :imap <S-C-B> <Esc>v<C-Q>
 
 " increment with keypad
-:nnoremap <kPlus> <C-A>
-:nnoremap <kMinus> <C-X>
-:nnoremap + <C-A>
-:nnoremap - <C-X>
+nnoremap <kPlus> <C-A>
+nnoremap <kMinus> <C-X>
+nnoremap + <C-A>
+nnoremap - <C-X>
 
 execute pathogen#infect()
+execute pathogen#helptags()
 filetype plugin on
 syntax on
 
@@ -149,7 +151,7 @@ if has("gui_running")
 	:map <F11> :call FullScreen()<CR>
 endif
 
-:map <S-F11> :call ToggleStatus()<CR>
+map <S-F11> :call ToggleStatus()<CR>
 
 " ---- FUNCS AND CMDS
 
@@ -275,6 +277,7 @@ let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType yaml setlocal expandtab
 au BufRead,BufNewFile *.adoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=nt filetype=asciidoc
+au BufRead,BufNewFile *.gradle setlocal filetype=groovy
 
 " ---- TAB VISIBILITY
 
@@ -293,44 +296,49 @@ set lazyredraw " to avoid scrolling problems
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
-" buffergator
-let g:buffergator_suppress_keymaps = 1
-let g:buffergator_autodismiss_on_select = 0
-let g:buffergator_autoexpand_on_split = 0
-let g:buffergator_autoupdate = 1
-
 " -- LEADER KEY MAPPINGS
-" map \b to buffergator
-:nnoremap <Leader>b :BuffergatorToggle<CR>
+" map \b to buffers for tab and \w to tab list
+nnoremap <Leader>b :Unite -buffer-name=bufs_in_tab buffer_tab<CR>
+nnoremap <Leader>w :Unite -buffer-name=tabs tab -quit<CR>
+" let unite be the tab sidebar
+set showtabline=0
+" switch to a tab that already has a buffer
+set switchbuf=usetab
 
 " map \r to rainbow toggle
-:nnoremap <Leader>r :RainbowParenthesesToggle<CR>
+nnoremap <Leader>r :RainbowParenthesesToggle<CR>
 
 " map \t in normal mode to undo tree
-:nnoremap <Leader>t :UndotreeToggle<CR>
+nnoremap <Leader>t :UndotreeToggle<CR>
 
 " map \v to Voom
-:nnoremap <Leader>v :VoomToggle<CR>
+nnoremap <Leader>v :VoomToggle<CR>
 
 " map \g to Goyo
-:nnoremap <Leader>g :Goyo<CR>
+nnoremap <Leader>g :Goyo<CR>
+
+" map \e to VimFilerSplit
+nnoremap <Leader>e :VimFilerSplit<CR>
 
 " map to \c to LanguageToolCheck and \C to LanguageToolClear
-:nnoremap <Leader>c :LanguageToolCheck<CR>
-:nnoremap <Leader>C :LanguageToolClear<CR>
+nnoremap <Leader>c :LanguageToolCheck<CR>
+nnoremap <Leader>C :LanguageToolClear<CR>
 
-:nnoremap <Leader>d   :Wordnet <C-r>=expand('<cword>')<CR><CR>
-:nnoremap <Leader>dd  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
-:nnoremap <Leader>de  :Etymology<CR>
-:nnoremap <Leader>dr  :ReverseDict<CR>
-:nnoremap <Leader>ds  :SoundsLike<CR>
-:nnoremap <Leader>dss :SpelledLike<CR>
-:vnoremap <Leader>d   <Esc>:Wordnet <C-r>=WordStudy#GetVisualSelection()<CR><CR>
-:vnoremap <Leader>dd  <Esc>:WordnetSyns <C-r>=WordStudy#GetVisualSelection()<CR><CR>
-:vnoremap <Leader>de  :EtymologyV<CR>
-:vnoremap <Leader>dr  :ReverseDictV<CR>
-:vnoremap <Leader>ds  :SoundsLikeV<CR>
-:vnoremap <Leader>dss :SpelledLikeV<CR>
+" map \s to showing spell check panel
+nnoremap <Leader>s :Unite spell_suggest -buffer-name=spell_suggest<CR>
+
+nnoremap <Leader>d   :Wordnet <C-r>=expand('<cword>')<CR><CR>
+nnoremap <Leader>dd  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
+nnoremap <Leader>de  :Etymology<CR>
+nnoremap <Leader>dr  :ReverseDict<CR>
+nnoremap <Leader>ds  :SoundsLike<CR>
+nnoremap <Leader>dss :SpelledLike<CR>
+vnoremap <Leader>d   <Esc>:Wordnet <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+vnoremap <Leader>dd  <Esc>:WordnetSyns <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+vnoremap <Leader>de  :EtymologyV<CR>
+vnoremap <Leader>dr  :ReverseDictV<CR>
+vnoremap <Leader>ds  :SoundsLikeV<CR>
+vnoremap <Leader>dss :SpelledLikeV<CR>
 
 if has("gui_running") 
 	autocmd! User GoyoEnter nested call FullScreen(1)
@@ -344,3 +352,17 @@ endif
 
 " convenience ft settings for Voom
 let g:voom_ft_modes = {'markdown': 'markdown', 'asciidoc': 'asciidoc', 'python': 'python'}
+let g:vimfiler_as_default_explorer = 1
+
+call vimfiler#custom#profile('default', 'context', {
+	\ 'simple': 1,
+	\ 'toggle': 1,
+	\ 'no_quit': 1,
+\ })
+
+call unite#custom#profile('default', 'context', {
+	\ 'toggle': 1,
+	\ 'vertical': 1,
+	\ 'no_quit': 1,
+	\ 'winwidth': 40,
+\ })
