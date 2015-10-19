@@ -23,16 +23,16 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" make Y behave like other capitals
 	noremap Y y$
 
-	" don't force set clipboard to always clip
+	" don't force set clipboard to always clip {{{2
 	" instead, use these convenience bindings
-
-	noremap ty "+y
-	vnoremap tY "+y
-	nnoremap tY "+y$
-	noremap tp "+p
-	noremap tP "+P
-	noremap td "+d
-	noremap tD "+D
+		noremap ty "+y
+		vnoremap tY "+y
+		nnoremap tY "+y$
+		noremap tp "+p
+		noremap tP "+P
+		noremap td "+d
+		noremap tD "+D
+	"}}}
 
 	" Quit all one-handed mapping
 	nnoremap ZA :qa<CR>
@@ -40,35 +40,38 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" go back to last insert keybindings
 	nnoremap <C-i> gi
 
-	" always center current line after movement
-	nnoremap <ScrollWheelUp> 3kzz
-	nnoremap <ScrollWheelDown> 3jzz
-	nnoremap <C-U> 11kzz
-	nnoremap <C-D> 11jzz
-	nnoremap <Down> gjzz
-	nnoremap <Up> gkzz
-	nnoremap j gjzz
-	nnoremap k gkzz
-	nnoremap # #zz
-	nnoremap * *zz
-	nnoremap n nzz
-	nnoremap N Nzz
-	nnoremap G Gzz
-	nnoremap <PageUp> <PageUp>zz
-	nnoremap <PageDown> <PageDown>zz
+	" always center current line after movement {{{2
+		nnoremap <ScrollWheelUp> 3kzz
+		nnoremap <ScrollWheelDown> 3jzz
+		nnoremap <C-U> 11kzz
+		nnoremap <C-D> 11jzz
+		nnoremap <Down> gjzz
+		nnoremap <Up> gkzz
+		nnoremap j jzz
+		nnoremap k kzz
+		nnoremap # #zz
+		nnoremap * *zz
+		nnoremap n nzz
+		nnoremap N Nzz
+		nnoremap G Gzz
+		nnoremap <PageUp> <PageUp>zz
+		nnoremap <PageDown> <PageDown>zz
+	"}}}
 
-	" Use the arrow keys to move through soft wrapped lines
-	inoremap <Down> <C-o>gj<C-o>zz
-	inoremap <Up> <C-o>gk<C-o>zz
-	inoremap <PageUp> <C-o><PageUp><C-o>zz
-	inoremap <PageDown> <C-o><PageDown><C-o>zz
-	inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
-	inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
+	" Use the arrow keys to move through soft wrapped lines {{{2
+		inoremap <Down> <C-o>gj<C-o>zz
+		inoremap <Up> <C-o>gk<C-o>zz
+		inoremap <PageUp> <C-o><PageUp><C-o>zz
+		inoremap <PageDown> <C-o><PageDown><C-o>zz
+		inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
+		inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
+	"}}}
 
-	" Undo remap changes
-	nnoremap U <C-r>
-	inoremap <c-u> <c-g>u<c-u>
-	inoremap <c-w> <c-g>u<c-w>
+	" Undo remap changes {{{2
+		nnoremap U <C-r>
+		inoremap <c-u> <c-g>u<c-u>
+		inoremap <c-w> <c-g>u<c-w>
+	"}}}
 
 	if has('nvim')
 		:tnoremap <C-[> <C-\><C-n>
@@ -78,19 +81,21 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" :map <S-C-B> <Esc>v<C-Q>
 	" :imap <S-C-B> <Esc>v<C-Q>
 
-	" increment with keypad
-	nnoremap <kPlus> <C-A>
-	nnoremap <kMinus> <C-X>
-	nnoremap + <C-A>
-	nnoremap - <C-X>
-	vnoremap <kPlus> <C-A>gv
-	vnoremap <kMinus> <C-X>gv
-	vnoremap + <C-A>gv
-	vnoremap - <C-X>gv
+	" increment with keypad {{{2
+		nnoremap <kPlus> <C-A>
+		nnoremap <kMinus> <C-X>
+		nnoremap + <C-A>
+		nnoremap - <C-X>
+		vnoremap <kPlus> <C-A>gv
+		vnoremap <kMinus> <C-X>gv
+		vnoremap + <C-A>gv
+		vnoremap - <C-X>gv
+	"}}}
 
-	" remap useless gs to inserting newlines on demand
-	nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
-	nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
+	" remap useless gs to inserting newlines on demand {{{2
+		nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
+		nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
+	"}}}
 " }}}
 
 " ---- Mouse details {{{1
