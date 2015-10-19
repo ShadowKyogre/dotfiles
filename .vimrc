@@ -386,8 +386,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		nnoremap <Leader>c :LanguageToolCheck<CR>
 		nnoremap <Leader>C :LanguageToolClear<CR>
 
-		" map \s to showing spell check panel
-		nnoremap <Leader>s :Unite spell_suggest -buffer-name=spell_suggest<CR>
+		" map z= to showing spell check panel
+		nnoremap z= :Unite spell_suggest -buffer-name=spell_suggest -toggle -vertical -winwidth=40<CR>
 	" }}}
 
 	" ------ Word lookups {{{2
