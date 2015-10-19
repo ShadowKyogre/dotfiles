@@ -137,6 +137,8 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set nobackup
 	set nowritebackup
 	set spell
+	" set up autocompletion dictionary
+	set dictionary+=/usr/share/dict/words
 	set smartindent
 	set tabstop=4
 	set shiftwidth=4
@@ -312,6 +314,12 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	au FileType yaml setlocal expandtab
 	au FileType cpp  setlocal tags+=~/.vim/tags/cpp
 	au FileType voomtree setlocal wrap
+	" ---- Prose Types {{{2
+		au FileType markdown setlocal complete+=k
+		au FileType markdown call SuperTabSetDefaultCompletionType("<c-n>")
+		au FileType asciidoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=nt complete+=k
+		au FileType asciidoc call SuperTabSetDefaultCompletionType("<c-n>")
+	"}}}
 
 	" Restore Jedi bindings under localleader {{{2
 		au FileType python setlocal omnifunc=jedi#completions
@@ -322,7 +330,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>n :call jedi#usages()<CR>
 	" }}}
 
-	au BufRead,BufNewFile *.adoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=nt filetype=asciidoc
+	au BufRead,BufNewFile *.adoc setlocal filetype=asciidoc
 	au BufRead,BufNewFile *.gradle setlocal filetype=groovy
 " }}}
 
