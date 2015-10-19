@@ -83,6 +83,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	nnoremap <kMinus> <C-X>
 	nnoremap + <C-A>
 	nnoremap - <C-X>
+	vnoremap <kPlus> <C-A>gv
+	vnoremap <kMinus> <C-X>gv
+	vnoremap + <C-A>gv
+	vnoremap - <C-X>gv
 " }}}
 
 " ---- Mouse details {{{
@@ -149,6 +153,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set completeopt=menuone,preview,longest
 
 	let g:SuperTabDefaultCompletionType = "context"
+	let g:SuperTabLongestHighlight = 1
 	let g:jedi#show_call_signatures = "0"
 	let g:jedi#auto_initialization = 0
 " }}}
@@ -299,7 +304,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	au FileType cpp  setlocal tags+=~/.vim/tags/cpp
 
 	" Restore Jedi bindings under localleader {{{
-		au FileType python setlocal omnifunc=jedi#complete
+		au FileType python setlocal omnifunc=jedi#completions
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>g :call jedi#goto_assignments()<CR>
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>d :call jedi#goto_definitions()<CR>
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>r :call jedi#rename()<CR>
@@ -333,8 +338,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 " ---- LEADER KEY MAPPINGS {{{
 	" ------ MANAGE TABS AND BUFFERS {{{
 		" map \b to buffers for tab and \w to tab list
-		nnoremap <Leader>b :Unite -buffer-name=bufs buffer<CR>
-		nnoremap <Leader>w :Unite -buffer-name=tabs tab -quit<CR>
+		nnoremap <Leader>b :Unite -buffer-name=bufs buffer -no-split -start-insert -quit<CR>
+		nnoremap <Leader>w :Unite -buffer-name=tabs tab -vertical -winwidth=40 -quit<CR>
 		" let unite be the tab sidebar
 		set showtabline=0
 		" switch to a tab that already has a buffer
@@ -411,11 +416,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	\ })
 
 	call unite#custom#profile('default', 'context', {
-		\ 'toggle': 1,
-		\ 'vertical': 1,
-		\ 'no_quit': 1,
 		\ 'wrap': 1,
-		\ 'winwidth': 40,
 	\ })
 " }}}
 
