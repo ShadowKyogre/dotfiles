@@ -1,13 +1,13 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
-" ---- don't clutter filesystem with lots of swap files {{{
+" ---- don't clutter filesystem with lots of swap files {{{1
 	set directory=$HOME/.vim/swap//
 	if !isdirectory(&directory)
 		call mkdir(&directory, "p")
 	endif
 " }}}
 
-" ---- misc cfgs {{{
+" ---- misc cfgs {{{1
 	set mouse=a 
 	set hlsearch
 	set background=dark
@@ -17,7 +17,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " set clipboard=unnamedplus
 
-" ---- mappings for usual stuff {{{
+" ---- mappings for usual stuff {{{1
 	" on the same key as \, and I don't really use the | motion anyway
 	let maplocalleader = '|'
 	" make Y behave like other capitals
@@ -89,7 +89,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	vnoremap - <C-X>gv
 " }}}
 
-" ---- Mouse details {{{
+" ---- Mouse details {{{1
 	" source $VIMRUNTIME/mswin.vim
 	if $DISPLAY != "" || has("gui_running")
 		behave xterm
@@ -102,14 +102,14 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set mousemodel=popup
 " }}}
 
-" ---- folding stuff {{{
+" ---- folding stuff {{{1
 	set foldmethod=syntax
 	" autocmd Filetype python set foldmethod=indent
 	set foldcolumn=1
 	set is
 " }}}
 
-" ---- small tweaks borrowed from skottish {{{
+" ---- small tweaks borrowed from skottish {{{1
 	set showmode
 	set shortmess+=I
 	set wrap
@@ -120,11 +120,11 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set wildmode=list:longest,full
 " }}}
 
-" ---- borrowed from ArchArael {{{
+" ---- borrowed from ArchArael {{{1
 	set number
 " }}}
 
-" ---- my own tweaks {{{
+" ---- my own tweaks {{{1
 	set nobackup
 	set nowritebackup
 	set spell
@@ -135,19 +135,19 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set display+=lastline
 " }}}
 
-" ---- Things for new files {{{
+" ---- Things for new files {{{1
 	nnoremap <C-n> :tabnew<CR>
 	inoremap <C-n> <Esc>:tabnew<CR>
 " }}}
 
-" ---- Load plugins {{{
+" ---- Load plugins {{{1
 	execute pathogen#infect()
 	execute pathogen#helptags()
 	filetype plugin on
 	syntax on
 " }}}
 
-" ---- SuperTab and Jedi {{{
+" ---- SuperTab and Jedi {{{1
 " Turn on omni completion
 " set omnifunc=syntaxcomplete#Complete
 	set completeopt=menuone,preview,longest
@@ -158,18 +158,18 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	let g:jedi#auto_initialization = 0
 " }}}
 
-" ---- Printing options {{{
+" ---- Printing options {{{1
 set pdev=Virtual_PDF_Printer
 set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,top:0.5in,bottom:0.5in
 " }}}
 
-" ---- Highlight extra whitespace {{{
+" ---- Highlight extra whitespace {{{1
 	au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 	au InsertLeave * match ExtraWhitespace /\s\+$/
 	highlight ExtraWhitespace ctermbg=darkred guibg=darkred
 " }}}
 
-" ---- UI Tweaks {{{
+" ---- UI Tweaks {{{1
 	colors sk_inkpot
 	if has("gui_running")
 		noremap <F11> :call FullScreen()<CR>
@@ -178,11 +178,11 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	noremap <S-F11> :call ToggleStatus()<CR>
 " }}}
 
-" ---- FUNCS AND CMDS {{{
+" ---- FUNCS AND CMDS {{{1
 	command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
 	command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
 
-	command! -nargs=* Hc call DoPrint('<args>') " {{{
+	command! -nargs=* Hc call DoPrint('<args>') " {{{2
 	function! DoPrint(args)
 		let colorsave=g:colors_name
 		color default
@@ -191,7 +191,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	endfunction " }}}
 
 	let g:fullScreened = 0
-	function! FullScreen(...) " {{{
+	function! FullScreen(...) " {{{2
 		if g:fullScreened == 0
 			let g:fullScreened = 1
 			set guioptions-=T guioptions-=m
@@ -207,7 +207,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
-	function! ToggleStatus() " {{{
+	function! ToggleStatus() " {{{2
 		if &laststatus > 0
 			set laststatus=0
 		else
@@ -216,7 +216,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	endfunction " }}}
 
 	" http://vim.wikia.com/wiki/Word_frequency_statistics_for_a_file
-	function! WordFrequency(caseSensitive) range " {{{
+	function! WordFrequency(caseSensitive) range " {{{2
 		let all = split(join(getline(a:firstline, a:lastline)), '\A\+')
 		let frequencies = {}
 		for word in all
@@ -237,7 +237,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	command! -bang -range=% WordFrequency <line1>,<line2>call WordFrequency(<bang>0)
 
 	" see https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
-	function! WordCount() " {{{
+	function! WordCount() " {{{2
 		let currentmode = mode()
 		if !exists('g:lastmode_wc')
 			let g:lastmode_wc = currentmode
@@ -283,7 +283,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 "}}}
 
-" ---- STATUSLINE {{{
+" ---- STATUSLINE {{{1
 	set statusline=%t	   "tail of the filename
 	set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 	set statusline+=%{&ff}] "file format
@@ -297,13 +297,14 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	set laststatus=2
 " }}}
 
-" ---- FTYPES {{{
+" ---- FTYPES {{{1
 	let g:xml_syntax_folding=1
 	au FileType xml  setlocal foldmethod=syntax
 	au FileType yaml setlocal expandtab
 	au FileType cpp  setlocal tags+=~/.vim/tags/cpp
+	au FileType voomtree setlocal wrap
 
-	" Restore Jedi bindings under localleader {{{
+	" Restore Jedi bindings under localleader {{{2
 		au FileType python setlocal omnifunc=jedi#completions
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>g :call jedi#goto_assignments()<CR>
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>d :call jedi#goto_definitions()<CR>
@@ -316,13 +317,13 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	au BufRead,BufNewFile *.gradle setlocal filetype=groovy
 " }}}
 
-" ---- TAB VISIBILITY {{{
+" ---- TAB VISIBILITY {{{1
 	highlight SpecialKey ctermfg=1
 	set list
 	set listchars=tab:▸\ ,eol:¬
 " }}}
 
-" ---- PERFORMANCE {{{
+" ---- PERFORMANCE {{{1
 	set synmaxcol=128
 	set ttyfast " u got a fast terminal
 	if !has('nvim')
@@ -335,8 +336,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	let g:rbpt_loadcmd_toggle = 0
 " }}}
 
-" ---- LEADER KEY MAPPINGS {{{
-	" ------ MANAGE TABS AND BUFFERS {{{
+" ---- LEADER KEY MAPPINGS {{{1
+	" ------ MANAGE TABS AND BUFFERS {{{2
 		" map \b to buffers for tab and \w to tab list
 		nnoremap <Leader>b :Unite -buffer-name=bufs buffer -no-split -start-insert -quit<CR>
 		nnoremap <Leader>w :Unite -buffer-name=tabs tab -vertical -winwidth=40 -quit<CR>
@@ -346,7 +347,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		set switchbuf=usetab
 	" }}}
 
-	" ------ MISC MAPPINGS {{{
+	" ------ MISC MAPPINGS {{{2
 		" map \r to rainbow toggle
 		nnoremap <Leader>r :RainbowParenthesesToggle<CR>
 
@@ -363,7 +364,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		nnoremap <Leader>e :VimFilerSplit<CR>
 	" }}}
 
-	" ------ Spelling / Grammar {{{
+	" ------ Spelling / Grammar {{{2
 		" map to \c to LanguageToolCheck and \C to LanguageToolClear
 		nnoremap <Leader>c :LanguageToolCheck<CR>
 		nnoremap <Leader>C :LanguageToolClear<CR>
@@ -372,7 +373,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		nnoremap <Leader>s :Unite spell_suggest -buffer-name=spell_suggest<CR>
 	" }}}
 
-	" ------ Word lookups {{{
+	" ------ Word lookups {{{2
 		nnoremap <Leader>d   :Wordnet <C-r>=expand('<cword>')<CR><CR>
 		nnoremap <Leader>dd  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
 		nnoremap <Leader>de  :Etymology<CR>
@@ -387,7 +388,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		vnoremap <Leader>dss :SpelledLikeV<CR>
 	" }}}
 
-	" ------ Distraction free mode config {{{
+	" ------ Distraction free mode config {{{2
 		if has("gui_running") 
 			autocmd! User GoyoEnter nested call FullScreen(1)
 			autocmd! User GoyoLeave nested call FullScreen(1)
@@ -399,7 +400,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	" }}}
 " }}}
 
-" ---- convenience ft settings for Voom {{{
+" ---- convenience ft settings for Voom {{{1
 	let g:voom_ft_modes = {
 		\ 'markdown': 'markdown',
 		\ 'asciidoc': 'asciidoc',
@@ -408,7 +409,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	let g:vimfiler_as_default_explorer = 1
 " }}}
 
-" ---- Shougo plugin default contexts {{{
+" ---- Shougo plugin default contexts {{{1
 	call vimfiler#custom#profile('default', 'context', {
 		\ 'simple': 1,
 		\ 'toggle': 1,
