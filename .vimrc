@@ -87,6 +87,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	vnoremap <kMinus> <C-X>gv
 	vnoremap + <C-A>gv
 	vnoremap - <C-X>gv
+
+	" remap useless gs to inserting newlines on demand
+	nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
+	nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
 " }}}
 
 " ---- Mouse details {{{1
