@@ -292,6 +292,27 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
+	function! ToggleOnlyAddInInsertMode() "{{{2
+		" remove the previous mapping
+		if !exists('b:disable_del_and_bs')
+			" assume when we are called, we want to disable it the first time
+			let b:disable_del_and_bs = 1
+		else
+			let b:disable_del_and_bs = !b:disable_del_and_bs
+		endif
+		if b:disable_del_and_bs
+			inoremap <buffer> <BS> <Nop>
+			inoremap <buffer> <Del> <Nop>
+		else
+			let autopairs_exists = exists('b:autopairs_loaded') && exists('g:AutoPairsMapBS')
+			if autopairs_exists && b:autopairs_loaded && g:AutoPairsMapBS
+				inoremap <buffer> <silent> <BS> <C-R>=AutoPairsDelete()<CR>
+			else
+				silent iunmap <buffer> <BS>
+			endif
+			silent iunmap <buffer> <Del>
+		endif
+	endfunction "}}}
 "}}}
 
 " ---- STATUSLINE {{{1
@@ -379,6 +400,9 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 		" map \e to VimFilerSplit
 		nnoremap <Leader>e :VimFilerSplit<CR>
+
+		" map \<BS> to toggling disabling the BS and del keys in insert mode
+		nnoremap <Leader><BS> :call ToggleOnlyAddInInsertMode()<CR>
 	" }}}
 
 	" ------ Spelling / Grammar {{{2
