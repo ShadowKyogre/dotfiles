@@ -343,7 +343,9 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	" ---- Prose Types {{{2
 		au FileType markdown setlocal complete+=k
 		au FileType markdown call SuperTabSetDefaultCompletionType("<c-n>")
-		au FileType asciidoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=nt complete+=k
+		au FileType asciidoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=tcqn complete+=k
+		au FileType asciidoc setlocal comments=:// commentstring=//\ %s
+		au FileType asciidoc setlocal formatlistpat=^\\s*[-*+.]\\+\\s\\+\\%\\(\\S\\+\\)\\@=\\\\|^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
 		au FileType asciidoc call SuperTabSetDefaultCompletionType("<c-n>")
 	"}}}
 
