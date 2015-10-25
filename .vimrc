@@ -158,6 +158,9 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	syntax on
 " }}}
 
+" Wailing setup
+let g:wailing_alert_fpath="~/Music/barn_owl_screech.mp3"
+
 " ---- Autopairs and Sparkup co-op {{{1
 	let g:sparkupMaps = 0
 	imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
