@@ -106,7 +106,8 @@ set clipboard=autoselectplus,exclude:cons\|linux
 		" gy/gY
 		" gx/gX
 		" g.
-		" gb/gB
+		nnoremap gb :tabnew<CR>
+		nnoremap gB :-tabnew<CR>
 		" gc/gC
 	"}}}
 " }}}
@@ -157,11 +158,6 @@ set clipboard=autoselectplus,exclude:cons\|linux
 	set shiftwidth=4
 	set linebreak
 	set display+=lastline
-" }}}
-
-" ---- Things for new files {{{1
-	nnoremap <C-n> :tabnew<CR>
-	inoremap <C-n> <Esc>:tabnew<CR>
 " }}}
 
 " ---- Load plugins {{{1
