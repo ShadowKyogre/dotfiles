@@ -98,7 +98,7 @@ set clipboard=autoselectplus,exclude:cons\|linux
 	"}}}
 
 	" map gz to split a line at cursor on demand {{{2
-		nnoremap <silent> gz :let curpos=getpos('.')<CR>i<CR><Esc>:call setpos('.', curpos)<CR>
+		nnoremap <silent> gz i<CR><C-G>k<Esc>
 		nnoremap <silent> gZ i<CR><Esc>
 	"}}}
 	
