@@ -15,7 +15,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set nocp
 " }}}
 
-" set clipboard=unnamedplus
+set clipboard=autoselectplus,exclude:cons\|linux
 
 " ---- mappings for usual stuff {{{1
 	" on the same key as \, and I don't really use the | motion anyway
@@ -96,11 +96,15 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 		nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
 		nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
 	"}}}
+	" map gz to split a line at cursor on demand {{{2
+		nnoremap <silent> gz :let curpos=getpos('.')<CR>i<CR><Esc>:call setpos('.', curpos)<CR>
+		nnoremap <silent> gZ i<CR><Esc>
+	"}}}
 " }}}
 
 " ---- Mouse details {{{1
 	" source $VIMRUNTIME/mswin.vim
-	if $DISPLAY != "" || has("gui_running")
+	if !empty($DISPLAY) || has("gui_running")
 		behave xterm
 	endif
 	if (!has('nvim') && !empty($DISPLAY)) || $TERM =~ "screen"
@@ -159,7 +163,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " }}}
 
 " Wailing setup
-let g:wailing_alert_fpath="~/Music/barn_owl_screech.mp3"
+let g:wailing_alert_fpath="~/Music/barn_owl_screech_modded.mp3"
+let g:wailing_reward_fpath="~/Music/Bayonetta/Bayonetta_-_Lets_Dance_Boys.mp3"
+let g:wailing_reward_start=3
+let g:wailing_reward_end=71.5
 
 " ---- Autopairs and Sparkup co-op {{{1
 	let g:sparkupMaps = 0
@@ -388,9 +395,9 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	" ------ MANAGE TABS AND BUFFERS {{{2
 		" map \b to buffers for tab and \w to tab list
 		nnoremap <Leader>b :Unite -buffer-name=bufs buffer -no-split -start-insert -quit<CR>
-		nnoremap <Leader>w :Unite -buffer-name=tabs tab -vertical -winwidth=40 -quit<CR>
+		" nnoremap <Leader>w :Unite -buffer-name=tabs tab -vertical -winwidth=40 -quit<CR>
 		" let unite be the tab sidebar
-		set showtabline=0
+		" set showtabline=0
 		" switch to a tab that already has a buffer
 		set switchbuf=usetab
 	" }}}
