@@ -96,9 +96,18 @@ set clipboard=autoselectplus,exclude:cons\|linux
 		nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
 		nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
 	"}}}
+
 	" map gz to split a line at cursor on demand {{{2
 		nnoremap <silent> gz :let curpos=getpos('.')<CR>i<CR><Esc>:call setpos('.', curpos)<CR>
 		nnoremap <silent> gZ i<CR><Esc>
+	"}}}
+	
+	" slots for unmapped commands {{{2
+		" gy/gY
+		" gx/gX
+		" g.
+		" gb/gB
+		" gc/gC
 	"}}}
 " }}}
 
