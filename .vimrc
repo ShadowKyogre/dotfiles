@@ -103,8 +103,19 @@ set clipboard=autoselectplus,exclude:cons\|linux
 	"}}}
 	
 	" slots for unmapped commands {{{2
-		" gy/gY
-		" gx/gX
+		nnoremap gy ggVGy
+		if !empty($DISPLAY)
+			nnoremap gY ggVG"+y
+		else
+			nnoremap gY ggVGy
+		endif
+		
+		nnoremap gx ggVGd
+		if !empty($DISPLAY)
+			nnoremap gX ggVG"+d
+		else
+			nnoremap gX ggVGd
+		endif
 		" g.
 		nnoremap gb :tabnew<CR>
 		nnoremap gB :-tabnew<CR>
