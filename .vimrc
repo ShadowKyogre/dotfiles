@@ -80,6 +80,13 @@ set clipboard=autoselectplus,exclude:cons\|linux
 	" Get Visual block to work
 	" :map <S-C-B> <Esc>v<C-Q>
 	" :imap <S-C-B> <Esc>v<C-Q>
+	
+	" line bubbling {{{2
+		nnoremap <silent> <C-Up> :silent! m--<CR>
+		nnoremap <silent> <C-Down> :silent! m+<CR>
+		vnoremap <silent> <C-Up> :<C-u>silent! '<,'>m '<-2<CR>gv=gv
+		vnoremap <silent> <C-Down> :<C-u>silent! '<,'>m '>+1<CR>gv=gv
+	" }}}
 
 	" increment with keypad {{{2
 		nnoremap <kPlus> <C-A>
