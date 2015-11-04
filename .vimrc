@@ -116,9 +116,10 @@ set clipboard=autoselectplus,exclude:cons\|linux
 		else
 			nnoremap gX ggVGd
 		endif
-		" g.
-		nnoremap gb :tabnew<CR>
-		nnoremap gB :-tabnew<CR>
+		
+		nnoremap <silent> g. :<C-U>exe v:count1 . 'wincmd w'<CR>
+		nnoremap <silent> gb :tabnew<CR>
+		nnoremap <silent> gB :-tabnew<CR>
 		" gc/gC
 	"}}}
 " }}}
