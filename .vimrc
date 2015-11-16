@@ -194,7 +194,10 @@ let g:wailing_reward_end=71.5
 
 " ---- Autopairs and Sparkup co-op {{{1
 	let g:sparkupMaps = 0
-	imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
+	au FileType xml imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
+	au FileType html imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
+	au FileType htmldjango imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
+	au FileType smarty imap <buffer> <c-e> <Esc>:let b:autopairs_enabled=0<CR>gi<Plug>SparkupExecute<Esc>:let b:autopairs_enabled=1<CR>gi
 "}}}
 
 " ---- SuperTab and Jedi {{{1
