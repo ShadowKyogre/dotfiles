@@ -222,7 +222,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 " ---- UI Tweaks {{{1
 	colors sk_inkpot
 	if has("gui_running")
-		noremap <F11> :call FullScreen()<CR>
+		set guioptions=c
+		" noremap <F11> :call FullScreen()<CR>
 	endif
 
 	noremap <S-F11> :call ToggleStatus()<CR>
@@ -422,6 +423,7 @@ if exists("+showtabline")
 	hi link TabLineFill StatusLine
 	hi clear TabLineSel
 	hi link TabLineSel String
+	hi TabLine term=underline ctermfg=15 ctermbg=242 gui=underline guibg=#6C6C6C
 endif
 " }}}
 
@@ -487,6 +489,9 @@ endif
 		" map \r to rainbow toggle
 		nnoremap <Leader>r :RainbowParenthesesToggle<CR>
 
+		" map \s to toggling virtual edit
+		nnoremap <silent> <Leader>s :if empty(&virtualedit) \| set virtualedit=block \| else \| set virtualedit= \| endif<CR>
+
 		" map \t in normal mode to undo tree
 		nnoremap <Leader>t :UndotreeToggle<CR>
 
@@ -529,8 +534,8 @@ endif
 
 	" ------ Distraction free mode config {{{2
 		if has("gui_running") 
-			autocmd! User GoyoEnter nested call FullScreen(1)
-			autocmd! User GoyoLeave nested call FullScreen(1)
+			"autocmd! User GoyoEnter nested call FullScreen(1)
+			"autocmd! User GoyoLeave nested call FullScreen(1)
 			nnoremap <Leader>f :Limelight!! 0.75<CR>
 		else
 			let g:limelight_conceal_ctermfg=235
