@@ -52,6 +52,7 @@ theme.icon_theme = "AwOken-000100255/clear"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "lxterminal"
+preferred_shell = " -e " .. "/usr/bin/fish"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 minibrowser_cmd = "qutebrowser"
@@ -174,7 +175,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal .. preferred_shell }
                                   }
                         })
 
@@ -271,6 +272,7 @@ function tag_tooltips(w, buttons, label, data, tags)
     end
 end
 
+unknown_task_icon = mbarfix.lookup_icon('gnome-unknown')
 function icons_only_update(w, buttons, label, data, objects)
     w:reset()
     local l = wibox.layout.fixed.horizontal()
@@ -308,7 +310,7 @@ function icons_only_update(w, buttons, label, data, objects)
         if icon then
             ib:set_image(icon)
         else
-            ib:set_image(mbarfix.lookup_icon('gnome-unknown'))
+            ib:set_image(unknown_task_icon)
         end
         l:add(bgb)
         tt:set_markup(text)
@@ -472,7 +474,7 @@ globalkeys = awful.util.table.join(
         "Move pointer to the previous screen"),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. preferred_shell) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -539,7 +541,27 @@ keydoc.group("Tags")
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
+
+generic_viewonly_tag_doc = "View only this tag"
+generic_toggleview_tag_doc = "Toggle viewing this tag"
+genertic_client_toggle_tag_doc = "Toggle tag on client"
+genertic_client_move_tag_doc = "Move client to this tag"
+
 for i = 1, 9 do
+    local viewonly_tag_doc, toggleview_tag_doc
+    local client_move_tag_doc, client_toggle_tag_doc
+    if i == 5 then
+        viewonly_tag_doc = generic_viewonly_tag_doc
+        toggleview_tag_doc = generic_toggleview_tag_doc
+        client_toggle_tag_doc = genertic_client_toggle_tag_doc
+        client_move_tag_doc = genertic_client_move_tag_doc
+    else
+        viewonly_tag_doc = nil
+        toggleview_tag_doc = nil
+        client_toggle_tag_doc = nil
+        client_move_tag_doc = nil
+    end
+
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only. If you set wallpapers up above, ALWAYS WRAP
         -- THEM WITH gears.surface.load_uncached. Otherwise, you'll
@@ -551,7 +573,8 @@ for i = 1, 9 do
                         if tag then
                            awful.tag.viewonly(tag)
                         end
-                  end),
+                  end,
+                  viewonly_tag_doc),
         -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
@@ -560,7 +583,8 @@ for i = 1, 9 do
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-                  end),
+                  end,
+                  toggleview_tag_doc),
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
@@ -570,7 +594,8 @@ for i = 1, 9 do
                               awful.client.movetotag(tag)
                           end
                      end
-                  end),
+                  end,
+                  client_move_tag_doc),
         -- Toggle tag.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
@@ -580,7 +605,8 @@ for i = 1, 9 do
                               awful.client.toggletag(tag)
                           end
                       end
-                  end))
+                  end,
+                  client_toggle_tag_doc))
 end
 
 ticked_icon = mbarfix.lookup_icon('gtk-apply')
