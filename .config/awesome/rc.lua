@@ -16,9 +16,6 @@ local menubar = require("menubar")
 local keydoc  = require("keydoc")
 local mbarfix = require("mbarfix")
 
-awful.util.spawn("compton")
-
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -168,8 +165,8 @@ end
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "open docs", minibrowser_cmd .. " " .. "/usr/share/doc/awesome/doc/index.html" },
-   { "UTF8 symbols", minibrowser_cmd .. " " .. "http://unicode-table.com/" },
+   { "open docs", minibrowser_cmd .. " -s tabs position top " .. "/usr/share/doc/awesome/doc/index.html" },
+   { "UTF8 symbols", minibrowser_cmd .. " -s tabs position top " .. "http://unicode-table.com/" },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
@@ -179,7 +176,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ image = '/home/shadowkyogre/Pictures/WallPaper/archse.png',
                                      menu = mymainmenu })
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -423,14 +420,17 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    keydoc.group("Misc"),
+    awful.key({modkey, }, "F1", keydoc.display, "Show help"),
     keydoc.group("Tag Navigation"),
-    awful.key({modkey, }, "F1", keydoc.display),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ,
         "View next tag"),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ,
         "View previous tag"),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
         "Jump between the most two recent tags"),
+    awful.key({ modkey, "Control"   }, "Escape", awful.tag.viewnone,
+        "View no tags"),
 
     keydoc.group("Client Navigation"),
     awful.key({ modkey,           }, "j",
@@ -474,21 +474,24 @@ globalkeys = awful.util.table.join(
         "Move pointer to the previous screen"),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. preferred_shell) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    keydoc.group("Misc"),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. preferred_shell) end, "Spawn a shell"),
+    awful.key({ modkey, "Control" }, "r", awesome.restart, "Restart awesome"),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit, "Quite awesome"),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    keydoc.group("Layout Manipulation"),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end, "Master width++"),
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end, "Master width--"),
+    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end, "Master count++"),
+    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end, "Master count--"),
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end, "Columns++"),
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end, "Columns--"),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end, "Next layout"),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end, "Previous layout"),
 
 
     -- Prompt
+    keydoc.group("Misc"),
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
@@ -537,7 +540,6 @@ clientkeys = awful.util.table.join(
         "Toggle maximization")
 )
 
-keydoc.group("Tags")
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -566,6 +568,7 @@ for i = 1, 9 do
         -- View tag only. If you set wallpapers up above, ALWAYS WRAP
         -- THEM WITH gears.surface.load_uncached. Otherwise, you'll
         -- notice huge delays when switching tags.
+        keydoc.group("Tag Navigation"),
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
                         local screen = mouse.screen
@@ -585,6 +588,7 @@ for i = 1, 9 do
                       end
                   end,
                   toggleview_tag_doc),
+        keydoc.group("Client Actions"),
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
@@ -596,7 +600,7 @@ for i = 1, 9 do
                      end
                   end,
                   client_move_tag_doc),
-        -- Toggle tag.
+        -- Toggle tag on client.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
@@ -885,4 +889,6 @@ function(c)
 end)
 -- }}}
 
+awful.util.spawn("killall compton")
+awful.util.spawn("compton")
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker
