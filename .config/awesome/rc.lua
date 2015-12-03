@@ -48,7 +48,7 @@ beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
 theme.icon_theme = "AwOken-000100255/clear"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "lxterminal"
+terminal = "termite"
 preferred_shell = " -e " .. "/usr/bin/fish"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
@@ -795,6 +795,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule = { class = "Stjerm" },
+      properties = { floating = true } },
     { rule = { class = "Kupfer.py", type='utility' }, 
         properties = { border_width = 0, floating = true, x = 746, y = 438 } },
     { rule = { class = "Keepassx" }, properties = { floating = true } },
@@ -824,7 +826,7 @@ client.connect_signal("manage", function (c, startup)
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
+        awful.client.setslave(c)
 
         -- Put windows in a smart way, only if they does not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then

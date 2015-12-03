@@ -21,10 +21,10 @@ theme.fg_widget_value = "#0064FF" -- key desc color
 theme.fg_widget_value_important = "#f00" -- key group color
 theme.fg_widget_clock = "#FF3700" -- keybinding color
 
-theme.border_width  = 4
+theme.border_width  = 2
 theme.tooltip_border_width  = 1
 theme.border_normal = "#B30077"
-theme.border_focus  = "#FF0000"
+theme.border_focus  = "#ff62a6"
 theme.border_marked = "#FF2900"
 
 -- There are other variable sets
