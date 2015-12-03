@@ -15,6 +15,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local keydoc  = require("keydoc")
 local mbarfix = require("mbarfix")
+local posix   = require("posix")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -45,14 +46,26 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
 --- Need clear for the standard icons since awesome is a bit stupid
-theme.icon_theme = "AwOken-000100255/clear"
+theme.icon_theme = "AwOken-220214194/clear"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
-preferred_shell = " -e " .. "/usr/bin/fish"
+terminal_exe_flag = "-e"
+preferred_shell = "/usr/bin/fish"
 editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
 minibrowser_cmd = "qutebrowser"
+
+function launch_term_editor(fname)
+    posix.popen({terminal, terminal_exe_flag, editor .. " " .. fname}, 'r')
+end
+
+function launch_term_with_shell()
+    posix.popen({terminal, terminal_exe_flag, preferred_shell}, 'r')
+end
+
+function launch_minibrowser(url)
+    posix.popen({minibrowser_cmd, "-s", "tabs", "position", "top", url}, 'r')
+end
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -111,7 +124,7 @@ for s = 1, screen.count() do
         awful.tag.add('⚡', {
             screen = s,
             tooltip = "Development",
-            wallpaper = "/home/shadowkyogre/Pictures/WallPaper/pacgraph.png" }),
+            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pacgraph.png") }),
         -- Books
         awful.tag.add('☬', {
             screen = s,
@@ -126,7 +139,7 @@ for s = 1, screen.count() do
         awful.tag.add('⚖', {
             screen = s,
             tooltip = "Rituals",
-            wallpaper = "/home/shadowkyogre/Pictures/WallPaper/one_of_my_favorite_quotes_by_vovina_de_micaloz-d77xbkl.png" }),
+            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/one_of_my_favorite_quotes_by_vovina_de_micaloz-d77xbkl.png") }),
         -- Writing
         awful.tag.add('✒', {
             screen = s,
@@ -163,16 +176,27 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "open docs", minibrowser_cmd .. " -s tabs position top " .. "/usr/share/doc/awesome/doc/index.html" },
-   { "UTF8 symbols", minibrowser_cmd .. " -s tabs position top " .. "http://unicode-table.com/" },
+   { "manual", function()
+                   posix.popen({terminal, terminal_exe_flag, "man awesome"})
+               end    },
+   { "edit config", function()
+                   launch_term_editor(awesome.conffile)
+               end    },
+
+   { "open docs", function()
+                      launch_minibrowser("/usr/share/doc/awesome/doc/index.html")
+               end}, 
+
+   { "UTF8 symbols", function()
+                       launch_minibrowser("http://unicode-table.com/")
+                    end},
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal .. preferred_shell }
+                                    { "open terminal",
+                                    launch_term_with_shell }
                                   }
                         })
 
@@ -475,7 +499,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     keydoc.group("Misc"),
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. preferred_shell) end, "Spawn a shell"),
+    awful.key({ modkey,           }, "Return", launch_term_with_shell , "Spawn a shell"),
     awful.key({ modkey, "Control" }, "r", awesome.restart, "Restart awesome"),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit, "Quit awesome"),
 
@@ -902,6 +926,6 @@ function(c)
 end)
 -- }}}
 
-awful.util.spawn("killall compton")
-awful.util.spawn("compton")
+posix.popen({"killall", "compton"}, 'r')
+posix.popen({"compton"}, 'r')
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker

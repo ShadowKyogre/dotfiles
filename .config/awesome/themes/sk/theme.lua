@@ -12,14 +12,14 @@ theme.bg_urgent     = "#780099"
 theme.bg_minimize   = "#2F0057"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#0064FF"
-theme.fg_focus      = "#00D8FF"
-theme.fg_urgent     = "#00D8FF"
-theme.fg_minimize   = "#0044AD"
+theme.fg_normal     = "#dcd6c2"
+theme.fg_focus      = "#FF62A6"
+theme.fg_urgent     = "#FF62A6"
+theme.fg_minimize   = "#BF6C00"
 
-theme.fg_widget_value = "#0064FF" -- key desc color
-theme.fg_widget_value_important = "#f00" -- key group color
-theme.fg_widget_clock = "#FF3700" -- keybinding color
+theme.fg_widget_value = "#dcd6c2" -- key desc color
+theme.fg_widget_value_important = "#bb0051" -- key group color
+theme.fg_widget_clock = "#bf6c00" -- keybinding color
 
 theme.border_width  = 2
 theme.tooltip_border_width  = 1
