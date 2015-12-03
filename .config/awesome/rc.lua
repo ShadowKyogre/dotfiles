@@ -793,8 +793,6 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
     { rule = { class = "Stjerm" },
       properties = { floating = true } },
     { rule = { class = "Kupfer.py", type='utility' }, 
@@ -806,9 +804,22 @@ awful.rules.rules = {
          },
          callback = force_grab_before_clamenu
     },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    -- autotagging {{{
+    -- astrology
+    { rule_any = { class = {"Openastro", } },
+        properties = { tag = tags[1][1] } },
+    -- web stuff
+    { rule_any = { class = {"Firefox", "Pidgin", "Transmission", "Thunderbird", "Skype", "qutebrowser"} },
+        properties = { tag = tags[1][2] } },
+    -- arts
+    { rule_any = { class = {"Gimp", "MyPaint", "Qosmic", "xsane"} },
+      properties = { tag = tags[1][3] } },
+    -- games
+    { rule_any = { class = {"ltris", "perl", "icebreaker", "Mupen64plus", "Pysol", "Gweled", "zsnes", "Simsu"},
+                   name = {"chuzzle.exe", "PlantsVsZombies.exe", "Yugioh Virtual Desktop 9.exe",
+                           "MWSPlay.exe", "MagicWorkstation.exe", "ZumasRevenge.exe"} },
+      properties = { tag = tags[1][4] } },
+    --- }}}
 }
 -- }}}
 

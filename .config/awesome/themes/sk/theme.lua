@@ -8,7 +8,7 @@ theme.font          = "Averia Serif 12"
 
 theme.bg_normal     = "#19002E"
 theme.bg_focus      = "#360099"
-theme.bg_urgent     = "#ff0000"
+theme.bg_urgent     = "#780099"
 theme.bg_minimize   = "#2F0057"
 theme.bg_systray    = theme.bg_normal
 
