@@ -17,7 +17,7 @@ gtk_color_scheme = "menu_bg_color:#0D0815"
 gtk_color_scheme = "menu_fg_color:#dcd6c2"
 
 gtk-icon-sizes = "panel-menu=22,22:gtk-button=16,16"
-gtk-button-images	= 0	
+gtk-button-images	= 1	
 gtk-toolbar-style	= 0	
 gtk-auto-mnemonics = 1
 
