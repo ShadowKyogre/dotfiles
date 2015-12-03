@@ -824,7 +824,7 @@ awful.rules.rules = {
     { rule = { class = "Keepassx" }, properties = { floating = true } },
     { rule_any = {
             -- If you're here, that's because you misbehave on super+right-clicks
-            class = { "qutebrowser", "chromium", "Nomacs" }
+            class = { "qutebrowser", "chromium", "Nomacs", "Qpdfview" }
          },
          callback = force_grab_before_clamenu
     },
@@ -926,6 +926,5 @@ function(c)
 end)
 -- }}}
 
-posix.popen({"killall", "compton"}, 'r')
-posix.popen({"compton"}, 'r')
+posix.popen({"compton", "-b"}, 'r')
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker
