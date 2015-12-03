@@ -477,7 +477,7 @@ globalkeys = awful.util.table.join(
     keydoc.group("Misc"),
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. preferred_shell) end, "Spawn a shell"),
     awful.key({ modkey, "Control" }, "r", awesome.restart, "Restart awesome"),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit, "Quite awesome"),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit, "Quit awesome"),
 
     keydoc.group("Layout Manipulation"),
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end, "Master width++"),
