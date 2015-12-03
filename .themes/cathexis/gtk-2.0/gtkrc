@@ -176,7 +176,7 @@ style "entry" {
 	ythickness = 3
 
     bg[NORMAL] = shade (0.70, @bg_color)
-    base[NORMAL] = @bg_color
+    base[NORMAL] = @base_color
     bg[SELECTED] = shade (0.90, @bg_color)
     fg[SELECTED] = @text_color
 

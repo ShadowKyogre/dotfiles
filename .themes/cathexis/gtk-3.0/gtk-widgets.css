@@ -710,7 +710,7 @@ GtkDrawingArea {
 .primary-toolbar .entry.progressbar,
 .entry.progressbar{
 	-GtkWidget-focus-line-width: 0;
-	background:none;
+	background:@base_color;
 	box-shadow: 0 0 2px 3px alpha(@menu_bg_color, 0.7) inset, -1px -1px 0 0 alpha(@fg_color, 0.3) inset;
 	border: none;
 	border-radius:2px;
@@ -730,7 +730,7 @@ GtkDrawingArea {
 .entry:focused,
 .entry:active,
 .primary-toolbar .entry:focus{
-	background-color:transparent;
+	background-color:@base_color;
 	border-radius: 2px;
 	border-width:1px;
 	border: 1px solid alpha (@menu_bg_color, 0.5);
