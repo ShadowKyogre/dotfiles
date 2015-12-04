@@ -48,12 +48,22 @@ beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
 --- Need clear for the standard icons since awesome is a bit stupid
 theme.icon_theme = "AwOken-220214194/clear"
 
+naughty.config.icon_formats = {"png", "gif", "xpm"}
+naughty.config.icon_size = 80
+tmp_table_dirs = mbarfix.lookup_dirs({
+    os.getenv('HOME') .. '/.icons/' .. theme.icon_theme .. '/',
+    '/usr/share/icons/hicolor'})
+table.insert(tmp_table_dirs, "/usr/share/icons/")
+table.insert(tmp_table_dirs, "/usr/share/pixmaps/")
+naughty.config.icon_dirs = tmp_table_dirs
+
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
 terminal_exe_flag = "-e"
-preferred_shell = "/usr/bin/fish"
+preferred_shell = "/usr/bin/fish -i"
 editor = os.getenv("EDITOR") or "nano"
 minibrowser_cmd = "qutebrowser"
+beautiful.useless_gap = 4
 
 function launch_term_editor(fname)
     posix.popen({terminal, terminal_exe_flag, editor .. " " .. fname}, 'r')
@@ -307,8 +317,10 @@ function icons_only_update(w, buttons, label, data, objects)
     local all_clients_tt = awful.tooltip({objects = {all_clients}})
     all_clients_tt:set_text("List all clients")
     l:add(all_clients)
+
     for i, o in ipairs(objects) do
         local cache = data[o]
+        local ib, bgb, tt
         if cache then
             ib = cache.ib
             bgb = cache.bgb
@@ -534,7 +546,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",
         function (c) c.fullscreen = not c.fullscreen  end,
         "Toggle fullscreen"),
-    awful.key({ modkey, "Shift"   }, "c",
+    awful.key({ modkey, "Ctrl"   }, "c",
         function (c) c:kill() end,
         "Kill window"),
     awful.key({ modkey, "Control" }, "space", 
@@ -645,6 +657,7 @@ minimize_icon = mbarfix.lookup_icon('gtk-go-down')
 close_icon = mbarfix.lookup_icon('gtk-close')
 move_to_tag_icon = mbarfix.lookup_icon('transform-move')
 toggle_tag_icon = mbarfix.lookup_icon('gtk-properties')
+toggle_top_icon = mbarfix.lookup_icon('gtk-goto-top')
 
 function create_client_actions_menu(c)
     local ttags_for_screen = {}
@@ -708,6 +721,13 @@ function create_client_actions_menu(c)
                 c:swap(awful.client.getmaster())
                 end,
                 master_icon
+            },
+            {
+                "Toggle on top",
+                function()
+                    c.ontop = not c.ontop
+                end,
+                toggle_top_icon,
             },
             {
                 "Toggle tags",
@@ -926,5 +946,22 @@ function(c)
 end)
 -- }}}
 
-posix.popen({"compton", "-b"}, 'r')
+function awesome_autostart()
+    posix.popen({"devmon"}, 'r')
+    posix.popen({"setxkbmap", "-model", "microsoftprousb", "-layout",
+        "us", "-variant", "olpc", "-option", "compose:rctrl",
+        "-option", "caps:none"}, 'r')
+    posix.popen({"xmodmap", os.getenv('HOME') .. '/.Xmodmap'}, 'r')
+    posix.popen({"compton", "-b"}, 'r')
+    posix.popen({"copyq"}, 'r')
+    posix.popen({"volumeicon"}, 'r')
+    posix.popen({"kupfer", "--no-splash"}, 'r')
+    posix.popen({"syncthing-gtk"}, 'r')
+    -- posix.popen({"xscreensaver", "-no-splash"})
+end
+
+if not finished_autostart then
+    finished_autostart = true
+    awesome_autostart()
+end
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker

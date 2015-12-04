@@ -27,6 +27,21 @@ local function is_format_supported(icon_file)
     return false
 end
 
+function mbarfix.lookup_dirs(ico_theme_dirs)
+	local output = {}
+	for _, icodir in ipairs(ico_theme_dirs) do
+		for j, size in ipairs(all_icon_sizes) do
+			table.insert(output, icodir .. size .. '/apps/')
+			table.insert(output, icodir .. size .. '/actions/')
+			table.insert(output, icodir .. size .. '/devices/')
+			table.insert(output, icodir .. size .. '/places/')
+			table.insert(output, icodir .. size .. '/categories/')
+			table.insert(output, icodir .. size .. '/status/')
+		end
+	end
+	return output
+end
+
 function mbarfix.lookup_icon(icon_file)
     if not icon_file or icon_file == "" then
         return default_icon
