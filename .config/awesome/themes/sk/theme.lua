@@ -3,6 +3,7 @@
 ---------------------------
 
 theme = {}
+theme.useless_gap = 4
 
 theme.font          = "Averia Serif 12"
 
@@ -39,6 +40,10 @@ theme.border_marked = "#FF2900"
 --theme.taglist_bg_focus = "#ff0000"
 theme.tasklist_bg_focus = "#550061"
 theme.tasklist_fg_focus = "#FF5800"
+
+theme.mouse_finder_color  = theme.fg_urgent
+theme.mouse_finder_radius = 20
+theme.mouse_finder_factor = 2
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = "/usr/share/awesome/themes/default/taglist/squarefw.png"

@@ -1,6 +1,7 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+awful.mouse.finder = require("awful.mouse.finder")
 awful.client = require("awful.client")
 awful.rules = require("awful.rules")
 awful.util = require("awful.util")
@@ -12,10 +13,10 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local keydoc  = require("keydoc")
 local mbarfix = require("mbarfix")
 local posix   = require("posix")
+local tags_titlebar = require("tags_titlebar")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -57,13 +58,14 @@ table.insert(tmp_table_dirs, "/usr/share/icons/")
 table.insert(tmp_table_dirs, "/usr/share/pixmaps/")
 naughty.config.icon_dirs = tmp_table_dirs
 
+mymousefinder = awful.mouse.finder()
+
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
 terminal_exe_flag = "-e"
 preferred_shell = "/usr/bin/fish -i"
 editor = os.getenv("EDITOR") or "nano"
 minibrowser_cmd = "qutebrowser"
-beautiful.useless_gap = 4
 
 function launch_term_editor(fname)
     posix.popen({terminal, terminal_exe_flag, editor .. " " .. fname}, 'r')
@@ -165,9 +167,9 @@ function set_wallpaper_for_tag(scr)
     local tag = awful.tag.selected(scr)
     local tagwall = awful.tag.getproperty(tag, 'wallpaper')
     if tagwall then
-        gears.wallpaper.maximized(tagwall, s)
+        gears.wallpaper.maximized(tagwall, scr)
     elseif beautiful.wallpaper then
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        gears.wallpaper.maximized(beautiful.wallpaper, scr, true)
     end
 end
 
@@ -212,8 +214,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 
 mylauncher = awful.widget.launcher({ image = '/home/shadowkyogre/Pictures/WallPaper/archse.png',
                                      menu = mymainmenu })
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibox
@@ -338,7 +338,8 @@ function icons_only_update(w, buttons, label, data, objects)
             }
         end
 
-        local text, bg, bg_image, icon = label(o)
+        -- pass the tooltip since it'll try to set the font of it
+        local text, bg, bg_image, icon = label(o, tt.textbox)
 
         if icon then
             ib:set_image(icon)
@@ -398,7 +399,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons, nil, icons_only_update)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
     -- click anywhere else on the taskbar to hide menus
     mywibox[s]:buttons(awful.util.table.join(
         awful.button({  }, 1, function()
@@ -417,6 +418,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
+    left_layout:add(mylayoutbox[s])
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
     left_layout:buttons()
@@ -425,7 +427,6 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -528,7 +529,8 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     keydoc.group("Misc"),
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "z", function() awful.mouse.finder.find(mymousefinder) end),
+    awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end, "Run command"),
 
     awful.key({ modkey }, "x",
               function ()
@@ -536,9 +538,7 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+              end, "Run lua code in awesome")
 )
 
 keydoc.group("Client Actions")
@@ -585,6 +585,8 @@ generic_toggleview_tag_doc = "Toggle viewing this tag"
 genertic_client_toggle_tag_doc = "Toggle tag on client"
 genertic_client_move_tag_doc = "Move client to this tag"
 
+numeric_pad = { "KP_End", "KP_Down", "KP_Next", "KP_Left", "KP_Begin", "KP_Right", "KP_Home", "KP_Up", "KP_Prior" }
+
 for i = 1, 9 do
     local viewonly_tag_doc, toggleview_tag_doc
     local client_move_tag_doc, client_toggle_tag_doc
@@ -624,7 +626,24 @@ for i = 1, 9 do
                       end
                   end,
                   toggleview_tag_doc),
-        keydoc.group("Client Actions"),
+        -- Numpad variants
+        awful.key({ modkey }, numeric_pad[i],
+                  function ()
+                        local screen = mouse.screen
+                        local tag = awful.tag.gettags(screen)[i]
+                        if tag then
+                           awful.tag.viewonly(tag)
+                        end
+                  end),
+        -- Toggle tag.
+        awful.key({ modkey, "Control" }, numeric_pad[i],
+                  function ()
+                      local screen = mouse.screen
+                      local tag = awful.tag.gettags(screen)[i]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end),
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
@@ -636,6 +655,7 @@ for i = 1, 9 do
                      end
                   end,
                   client_move_tag_doc),
+
         -- Toggle tag on client.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
@@ -646,7 +666,30 @@ for i = 1, 9 do
                           end
                       end
                   end,
-                  client_toggle_tag_doc))
+                  client_toggle_tag_doc),
+        -- Numpad variants
+        -- Move client to tag.
+        awful.key({ modkey, "Shift" }, numeric_pad[i],
+                  function ()
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.movetotag(tag)
+                          end
+                     end
+                  end),
+
+        -- Toggle tag on client.
+        awful.key({ modkey, "Control", "Shift" }, numeric_pad[i],
+                  function ()
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.toggletag(tag)
+                          end
+                      end
+                  end)
+    )
 end
 
 ticked_icon = mbarfix.lookup_icon('gtk-apply')
@@ -838,9 +881,10 @@ awful.rules.rules = {
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "Stjerm" },
-      properties = { floating = true } },
-    { rule = { class = "Kupfer.py", type='utility' }, 
-        properties = { border_width = 0, floating = true, x = 746, y = 438 } },
+      properties = { floating = true }, callback = awful.titlebar.hide },
+    { rule = { class = "Kupfer.py", type='utility' },
+        properties = { border_width = 0, floating = true, x = 746, y = 438 },
+        callback = awful.titlebar.hide },
     { rule = { class = "Keepassx" }, properties = { floating = true } },
     { rule_any = {
             -- If you're here, that's because you misbehave on super+right-clicks
@@ -890,7 +934,7 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 
-    local titlebars_enabled = false
+    local titlebars_enabled = true
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
@@ -899,7 +943,7 @@ client.connect_signal("manage", function (c, startup)
                     c:raise()
                     awful.mouse.client.move(c)
                 end),
-                awful.button({ }, 3, function()
+                awful.button({ }, 2, function()
                     client.focus = c
                     c:raise()
                     awful.mouse.client.resize(c)
@@ -910,14 +954,15 @@ client.connect_signal("manage", function (c, startup)
         local left_layout = wibox.layout.fixed.horizontal()
         left_layout:add(awful.titlebar.widget.iconwidget(c))
         left_layout:buttons(buttons)
+        left_layout:add(tags_titlebar(c))
 
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.stickybutton(c))
-        right_layout:add(awful.titlebar.widget.ontopbutton(c))
-        right_layout:add(awful.titlebar.widget.closebutton(c))
+        -- right_layout:add(awful.titlebar.widget.floatingbutton(c))
+        -- right_layout:add(awful.titlebar.widget.maximizedbutton(c))
+        -- right_layout:add(awful.titlebar.widget.stickybutton(c))
+        -- right_layout:add(awful.titlebar.widget.ontopbutton(c))
+        -- right_layout:add(awful.titlebar.widget.closebutton(c))
 
         -- The title goes in the middle
         local middle_layout = wibox.layout.flex.horizontal()
@@ -932,7 +977,7 @@ client.connect_signal("manage", function (c, startup)
         layout:set_right(right_layout)
         layout:set_middle(middle_layout)
 
-        awful.titlebar(c):set_widget(layout)
+        awful.titlebar(c, {size="18"}):set_widget(layout)
     end
 end)
 
@@ -962,6 +1007,6 @@ end
 
 if not finished_autostart then
     finished_autostart = true
-    awesome_autostart()
+    -- awesome_autostart()
 end
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker
