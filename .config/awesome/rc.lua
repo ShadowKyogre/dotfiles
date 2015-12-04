@@ -510,6 +510,14 @@ globalkeys = awful.util.table.join(
         function () awful.screen.focus_relative(-1) end,
         "Move pointer to the previous screen"),
 
+    keydoc.group("CMus Control"),
+    awful.key({ modkey }, "slash",  function() posix.spawn({"cmus-remote", "-u"}, 'r') end, "Play/Pause"),
+    awful.key({ modkey }, "comma",  function() posix.spawn({"cmus-remote", "-r"}, 'r') end, "Next"),
+    awful.key({ modkey }, "period", function() posix.spawn({"cmus-remote", "-n"}, 'r') end, "Previous"),
+    awful.key({ modkey, "Shift" }, "slash",
+        function()
+            posix.spawn({os.getenv('HOME') .. '/bin/cmus_mark_impressive.sh'}, 'r')
+        end, "Quickmark"),
     -- Standard program
     keydoc.group("Misc"),
     awful.key({ modkey,           }, "Return", launch_term_with_shell , "Spawn a shell"),
@@ -558,6 +566,9 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",
         awful.client.movetoscreen,
         "Move client to screen"),
+    awful.key({ modkey,           }, "s",
+        function (c) c.sticky = not c.sticky end,
+        "Toggle sticky"),
     awful.key({ modkey,           }, "t",
         function (c) c.ontop = not c.ontop end,
         "Toggle on top"),
@@ -701,6 +712,7 @@ close_icon = mbarfix.lookup_icon('gtk-close')
 move_to_tag_icon = mbarfix.lookup_icon('transform-move')
 toggle_tag_icon = mbarfix.lookup_icon('gtk-properties')
 toggle_top_icon = mbarfix.lookup_icon('gtk-goto-top')
+toggle_sticky_icon = mbarfix.lookup_icon('sticky-notes')
 
 function create_client_actions_menu(c)
     local ttags_for_screen = {}
@@ -747,21 +759,21 @@ function create_client_actions_menu(c)
             {
                 "[H] Maximize toggle", 
                 function() 
-                c.maximized_horizontal = not c.maximized_horizontal
+                    c.maximized_horizontal = not c.maximized_horizontal
                 end,
                 hmaximize_toggle_icon
             },
             {
                 "[V] Maximize toggle",
                 function()
-                c.maximized_vertical   = not c.maximized_vertical
+                    c.maximized_vertical   = not c.maximized_vertical
                 end,
                 vmaximize_toggle_icon
             },
             {
                 "Set as master",
                 function()
-                c:swap(awful.client.getmaster())
+                    c:swap(awful.client.getmaster())
                 end,
                 master_icon
             },
@@ -771,6 +783,13 @@ function create_client_actions_menu(c)
                     c.ontop = not c.ontop
                 end,
                 toggle_top_icon,
+            },
+            {
+                "Toggle sticky",
+                function()
+                    c.sticky = not c.sticky
+                end,
+                toggle_sticky_icon,
             },
             {
                 "Toggle tags",
@@ -785,14 +804,14 @@ function create_client_actions_menu(c)
             {
                 "Minimize",
                 function()
-                c.minimized=true
+                    c.minimized=true
                 end,
                 minimize_icon
             },
             {
                 "Close",
                 function()
-                c:kill()
+                    c:kill()
                 end,
                 close_icon
             },
