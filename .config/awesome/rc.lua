@@ -46,7 +46,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
-beautiful.init("/home/shadowkyogre/.config/awesome/xresources/theme.lua")
+beautiful.init("/home/shadowkyogre/.config/awesome/themes/xresources/theme.lua")
 --- Need clear for the standard icons since awesome is a bit stupid
 theme.icon_theme = "AwOken-220214194/clear"
 
