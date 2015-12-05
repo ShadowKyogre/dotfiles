@@ -45,7 +45,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
+-- beautiful.init("/home/shadowkyogre/.config/awesome/themes/sk/theme.lua")
+beautiful.init("/home/shadowkyogre/.config/awesome/xresources/theme.lua")
 --- Need clear for the standard icons since awesome is a bit stupid
 theme.icon_theme = "AwOken-220214194/clear"
 
@@ -977,11 +978,11 @@ client.connect_signal("manage", function (c, startup)
 
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
-        -- right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        -- right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        -- right_layout:add(awful.titlebar.widget.stickybutton(c))
-        -- right_layout:add(awful.titlebar.widget.ontopbutton(c))
-        -- right_layout:add(awful.titlebar.widget.closebutton(c))
+        right_layout:add(awful.titlebar.widget.floatingbutton(c))
+        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
+        right_layout:add(awful.titlebar.widget.stickybutton(c))
+        right_layout:add(awful.titlebar.widget.ontopbutton(c))
+        right_layout:add(awful.titlebar.widget.closebutton(c))
 
         -- The title goes in the middle
         local middle_layout = wibox.layout.flex.horizontal()
