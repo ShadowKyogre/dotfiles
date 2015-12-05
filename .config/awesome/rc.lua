@@ -282,7 +282,7 @@ function tag_tooltips(w, buttons, label, data, tags)
             tb = wibox.widget.textbox()
             m = wibox.layout.margin(tb, 4, 4)
             tt = awful.tooltip({objects = {bgb}, })
-            tt:set_markup(awful.tag.getproperty(o, 'tooltip'))
+
 
             bgb:set_widget(m)
             bgb:buttons(awful.widget.common.create_buttons(buttons, o))
@@ -297,6 +297,7 @@ function tag_tooltips(w, buttons, label, data, tags)
 
         local text, bg, bg_image, icon = label(o)
         tb:set_markup(text)
+        tt:set_markup(text:gsub(o.name, awful.tag.getproperty(o, 'tooltip')))
         tt.wibox:set_bg(bg)
         bgb:set_bg(bg)
         bgb:set_bgimage(bg_image)
