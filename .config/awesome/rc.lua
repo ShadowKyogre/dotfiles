@@ -220,7 +220,7 @@ mylauncher = awful.widget.launcher({ image = '/home/shadowkyogre/Pictures/WallPa
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("<b>%Y-%m-%d</b> %H:%M:%S", 1)
+mytextclock = awful.widget.textclock("<b>%Y-%m-%d</b> [%a]  %H:%M:%S", 1)
 
 -- Create a wibox for each screen and add it
 mywibox = {}

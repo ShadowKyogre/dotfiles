@@ -15,13 +15,13 @@ local theme_assets = dofile("/usr/share/awesome/themes/xresources/assets.lua")
 theme.font          = "AveriaSerif 12"
 
 theme.bg_normal     = xrdb.background
-theme.bg_focus      = xrdb.color4
+theme.bg_focus      = xrdb.color0
 theme.bg_urgent     = xrdb.color1
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = xrdb.foreground
-theme.fg_focus      = xrdb.color9
+theme.fg_focus      = xrdb.color11
 theme.fg_urgent     = xrdb.color9
 theme.fg_minimize   = theme.fg_normal
 
@@ -50,7 +50,12 @@ theme.fg_widget_clock = xrdb.color3
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 theme.taglist_bg_occupied = theme.bg_normal
-theme.taglist_bg_empty = theme.bg_normal
+theme.taglist_bg_empty    = theme.bg_normal
+theme.taglist_fg_occupied = theme.fg_normal
+theme.taglist_fg_empty    = theme.fg_normal
+
+theme.tooltip_fg_color = theme.fg_normal
+theme.tooltip_bg_color = theme.bg_normal
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
