@@ -51,7 +51,8 @@ beautiful.init("/home/shadowkyogre/.config/awesome/xresources/theme.lua")
 theme.icon_theme = "AwOken-220214194/clear"
 
 naughty.config.icon_formats = {"png", "gif", "xpm"}
-naughty.config.icon_size = 80
+naughty.config.defaults.icon_size = 64
+naughty.config.defaults.height = 72
 tmp_table_dirs = mbarfix.lookup_dirs({
     os.getenv('HOME') .. '/.icons/' .. theme.icon_theme .. '/',
     '/usr/share/icons/hicolor'})
