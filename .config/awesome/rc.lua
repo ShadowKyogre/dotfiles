@@ -140,6 +140,7 @@ for s = 1, screen.count() do
         awful.tag.add('⚡', {
             screen = s,
             tooltip = "Development",
+            layout = layouts[4],
             wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pacgraph.png") }),
         -- Books
         awful.tag.add('☬', {

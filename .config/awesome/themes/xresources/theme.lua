@@ -100,9 +100,9 @@ end
 local is_dark_bg = (bg_numberic_value < 383)
 
 -- Generate wallpaper:
-local wallpaper_bg = xrdb.color8
-local wallpaper_fg = xrdb.color7
-local wallpaper_alt_fg = xrdb.color12
+local wallpaper_bg = xrdb.color0
+local wallpaper_fg = xrdb.foreground
+local wallpaper_alt_fg = xrdb.color3
 if not is_dark_bg then
     wallpaper_bg, wallpaper_fg = wallpaper_fg, wallpaper_bg
 end
