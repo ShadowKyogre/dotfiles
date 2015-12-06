@@ -5,4 +5,5 @@ xmodmap ~/.Xmodmap &
 copyq &
 volumeicon &
 kupfer --no-splash &
+xscreensaver -no-splash &
 syncthing-gtk &
