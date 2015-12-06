@@ -1,8 +1,9 @@
 local awful = require('awful')
+local beautiful = require('beautiful')
 awful.util  = require('awful.util')
 local wibox = require('wibox')
 
-ttb_widget = { mt = {} }
+local ttb_widget = { mt = {} }
 
 local function new(c)
     local output = wibox.layout.fixed.horizontal()
@@ -10,8 +11,10 @@ local function new(c)
 
     local function redraw()
         output:reset()
-        local fg_focus = theme.fg_focus
-        local fg_occupied = theme.fg_normal
+        local fg_focus    = beautiful.taglist_fg_focus or beautiful.fg_focus
+        local fg_occupied = beautiful.taglist_fg_occupied or beautiful.fg_normal
+        local bg_focus    = beautiful.taglist_bg_focus or beautiful.bg_focus
+        local bg_normal   = beautiful.taglist_bg_empty or beautiful.bg_normal
         for i, o in ipairs(awful.tag.gettags(c.screen)) do
             local selected = false
             for _, t in ipairs(c:tags()) do
@@ -33,17 +36,30 @@ local function new(c)
                     tt = tt, 
                 }
             end
+            local etext = awful.util.escape(o.name) or ""
+            local ettext = awful.util.escape(awful.tag.getproperty(o, 'tooltip')) or ""
+
             local text
+            local ttext
             if selected then
                 text = "<span color='" .. awful.util.ensure_pango_color(fg_focus) ..
-        "'>" .. (awful.util.escape(o.name) or "") .. "</span>"
+        "'>" .. etext .. "</span>"
+                ttext = "<span color='" .. awful.util.ensure_pango_color(fg_focus) ..
+        "'>" .. ettext .. "</span>"
+                tt.wibox:set_bg(bg_focus)
+                tt.wibox.border_color = fg_focus
             else
                 text = "<span color='" .. awful.util.ensure_pango_color(fg_occupied) ..
-        "'>" .. (awful.util.escape(o.name) or "") .. "</span>"
+        "'>" .. etext .. "</span>"
+                ttext = "<span color='" .. awful.util.ensure_pango_color(fg_occupied) ..
+        "'>" .. ettext .. "</span>"
+                tt.wibox:set_bg(bg_occupied)
+                tt.wibox.border_color = fg_occupied
             end
-                    tb:set_markup(text)
-                    tt:set_markup(awful.tag.getproperty(o, 'tooltip'))
-                    output:add(tb)
+            tb:set_markup(text)
+
+            tt:set_markup(ttext)
+            output:add(tb)
         end
     end
 

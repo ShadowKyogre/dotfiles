@@ -23,7 +23,7 @@ theme.bg_systray    = theme.bg_normal
 theme.fg_normal     = xrdb.foreground
 theme.fg_focus      = xrdb.color11
 theme.fg_urgent     = xrdb.color9
-theme.fg_minimize   = theme.fg_normal
+theme.fg_minimize   = xrdb.color14
 
 theme.mouse_finder_color  = theme.fg_urgent
 theme.mouse_finder_radius = 20
@@ -32,7 +32,7 @@ theme.mouse_finder_factor = 2
 theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(2)
 theme.border_normal = xrdb.color0
-theme.border_focus  = theme.bg_focus
+theme.border_focus  = theme.fg_focus
 theme.border_marked = xrdb.color10
 
 theme.fg_widget_value = xrdb.foreground

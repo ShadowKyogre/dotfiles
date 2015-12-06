@@ -17,6 +17,8 @@ local keydoc  = require("keydoc")
 local mbarfix = require("mbarfix")
 local posix   = require("posix")
 local tags_titlebar = require("tags_titlebar")
+local popdown = require("popdown")
+local flexitimer = require("flexitimer")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -227,6 +229,29 @@ mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
+mytimer = flexitimer({work = 120 * 60, breaks = 10 * 60})
+mytimer:buttons(awful.util.table.join(
+    awful.button({  }, 1, function()
+            if mytimer._timer.started  then
+                mytimer:pause(false)
+            else
+                if mytimer.curtime > 0 or mytimer.curbreaktime > 0 then
+                    mytimer:resume()
+                else
+                    mytimer:start()
+                end
+            end
+        end),
+    awful.button({  }, 2, function()
+        if not mytimer.inbreak then
+            mytimer:pause(true)
+        end
+    end),
+    awful.button({ "Shift" }, 1, function()
+        mytimer:start(false)
+    end)
+    )
+)
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
@@ -253,6 +278,7 @@ mytasklist.buttons = awful.util.table.join(
                                                   c:raise()
                                               end
                                           end),
+                     awful.button({ }, 2, function (c) c:kill() end),
                      awful.button({ }, 3, function (c)
                                               hide_client_actions()
                                               client_actions = create_client_actions_menu(c)
@@ -297,8 +323,12 @@ function tag_tooltips(w, buttons, label, data, tags)
 
         local text, bg, bg_image, icon = label(o)
         tb:set_markup(text)
-        tt:set_markup(text:gsub(o.name, awful.tag.getproperty(o, 'tooltip')))
+        local ename = awful.util.escape(o.name) or ""
+        local ettext = awful.util.escape(awful.tag.getproperty(o, 'tooltip')) or ""
+        tt:set_markup(text:gsub(ename, ename .. ' ' .. ettext))
+        -- tt.wibox.border_color = tt.wibox.background.foreground
         tt.wibox:set_bg(bg)
+        tt.wibox.border_color = text:match('#[0-9A-Fa-f]+')
         bgb:set_bg(bg)
         bgb:set_bgimage(bg_image)
 
@@ -352,6 +382,7 @@ function icons_only_update(w, buttons, label, data, objects)
         l:add(bgb)
         tt:set_markup(text)
         tt.wibox:set_bg(bg)
+        tt.wibox.border_color = text:match('#[0-9A-Fa-f]+')
         bgb:set_widget(ib)
         bgb:set_bg(bg)
         bgb:set_bgimage(bg_image)
@@ -429,6 +460,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mytimer._widget)
     right_layout:add(mytextclock)
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -876,11 +908,11 @@ root.keys(globalkeys)
 -- }}}
 
 function default_custom_properties(c)
-   awful.client.property.set(c, 'grab_before_show', false) 
+   awful.client.property.set(c, 'grab_before_show', false)
 end
 
 function force_grab_before_clamenu(c)
-   awful.client.property.set(c, 'grab_before_show', true) 
+   awful.client.property.set(c, 'grab_before_show', true)
 end
 
 -- {{{ Rules
@@ -974,7 +1006,36 @@ client.connect_signal("manage", function (c, startup)
 
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.iconwidget(c))
+        local wicon = awful.titlebar.widget.iconwidget(c)
+        left_layout:add(wicon)
+        wicon.poppy = popdown(popdown.simple_text(string.format("class: %s\ntype: %s", c.class, c.type)))
+
+        wicon:buttons(awful.util.table.join(
+            awful.button({ }, 1,
+            function(g)
+                --acts weirdly when not embedded in func
+                function wicon_poppy_move()
+                    local cgeo = c:geometry()
+                    local new_xdelta = cgeo.x - wicon.poppy.prevx
+                    local new_ydelta = cgeo.y - wicon.poppy.prevy
+                    local curgeo = wicon.poppy:geometry()
+                    wicon.poppy:geometry({x = curgeo.x + new_xdelta, y = curgeo.y + new_ydelta})
+                    wicon.poppy.prevx = cgeo.x
+                    wicon.poppy.prevy = cgeo.y
+                end
+                if wicon.poppy and wicon.poppy:visible() then
+                    wicon.poppy:hide()
+                    c:disconnect_signal('property::geometry', wicon_poppy_move)
+                else
+                    local mygeo = g.drawable.drawable:geometry()
+                    wicon.poppy:geometry({x = mygeo.x, y = mygeo.y + mygeo.height})
+                    wicon.poppy.prevx = c:geometry().x
+                    wicon.poppy.prevy = c:geometry().y
+                    wicon.poppy:show()
+                    c:connect_signal('property::geometry', wicon_poppy_move)
+                end
+            end)
+        ))
         left_layout:buttons(buttons)
         left_layout:add(tags_titlebar(c))
 
@@ -990,6 +1051,7 @@ client.connect_signal("manage", function (c, startup)
         local middle_layout = wibox.layout.flex.horizontal()
         local title = awful.titlebar.widget.titlewidget(c)
         title:set_align("center")
+
         middle_layout:add(title)
         middle_layout:buttons(buttons)
 
