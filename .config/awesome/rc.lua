@@ -125,6 +125,7 @@ for s = 1, screen.count() do
         awful.tag.add('⛓', {
             screen = s,
             tooltip = "Internet",
+            layout = layouts[2],
             wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/lelouch_-_custom_wallpaper.png") }),
         -- Art
         awful.tag.add('⛧', {
@@ -328,8 +329,12 @@ function tag_tooltips(w, buttons, label, data, tags)
         local ettext = awful.util.escape(awful.tag.getproperty(o, 'tooltip')) or ""
         tt:set_markup(text:gsub(ename, ename .. ' ' .. ettext))
         -- tt.wibox.border_color = tt.wibox.background.foreground
-        tt.wibox:set_bg(bg)
-        tt.wibox.border_color = text:match('#[0-9A-Fa-f]+')
+
+        tt.wibox:set_bg(bg or theme.taglist_bg_occupied)
+
+        local col = text:match('#[0-9A-Fa-f]+')
+        -- workaround for those on all tags having nil except currently viewed tag
+        tt.wibox.border_color = col or theme.taglist_fg_occupied
         bgb:set_bg(bg)
         bgb:set_bgimage(bg_image)
 
@@ -1076,22 +1081,4 @@ function(c)
 end)
 -- }}}
 
-function awesome_autostart()
-    posix.popen({"devmon"}, 'r')
-    posix.popen({"setxkbmap", "-model", "microsoftprousb", "-layout",
-        "us", "-variant", "olpc", "-option", "compose:rctrl",
-        "-option", "caps:none"}, 'r')
-    posix.popen({"xmodmap", os.getenv('HOME') .. '/.Xmodmap'}, 'r')
-    posix.popen({"compton", "-b"}, 'r')
-    posix.popen({"copyq"}, 'r')
-    posix.popen({"volumeicon"}, 'r')
-    posix.popen({"kupfer", "--no-splash"}, 'r')
-    posix.popen({"syncthing-gtk"}, 'r')
-    -- posix.popen({"xscreensaver", "-no-splash"})
-end
-
-if not finished_autostart then
-    finished_autostart = true
-    -- awesome_autostart()
-end
 -- vim: ts=4:sw=4:expandtab:foldmethod=marker
