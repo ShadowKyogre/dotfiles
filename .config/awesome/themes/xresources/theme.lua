@@ -25,10 +25,6 @@ theme.fg_focus      = xrdb.color11
 theme.fg_urgent     = xrdb.color12
 theme.fg_minimize   = xrdb.color14
 
-theme.mouse_finder_color  = theme.fg_urgent
-theme.mouse_finder_radius = 20
-theme.mouse_finder_factor = 2
-
 theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(2)
 theme.border_normal = xrdb.color1
@@ -38,6 +34,10 @@ theme.border_marked = xrdb.color10
 theme.fg_widget_value = xrdb.foreground
 theme.fg_widget_value_important = xrdb.color1
 theme.fg_widget_clock = xrdb.color3
+
+theme.mouse_finder_color  = theme.border_focus
+theme.mouse_finder_radius = 20
+theme.mouse_finder_factor = 2
 
 -- There are other variable sets
 -- overriding the default one when
