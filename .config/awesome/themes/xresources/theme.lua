@@ -15,14 +15,14 @@ local theme_assets = dofile("/usr/share/awesome/themes/xresources/assets.lua")
 theme.font          = "AveriaSerif 12"
 
 theme.bg_normal     = xrdb.background
-theme.bg_focus      = xrdb.color0
-theme.bg_urgent     = xrdb.color1
+theme.bg_focus      = xrdb.color5
+theme.bg_urgent     = xrdb.color4
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = xrdb.foreground
 theme.fg_focus      = xrdb.color11
-theme.fg_urgent     = xrdb.color9
+theme.fg_urgent     = xrdb.color12
 theme.fg_minimize   = xrdb.color14
 
 theme.mouse_finder_color  = theme.fg_urgent
@@ -31,8 +31,8 @@ theme.mouse_finder_factor = 2
 
 theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(2)
-theme.border_normal = xrdb.color0
-theme.border_focus  = theme.fg_focus
+theme.border_normal = xrdb.color1
+theme.border_focus  = xrdb.color9
 theme.border_marked = xrdb.color10
 
 theme.fg_widget_value = xrdb.foreground
