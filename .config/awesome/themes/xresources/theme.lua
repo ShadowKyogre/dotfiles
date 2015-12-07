@@ -64,6 +64,10 @@ theme.menu_submenu_icon = "/usr/share/awesome/themes/default/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(130)
 
+theme.menu_bg_focus = xrdb.color3
+theme.menu_fg_focus = xrdb.color0
+theme.menu_border_width = 0
+
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
@@ -109,6 +113,7 @@ end
 theme.wallpaper = theme_assets.wallpaper(
     wallpaper_bg, wallpaper_fg, wallpaper_alt_fg
 )
+-- theme.wallpaper = "/home/shadowkyogre/Pictures/WallPaper/sample_f6cac1a1c6ff90f0b8f2952eb405f8448649eca6.jpg"
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
