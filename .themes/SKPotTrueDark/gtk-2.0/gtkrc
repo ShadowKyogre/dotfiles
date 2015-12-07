@@ -2,14 +2,17 @@
 # (c) 2009 Rico Sta. Cruz, Kido Mariano, James Schriver
 # Licensed under the GPL.
 
-gtk_color_scheme = "fg_color:#0064ff"
-gtk_color_scheme = "bg_color:#19002E"
-gtk_color_scheme = "base_color:#001940"
-gtk_color_scheme = "text_color:#0064ff"
-gtk_color_scheme = "selected_bg_color:#0064ff"
-gtk_color_scheme = "selected_fg_color:#000000"
-gtk_color_scheme = "tooltip_bg_color:#001940"
-gtk_color_scheme = "tooltip_fg_color:#0064ff"
+gtk_color_scheme = "fg_color:#dcd6c2"
+gtk_color_scheme = "bg_color:#0D0815"
+gtk_color_scheme = "base_color:#162a37"
+gtk_color_scheme = "text_color:#dcd6c2"
+gtk_color_scheme = "selected_bg_color:#bf6c00"
+gtk_color_scheme = "selected_fg_color:#162a37"
+gtk_color_scheme = "tooltip_bg_color:#314551"
+gtk_color_scheme = "tooltip_fg_color:#dcd6c2"
+gtk_color_scheme = "link_color:#bf6c00"
+gtk_color_scheme = "menu_bg_color:#0D0815"
+gtk_color_scheme = "menu_fg_color:#dcd6c2"
 
 #include "scrollbars/scrollbar.rc"
 
