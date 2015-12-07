@@ -80,7 +80,7 @@ function launch_term_with_shell()
 end
 
 function launch_minibrowser(url)
-    posix.popen({minibrowser_cmd, "-s", "tabs", "position", "top", url}, 'r')
+    posix.popen({minibrowser_cmd, "--qt-name", "AwesomeHelp", "-s", "tabs", "position", "top", url}, 'r')
 end
 
 -- Default modkey.
@@ -511,7 +511,8 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     keydoc.group("Misc"),
-    awful.key({modkey, }, "F1", keydoc.display, "Show help"),
+    awful.key({ modkey, }, "F1", keydoc.display, "Show help"),
+    awful.key({ modkey, }, "F2", function() mymainmenu:toggle() end, "Show main menu"),
     keydoc.group("Tag Navigation"),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ,
         "View next tag"),
@@ -567,6 +568,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "slash",  function() posix.spawn({"cmus-remote", "-u"}, 'r') end, "Play/Pause"),
     awful.key({ modkey }, "comma",  function() posix.spawn({"cmus-remote", "-r"}, 'r') end, "Next"),
     awful.key({ modkey }, "period", function() posix.spawn({"cmus-remote", "-n"}, 'r') end, "Previous"),
+    awful.key({ modkey, "Shift"}, "apostrophe",
+        function()
+            posix.spawn({"cmus-remote", "--raw", "toggle repeat_current"}, 'r')
+        end,
+        "Toggle loop current"),
     awful.key({ modkey, "Shift" }, "slash",
         function()
             posix.spawn({os.getenv('HOME') .. '/bin/cmus_mark_impressive.sh'}, 'r')
@@ -593,7 +599,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "z", function() awful.mouse.finder.find(mymousefinder) end, "Find the mouse"),
     awful.key({ modkey }, "r", function() mypromptbox[mouse.screen]:run() end, "Run command"),
     awful.key({ modkey }, "d", function() posix.popen({"xscreensaver-command", "-lock"}, 'r') end, "Lock screen"),
-
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -949,6 +954,26 @@ awful.rules.rules = {
                    },
        callback =  default_custom_properties,
     },
+
+    -- autotagging {{{
+    -- astrology
+    { rule_any = { class = {"Openastro", } },
+        properties = { tag = tags[1][1] } },
+    -- web stuff
+    { rule_any = { class = {"Firefox", "Pidgin", "Transmission", "Thunderbird", "Skype", "qutebrowser"} },
+        properties = { tag = tags[1][2] } },
+    -- arts
+    { rule_any = { class = {"Gimp", "MyPaint", "Qosmic", "xsane"} },
+      properties = { tag = tags[1][3] } },
+    -- games
+    { rule_any = { class = {"ltris", "perl", "icebreaker", "Mupen64plus", "Pysol", "Gweled", "zsnes", "Simsu"},
+                   name = {"chuzzle.exe", "PlantsVsZombies.exe", "Yugioh Virtual Desktop 9.exe",
+                           "MWSPlay.exe", "MagicWorkstation.exe", "ZumasRevenge.exe"} },
+    properties = { tag = tags[1][4] } },
+    --- }}}
+
+    { rule = { class = "qutebrowser", instance = "AwesomeHelp" },
+        properties = { tag = tags[1][5] } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -965,22 +990,14 @@ awful.rules.rules = {
          },
          callback = force_grab_before_clamenu
     },
-    -- autotagging {{{
-    -- astrology
-    { rule_any = { class = {"Openastro", } },
-        properties = { tag = tags[1][1] } },
-    -- web stuff
-    { rule_any = { class = {"Firefox", "Pidgin", "Transmission", "Thunderbird", "Skype", "qutebrowser"} },
-        properties = { tag = tags[1][2] } },
-    -- arts
-    { rule_any = { class = {"Gimp", "MyPaint", "Qosmic", "xsane"} },
-      properties = { tag = tags[1][3] } },
-    -- games
-    { rule_any = { class = {"ltris", "perl", "icebreaker", "Mupen64plus", "Pysol", "Gweled", "zsnes", "Simsu"},
-                   name = {"chuzzle.exe", "PlantsVsZombies.exe", "Yugioh Virtual Desktop 9.exe",
-                           "MWSPlay.exe", "MagicWorkstation.exe", "ZumasRevenge.exe"} },
-      properties = { tag = tags[1][4] } },
-    --- }}}
+    {
+        rule = { class = "Firefox", role = "SessionPrompt" },
+        properties = { floating = true },
+    },
+    {
+        rule = { class = "Pixeltool-qt4" },
+        properties = { floating = true },
+    },
 }
 -- }}}
 
@@ -1027,7 +1044,9 @@ client.connect_signal("manage", function (c, startup)
         local left_layout = wibox.layout.fixed.horizontal()
         local wicon = awful.titlebar.widget.iconwidget(c)
         left_layout:add(wicon)
-        wicon.poppy = popdown(popdown.simple_text(string.format("class: %s\ntype: %s", c.class, c.type)))
+        local debuginfo = string.format("class: %s\ntype: %s\nrole: %s\ninstance: %s",
+                              c.class, c.type, c.role, c.instance)
+        wicon.poppy = popdown(popdown.simple_text(debuginfo))
 
         wicon:buttons(awful.util.table.join(
             awful.button({ }, 1,
