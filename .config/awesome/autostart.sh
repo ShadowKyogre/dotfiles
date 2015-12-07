@@ -1,6 +1,8 @@
 devmon &
 compton -b &
-setxkbmap us -variant altgr-intl -option compose:ralt -option nodeadkeys &
+setxkbmap -layout us           -model microsoftprousb \
+          -variant olpc        -option caps:none \
+          -option compose:menu -option keyboard:pointerkeys &
 xmodmap ~/.Xmodmap &
 copyq &
 volumeicon &
