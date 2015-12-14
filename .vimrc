@@ -15,7 +15,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set nocp
 " }}}
 
-set clipboard=autoselectplus,exclude:cons\|linux
+" set clipboard=autoselectplus,exclude:cons\|linux
 
 " ---- mappings for usual stuff {{{1
 	" on the same key as \, and I don't really use the | motion anyway
@@ -41,30 +41,30 @@ set clipboard=autoselectplus,exclude:cons\|linux
 	nnoremap <C-i> gi
 
 	" always center current line after movement {{{2
-		nnoremap <ScrollWheelUp> 3kzz
-		nnoremap <ScrollWheelDown> 3jzz
-		nnoremap <C-U> 11kzz
-		nnoremap <C-D> 11jzz
-		nnoremap <Down> gjzz
-		nnoremap <Up> gkzz
-		nnoremap j jzz
-		nnoremap k kzz
-		nnoremap # #zz
-		nnoremap * *zz
-		nnoremap n nzz
-		nnoremap N Nzz
-		nnoremap G Gzz
-		nnoremap <PageUp> <PageUp>zz
-		nnoremap <PageDown> <PageDown>zz
+		" nnoremap <ScrollWheelUp> 3kzz
+		" nnoremap <ScrollWheelDown> 3jzz
+		" nnoremap <C-U> 11kzz
+		" nnoremap <C-D> 11jzz
+		" nnoremap <Down> gjzz
+		" nnoremap <Up> gkzz
+		" nnoremap j jzz
+		" nnoremap k kzz
+		" nnoremap # #zz
+		" nnoremap * *zz
+		" nnoremap n nzz
+		" nnoremap N Nzz
+		" nnoremap G Gzz
+		" nnoremap <PageUp> <PageUp>zz
+		" nnoremap <PageDown> <PageDown>zz
 	"}}}
 
 	" Use the arrow keys to move through soft wrapped lines {{{2
-		inoremap <Down> <C-o>gj<C-o>zz
-		inoremap <Up> <C-o>gk<C-o>zz
-		inoremap <PageUp> <C-o><PageUp><C-o>zz
-		inoremap <PageDown> <C-o><PageDown><C-o>zz
-		inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
-		inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
+		" inoremap <Down> <C-o>gj<C-o>zz
+		" inoremap <Up> <C-o>gk<C-o>zz
+		" inoremap <PageUp> <C-o><PageUp><C-o>zz
+		" inoremap <PageDown> <C-o><PageDown><C-o>zz
+		" inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
+		" inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
 	"}}}
 
 	" Undo remap changes {{{2
@@ -335,6 +335,12 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
+	function! QuickPTPB() "{{{2
+		let fpath = fnameescape(expand("%:p"))
+		exec '!curl -i -F c=@' . fpath .' https://ptpb.pw'
+	endfunction
+	"}}}
+
 	function! ToggleOnlyAddInInsertMode() "{{{2
 		" remove the previous mapping
 		if !exists('b:disable_del_and_bs')
@@ -436,6 +442,7 @@ endif
 	au FileType yaml setlocal expandtab
 	au FileType cpp  setlocal tags+=~/.vim/tags/cpp
 	au FileType voomtree setlocal wrap
+	au FileType tsv setlocal nowrap tabstop=20 list
 	" ---- Prose Types {{{2
 		au FileType markdown setlocal complete+=k
 		au FileType markdown call SuperTabSetDefaultCompletionType("<c-n>")
@@ -454,8 +461,10 @@ endif
 		au FileType python nnoremap <silent> <buffer> <LocalLeader>n :call jedi#usages()<CR>
 	" }}}
 	au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+	au BufRead,BufNewFile *.xrdb setlocal filetype=xdefaults
 	au BufRead,BufNewFile *.adoc setlocal filetype=asciidoc
 	au BufRead,BufNewFile *.gradle setlocal filetype=groovy
+	au BufRead,BufNewFile *.tsv setlocal filetype=tsv
 " }}}
 
 " ---- TAB VISIBILITY {{{1
