@@ -23,9 +23,14 @@
  * @define-color text-color #ff00ff;
  */
 
-@define-color entrybg-color #001940;
-@define-color entryfg-color #0064FF;
 @define-color background-color #19002E;
 @define-color foreground-color #0064ff;
-@define-color entryselbg-color #0064FF;
+@define-color entrybg-color    #001940;
+@define-color entryfg-color    #0064ff;
+@define-color entryselbg-color #0064ff;
 @define-color entryselfg-color #000000;
+@define-color tooltipbg-color  #001940;
+@define-color tooltipfg-color  #001940;
+@define-color link-color       #FF007D;
+@define-color menubg-color     #19002E;
+@define-color menufg-color     #0064ff;

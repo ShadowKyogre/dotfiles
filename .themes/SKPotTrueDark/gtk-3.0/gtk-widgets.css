@@ -15,6 +15,10 @@
 {
 	background-color: @background-color;
 	color: @foreground-color;
+	-GtkHTML-link-color: @link-color;
+	-GtkIMHtml-hyperlink-color: @link-color;
+	-GtkWidget-link-color: @link-color;
+	-GtkWidget-visited-link-color: @link-color;
 }
 
 *:insensitive{
@@ -147,11 +151,12 @@ GtkImage
 
 .tooltip {
 	/* Members: GtkTooltip. */
-	border: 1px solid shade(@entrybg-color, 2.2);
-	background: -gtk-gradient(linear, 0 0, 0 1, color-stop(0.0,shade(@entrybg-color,1.2)), 
-												color-stop(0.50,shade(@entrybg-color,1.3)), 
-												color-stop(0.51,shade(@entrybg-color,1.5)), 
-												color-stop(1.00,shade(@entrybg-color,1.2)));
+	color: @tooltip-fg-color;
+	border: 1px solid shade(@tooltipbg-color, 2.2);
+	background: -gtk-gradient(linear, 0 0, 0 1, color-stop(0.0,shade(@tooltipbg-color,1.2)), 
+												color-stop(0.50,shade(@tooltipbg-color,1.3)), 
+												color-stop(0.51,shade(@tooltipbg-color,1.5)), 
+												color-stop(1.00,shade(@tooltipbg-color,1.2)));
 }
 
 .tooltip * {
@@ -328,6 +333,7 @@ GtkFrame
 
 GtkLinkButton * {
 	text-decoration: underline;
+	color: @link-color;
 }
 
 .progressbar {
@@ -351,8 +357,8 @@ GtkLinkButton * {
 
 .menuitem {
 	/* Members: GtkMenuItem. */
-	color: @foreground-color;
-	background-color: @background-color;
+	color: @menufg-color;
+	background-color: @menubg-color;
 	padding: 3px 2px;
 }
 

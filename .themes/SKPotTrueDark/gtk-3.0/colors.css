@@ -23,9 +23,14 @@
  * @define-color text-color #ff00ff;
  */
 
-@define-color entrybg-color #162a37;
-@define-color entryfg-color #dcd6c2;
-@define-color background-color #0D0815;
+@define-color background-color #0d0815;
 @define-color foreground-color #dcd6c2;
+@define-color entrybg-color    #162a37;
+@define-color entryfg-color    #dcd6c2;
 @define-color entryselbg-color #bf6c00;
 @define-color entryselfg-color #162a37;
+@define-color tooltipbg-color  #162a37;
+@define-color tooltipfg-color  #162a37;
+@define-color link-color       #6c00bf;
+@define-color menubg-color     #0d0815;
+@define-color menufg-color     #dcd6c2;

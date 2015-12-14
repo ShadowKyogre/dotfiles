@@ -2,16 +2,16 @@
 # (c) 2009 Rico Sta. Cruz, Kido Mariano, James Schriver
 # Licensed under the GPL.
 
+gtk_color_scheme = "bg_color:#0d0815"
 gtk_color_scheme = "fg_color:#dcd6c2"
-gtk_color_scheme = "bg_color:#0D0815"
 gtk_color_scheme = "base_color:#162a37"
 gtk_color_scheme = "text_color:#dcd6c2"
 gtk_color_scheme = "selected_bg_color:#bf6c00"
 gtk_color_scheme = "selected_fg_color:#162a37"
-gtk_color_scheme = "tooltip_bg_color:#314551"
+gtk_color_scheme = "tooltip_bg_color:#162a37"
 gtk_color_scheme = "tooltip_fg_color:#dcd6c2"
-gtk_color_scheme = "link_color:#bf6c00"
-gtk_color_scheme = "menu_bg_color:#0D0815"
+gtk_color_scheme = "link_color:#6c00bf"
+gtk_color_scheme = "menu_bg_color:#0d0815"
 gtk_color_scheme = "menu_fg_color:#dcd6c2"
 
 #include "scrollbars/scrollbar.rc"
@@ -110,6 +110,9 @@ style "default"
         stepperstyle        = 1     # 0 = standard, 1 = integrated stepper handles, 2 = unknown
         toolbarstyle	    = 1     # 0 = flat, 1 = glassy, 2 = gradient                
     }
+
+	GtkWidget::link-color = @link_color
+	GtkWidget::visited-link-color = @text_color
 }
 
 
@@ -307,8 +310,8 @@ style "menu" = "dark"
 	ythickness = 0
 
 	#Keep it this dark since OOo likes it
-	bg[NORMAL] = @bg_color #"#302F2C"
-	text[NORMAL] = @fg_color
+	bg[NORMAL] = @menu_bg_color #"#302F2C"
+	text[NORMAL] = @menu_fg_color
 	text[PRELIGHT]	= @selected_fg_color
 }
 
@@ -333,7 +336,7 @@ style "separator-menu-item"
 	GtkWidget::separator-height = 2
 	xthickness = 4
 	ythickness = 0
-	bg[NORMAL] = @fg_color #"#444"
+	bg[NORMAL] = @menu_fg_color #"#444"
 }
 
 # Based on the default style so that the colors from the button
