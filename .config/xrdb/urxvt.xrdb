@@ -1,0 +1,22 @@
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt.scrollstyle: plain
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.scrollColor: #bf0053
+URxvt.troughColor: #0d0815
+URxvt.depth: 32
+URxvt.background: [90]#0d0815
+URxvt.keysym.C-M-c: builtin-string:
+URxvt.keysym.C-M-v: builtin-string:
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.iso14755: False
+URxvt.iso14755_52: False
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.clipboard.copycmd:  copyq copy -
+URxvt.clipboard.pastecmd: copyq clipboard
+URxvt.matcher.button: 2

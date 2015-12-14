@@ -12,8 +12,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     done
     unset f
 fi
+
 #export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-exec ${1}
+[[ -f ~/.config/xrdb/default.xrdb ]] && xrdb -merge -I$HOME/.config/xrdb ~/.config/xrdb/default.xrdb
+
+if [ -x "$HOME/.config/awesome/autostart.sh" -a "$1" = "awesome" ];then
+	sleep 5 && "$HOME/.config/awesome/autostart.sh" &
+fi
+
+exec ${1:-compiz-alone-session}
+
+#exec compiz-alone-session
+#exec awesome
+
+#exec lilyterm
 
 #exec dbus-launch ck-launch-session pekwm
 #exec dbus-launch ck-launch-session compiz-alone-session --sm-disable
