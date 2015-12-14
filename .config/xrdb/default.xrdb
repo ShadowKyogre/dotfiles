@@ -1,6 +1,6 @@
 Xcursor.theme: Azenis
 
-#include "sk_inkpot.xrdb"
+#include "sk_sunset_inkpot.xrdb"
 #include "stjerm.xrdb"
 #include "xscreensaver.xrdb"
 #include "urxvt.xrdb"
