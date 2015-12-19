@@ -99,6 +99,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 		vnoremap - <C-X>gv
 	"}}}
 
+	" shortcut for selecting previously inserted text {{{2
+		nnoremap gV `[v`]
+	" }}}
+
 	" remap useless gs to inserting newlines on demand {{{2
 		nnoremap <silent> gs :<C-U>call append(line('.'), repeat([''], v:count1))<CR>
 		nnoremap <silent> gS :<C-U>call append(line('.')-1, repeat([''], v:count1))<CR>
