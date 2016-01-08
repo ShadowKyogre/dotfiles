@@ -1,3 +1,22 @@
+function fish_mode_prompt --description "Displays the current mode"
+	# Do nothing if not in vi mode
+	if set -q __fish_vi_mode
+		switch $fish_bind_mode
+			case default
+				set_color --bold --background red white
+				echo '[N]'
+			case insert
+				set_color --bold --background blue white
+				echo '[I]'
+			case visual
+				set_color --bold --background magenta white
+				echo '[V]'
+		end
+		set_color normal
+		echo -n ' '
+	end
+end
+
 function fish_prompt
 	printf " %s_____/[%s" (set_color purple) (set_color -o red)
 	printf "%s@%s" $USER (hostname)
