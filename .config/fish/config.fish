@@ -27,8 +27,8 @@ function fish_prompt
 	printf "%s%s|%s%s" (set_color normal) (set_color purple) (set_color -o red) (date "+%F %T")
 	printf "%s%s]\______________)\n(_/[%s%s" (set_color normal) (set_color purple) (set_color -o red) (prompt_pwd)
 	printf '%s%s]\_____________/(%s' (set_color normal) (set_color purple) (set_color -o red)
-	if test -d .git
-		printf "(%s%s%s)" (set_color yellow) (git rev-parse --abbrev-ref HEAD) (set_color -o red)
+	if git rev-parse --git-dir >/dev/null ^/dev/null
+		printf "(%s%s%s)" (set_color yellow) (git rev-parse --abbrev-ref HEAD ^/dev/null) (set_color -o red)
 	else
 		printf "(%s\$%s)" (set_color yellow) (set_color -o red)
 	end
