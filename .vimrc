@@ -380,7 +380,7 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 " ---- STATUSLINE {{{1
 	set statusline=%{winnr('$')\ >\ 1?'['.winnr().']':''}	   "window number
-	set statusline+=%t	   "tail of the filename
+	set statusline+=%{pathshorten(expand('%:p'))}	   "tail of the filename
 	set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 	set statusline+=%{&ff}] "file format
 	set statusline+=%h	  "help file flag
@@ -484,7 +484,7 @@ endif
 " ---- TAB VISIBILITY {{{1
 	highlight SpecialKey ctermfg=1
 	set list
-	set listchars=tab:▸\ ,eol:¬
+	set listchars=tab:▸⪢,eol:¬
 " }}}
 
 " ---- PERFORMANCE {{{1
