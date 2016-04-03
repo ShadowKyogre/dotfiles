@@ -7,6 +7,16 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	endif
 " }}}
 
+" --- preserve undo when closed {{{1
+	set undofile
+	set undodir=$HOME/.vim/undo//
+	if !isdirectory(&undodir)
+		call mkdir(&undodir, "p")
+	endif
+	set undolevels=1000
+	set undoreload=10000
+" }}}
+
 " ---- misc cfgs {{{1
 	set mouse=a 
 	set hlsearch
