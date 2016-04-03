@@ -51,12 +51,12 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	nnoremap <C-i> gi
 
 	" always center current line after movement {{{2
-		" nnoremap <ScrollWheelUp> 3kzz
-		" nnoremap <ScrollWheelDown> 3jzz
-		" nnoremap <C-U> 11kzz
-		" nnoremap <C-D> 11jzz
-		" nnoremap <Down> gjzz
-		" nnoremap <Up> gkzz
+		nnoremap <ScrollWheelUp> 3k
+		nnoremap <ScrollWheelDown> 3j
+		nnoremap <C-U> 11k
+		nnoremap <C-D> 11j
+		nnoremap <Down> gj
+		nnoremap <Up> gk
 		" nnoremap j jzz
 		" nnoremap k kzz
 		" nnoremap # #zz
@@ -69,12 +69,12 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	"}}}
 
 	" Use the arrow keys to move through soft wrapped lines {{{2
-		" inoremap <Down> <C-o>gj<C-o>zz
-		" inoremap <Up> <C-o>gk<C-o>zz
-		" inoremap <PageUp> <C-o><PageUp><C-o>zz
-		" inoremap <PageDown> <C-o><PageDown><C-o>zz
-		" inoremap <ScrollWheelUp> <C-o>3k<C-o>zz
-		" inoremap <ScrollWheelDown> <C-o>3j<C-o>zz
+		inoremap <Down> <C-o>gj
+		inoremap <Up> <C-o>gk
+		inoremap <PageUp> <C-o><PageUp>
+		inoremap <PageDown> <C-o><PageDown>
+		inoremap <ScrollWheelUp> <C-o>3k
+		inoremap <ScrollWheelDown> <C-o>3j
 	"}}}
 
 	" Undo remap changes {{{2
