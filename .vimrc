@@ -250,6 +250,9 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
 	command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
 
+	" Only vipJ on paragraphs that use two or more lines
+	command! HardSoftWrap :%g/^\s*\n.*\S\n.*\S$/+norm! jvipJ
+
 	command! -nargs=* Hc call DoPrint('<args>') " {{{2
 	function! DoPrint(args)
 		let colorsave=g:colors_name
