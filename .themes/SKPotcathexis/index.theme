@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=SKPotcathexis
+Comment=Simple, minimal, distraction free foundation for building your desktop experience...
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=SKPotcathexis
+MetacityTheme=SKPotcathexis
+IconTheme=clarity
+CursorTheme=DMZ-White
+ButtonLayout=close,minimize,maximize:

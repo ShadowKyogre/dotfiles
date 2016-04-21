@@ -43,7 +43,7 @@ image {
 	/* Members: GtkAccelLabel. */
 }
 
-frame :first-child {
+frame border {
 	/* Members: GtkFrame. */
 	border: 1px solid shade(@background-color, 0.6);
 }
@@ -56,37 +56,68 @@ frame label {
 	/* Members: GtkCalendar. */
 }
 
-radio:checked, check:checked {
-	background: @entryselbg-color;
+radio:checked, check:checked, radio:indeterminate, check:indeterminate {
+	background: 
+	    -gtk-gradient(radial,
+	        center bottom, 0, 
+	        center center, 1,
+	        color-stop(1.0, rgba(0, 0, 0, 0)),
+	        color-stop(0.0, shade(@entryselbg-color, 1.6))),
+	    @entryselbg-color;
 	color: @entryselfg-color;
 }
 
 
-radio, check {
-	background: @entrybg-color;
-	color: @entryfg-color;
-	border: 1px solid shade(@background-color, 0.8);
+radio, check, treeview.view check:not(:checked) {
+	background: @entryselbg-color;
+	color: @entryselfg-color;
+	box-shadow: inset 0px 0px 1px 1px shade(@background-color, 0.8);
+	border:none;
+	margin: 1px;
 	/* .radio Members: GtkCellRendererToggle, GtkRadioMenuItem, GtkRadioButton. */
 	/* .check Members: GtkCheckMenuItem, GtkCellRendererToggle, GtkCheckButton. */
+}
+
+check {
+	border-radius: 4px;
 }
 
 radio {
 	border-radius: 20px;
 }
 
-radio:checked  {
-	box-shadow: inset 0px 0px 1px 1px shade(@background-color, 0.8);
-	border:none;
-	margin: 1px;
-}
-
 treeview.view check:checked:selected, check:checked {
 	/* workaround until this is fixed upstream */
 	-gtk-icon-source: image(
-		-gtk-recolor(url("assets/checkmark.svg")),
-		-gtk-recolor(url("assets/checkmark.png"))
+		-gtk-recolor(url("assets/checkmark-symbolic.svg")),
+		-gtk-recolor(url("assets/checkmark-symbolic.png"))
 	);
 	/* -gtk-icon-source: none; */
+}
+
+radio:checked {
+	-gtk-icon-source: image(
+		-gtk-recolor(url('assets/radio-symbolic.svg')),
+		-gtk-recolor(url('assets/radio-symbolic.png'))
+	);
+}
+
+radio:indeterminate, check:indeterminate {
+	-gtk-icon-source: image(
+		-gtk-recolor(url('assets/indeterminate-symbolic.svg')),
+		-gtk-recolor(url('assets/indeterminate-symbolic.png'))
+	);
+}
+
+check:checked, radio:checked,
+check:indeterminate, radio:indeterminate
+{
+	-gtk-icon-shadow: 0px 0px 2px shade(@entryselfg-color, 1.3);
+}
+
+check:disabled, radio:disabled
+{
+	-gtk-icon-shadow: 0px 0px 2px shade(@entryselbg-color, 0.3);
 }
 
 menuitem radio, menuitem check {
@@ -95,8 +126,18 @@ menuitem radio, menuitem check {
 }
 
 check:disabled, radio:disabled {
-	background: @background-color;
-	color: shade(@background-color, 0.3);
+	background: shade(@entryselbg-color, 0.7);
+	color: shade(@entryselbg-color, 0.3);
+}
+
+check:disabled:checked, radio:disabled:checked {
+	background:
+	    -gtk-gradient(radial,
+	        center bottom, 0,
+	        center center, 1,
+	        color-stop(1.0, rgba(0, 0, 0, 0)),
+	        color-stop(0.0, shade(@entryselbg-color, 1.3))),
+	    shade(@entryselbg-color, 0.7);
 }
 
 .menubar {
@@ -255,24 +296,87 @@ slider {
 	                color-stop(0.50,shade(@background-color,1.5)),
 	                color-stop(0.51,shade(@background-color,1.3)),
 	                color-stop(1.00,shade(@background-color,1.2)));
+	border-radius: 3px;
 	/* Members: GtkScale, GtkScrollbar. */
+}
+
+scale.vertical slider {
+	background: -gtk-gradient(linear, 0 0, 1 0,
+	                color-stop(0.0,shade(@background-color,1.2)),
+	                color-stop(0.50,shade(@background-color,1.5)),
+	                color-stop(0.51,shade(@background-color,1.3)),
+	                color-stop(1.00,shade(@background-color,1.2)));
 }
 
 scrollbar slider {
 	padding: 4px;
+	border-radius: 0px;
 	border-color: shade(@entryselbg-color, 0.7);
 	box-shadow: inset 0 0 0 1px shade(@entryselbg-color, 2.0);
-	background: -gtk-gradient(linear, 0 0, 0 1, color-stop(0.0,  shade(@entryselbg-color, 1.0)),
-	                color-stop(0.50, shade(@entryselbg-color, 1.5)),
-	                color-stop(0.50, shade(@entryselbg-color, 1.0)),
-	                color-stop(1.00, shade(@entryselbg-color, 1.0)));
+}
+
+scrollbar button {
+	min-width: 8px;
+	min-height: 8px;
+	padding: 4px;
+}
+
+scrollbar button {
+	-gtk-icon-source: image(
+		-gtk-recolor(url("assets/pan-symbolic.svg")),
+		-gtk-recolor(url("assets/pan-symbolic.png"))
+	);
+}
+
+scrollbar.vertical button.up {
+	-gtk-icon-transform: rotate(180deg);
+}
+
+scrollbar.horizontal button.up {
+	-gtk-icon-transform: rotate(90deg);
+}
+
+scrollbar.horizontal button.down {
+	-gtk-icon-transform: rotate(-90deg);
 }
 
 scrollbar.vertical slider {
-	background: -gtk-gradient(linear, 0 0, 1 0, color-stop(0.0, shade(@entryselbg-color, 1.0)),
-	                color-stop(0.50,shade(@entryselbg-color, 1.5)),
-	                color-stop(0.50,shade(@entryselbg-color, 1.0)),
-	                color-stop(1.00,shade(@entryselbg-color, 1.0)));
+	background: -gtk-gradient(linear, 0 0, 0.5 0, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
+	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
+	                color-stop(0.52, rgba(0, 0, 0, 0))),
+
+	            -gtk-gradient(linear, 0 0, 1 1,
+	                color-stop(0.0, @entryselbg-color),
+	                color-stop(0.25, @entryselbg-color), color-stop(0.26, shade(@entryselbg-color, 0.90)),
+	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
+	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
+	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
+	background-repeat: repeat-y;
+	background-size: 200% 12px;
+	min-width: 4px;
+}
+
+scrollbar.horizontal slider {
+	background: -gtk-gradient(linear, 0 0, 0 0.5, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
+	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
+	                color-stop(0.52, rgba(0, 0, 0, 0))),
+
+	            -gtk-gradient(linear, 0 0, 1 1,
+	                color-stop(0.0, @entryselbg-color),
+	                color-stop(0.25, @entryselbg-color), color-stop(0.26, shade(@entryselbg-color, 0.90)),
+	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
+	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
+	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
+	background-repeat:repeat-x;
+	background-size: 12px 200%;
+	min-height:4px;
+}
+
+scrollbar trough {
+	border-radius: 0px;
+	margin: 0px;
 }
 
 /*
@@ -282,7 +386,18 @@ GtkSwitch {
 
 notebook {
 	/* Members: GtkNotebook. */
-	border: 1px solid shade(@background-color,0.8);
+}
+
+tab * {
+	border: none; background: none;
+}
+
+tab label + button {
+	margin-left: 8px;
+}
+
+notebook stack {
+	border: 1px solid shade(@background-color,0.5);
 }
 
 GtkFrame
@@ -292,6 +407,7 @@ GtkFrame
 
 notebook tab {
 	padding: 5px 8px;
+	border: 1px solid shade(@background-color, 0.5);
 }
 
 notebook header.top tab {
@@ -302,6 +418,7 @@ notebook header.top tab {
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 1.5), 0.3),
 	            inset 0 -1px 0 0 shade(@background-color, 0.7);
 	border-bottom:none;
+	margin-top: 2px;
 }
 
 notebook header.bottom tab {
@@ -312,6 +429,7 @@ notebook header.bottom tab {
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 1.5), 0.3),
 	            inset 0 1px 0 0 shade(@background-color, 0.7);
 	border-top:none;
+	margin-bottom: 2px;
 }
 
 notebook header.left tab {
@@ -322,6 +440,7 @@ notebook header.left tab {
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 1.5), 0.3),
 	            inset -1px 0 0 0 shade(@background-color, 0.7);
 	border-right:none;
+	margin-left: 2px;
 }
 
 notebook header.right tab {
@@ -332,6 +451,7 @@ notebook header.right tab {
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 1.5), 0.3),
 	            inset 1px 0 0 0 shade(@background-color, 0.7);
 	border-left: none;
+	margin-right: 2px;
 }
 
 trough {
@@ -339,7 +459,6 @@ trough {
 	background: shade(@background-color, 0.75);
 	border: 1px solid shade(@background-color, 0.5);
 	margin: 5px;
-	border-radius: 4px;
 }
 
 scale.vertical slider {
@@ -371,7 +490,6 @@ scale trough.vertical.highlight.bottom
 }*/
 
 scale trough {
-	border-radius: 4px;
 	box-shadow: inset 0 0 0 4px @background-color;
 	border: 1px solid @background-color;
 	margin: 0px;
@@ -393,6 +511,14 @@ scale:focus highlight
 	box-shadow: inset 0 0 0 6px shade(@entryselbg-color, 1.2),
 	            inset 0 0 0 5px shade(@entryselbg-color, 0.7),
 	            inset 0 0 0 4px mix(@entryselbg-color, @background-color, 0.8);
+}
+
+scale:focus trough
+{
+	box-shadow: inset 0 0 0 6px shade(@background-color, 0.75),
+	            inset 0 0 0 5px shade(@background-color, 0.5),
+	            inset 0 0 0 4px mix(@entryselbg-color, @background-color, 0.8);
+	border-radius: 0px;
 }
 
 levelbar trough
@@ -439,8 +565,40 @@ levelbar block.empty {
 	/* Members: GtkToolbar. */
 }
 
-separator.horizontal, separator.vertical {
-	background: shade(@background-color, 0.5);
+separator {
+	border-right: 1px solid shade(@background-color, 2.4);
+	border-top: 1px solid shade(@background-color, 2.4);
+}
+
+menu separator, popover.menu separator {
+	margin:4px;
+}
+
+paned > separator {
+	min-height:1px;
+	min-width: 1px;
+	border: none;
+	margin: 2px;
+}
+
+paned.horizontal > separator {
+	background: -gtk-gradient(linear, 0 0, 0 1, 
+		color-stop(0.0, shade(@background-color, 2.4)),
+		color-stop(0.5, shade(@background-color, 2.4)),
+		color-stop(0.5, transparent)
+	);
+	background-repeat: repeat-y;
+	background-size: 100% 20px;
+}
+
+paned.vertical > separator {
+	background: -gtk-gradient(linear, 0 0, 1 0, 
+		color-stop(0.0, shade(@background-color, 2.4)),
+		color-stop(0.5, shade(@background-color, 2.4)),
+		color-stop(0.5, transparent)
+	);
+	background-repeat: repeat-x;
+	background-size: 20px 100%;
 }
 
 toolbar separator {
@@ -457,7 +615,7 @@ toolbar button * {
 	/* Members: GtkHandleBox. */
 }
 
-button, slider {
+button, slider, combobox {
 	box-shadow: inset 0 0 0 1px shade(@background-color,3.6);
 	border: 1px solid shade(@background-color, 0.3);
 	padding: 1px 1px;
@@ -479,7 +637,7 @@ button:focus > *
 	color: @entryselfg-color;
 }
 
-button:hover {
+button:hover, combobox:hover {
 	box-shadow: inset 0 0 0 1px shade(@background-color, 5.4);
 	background: -gtk-gradient(linear, 0 0, 0 1, color-stop(0.0,shade(@background-color, 1.7)),
 	                color-stop(0.50,shade(@background-color,2.0)),
@@ -544,9 +702,10 @@ toolbar button:active:hover
 	color: @entryselfg-color;
 }
 
-notebook tab:checked {
+notebook header tab:checked {
 	/*border: 1px solid shade(@background-color,3.6);*/
 	padding: 7px 10px;
+	margin: 0px;
 }
 
 notebook header.top tab:checked {
@@ -558,7 +717,7 @@ notebook header.top tab:checked {
 	                color-stop(0.51,shade(@background-color,1.2)),
 	                color-stop(1.00,shade(@background-color,1.0)));
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 3.6), 0.3),
-	            inset 0 -1px 0 0 @background-color;
+	            0 1px 0 0 @background-color;
 }
 
 notebook header.left tab:checked {
@@ -570,7 +729,7 @@ notebook header.left tab:checked {
 	                color-stop(0.51,shade(@background-color,1.2)),
 	                color-stop(1.00,shade(@background-color,1.0)));
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 3.6), 0.3),
-	            inset -1px 0 0 0 @background-color;
+	            1px 0 0 0 @background-color;
 }
 
 notebook header.bottom tab:checked {
@@ -582,7 +741,7 @@ notebook header.bottom tab:checked {
 	                color-stop(0.51,shade(@background-color,1.2)),
 	                color-stop(1.00,shade(@background-color,1.0)));
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 3.6), 0.3),
-	            inset 0 1px 0 0 @background-color;
+	            0 -1px 0 0 @background-color;
 }
 
 notebook header.right tab:checked {
@@ -594,7 +753,7 @@ notebook header.right tab:checked {
 	                color-stop(0.51,shade(@background-color,1.2)),
 	                color-stop(1.00,shade(@background-color,1.0)));
 	box-shadow: inset 0 0 0 1px alpha(shade(@background-color, 3.6), 0.3),
-	            inset 1px 0 0 0 @background-color;
+	            -1px 0 0 0 @background-color;
 }
 
 button:disabled, slider:disabled {
@@ -627,8 +786,21 @@ button.link {
 }
 
 progressbar progress {
+	color: @entryselfg-color;
+	box-shadow: inset 0 0 0 2px alpha(shade(@entryselbg-color, 4.8), 0.4),
+	            inset 0 0 0 1px alpha(shade(@entryselbg-color, 1.0), 1.0);
+}
+
+progressbar.horizontal progress {
+	min-height: 24px;
+	min-width: 0px;
+	background-repeat: repeat-x;
+	background-size: 40px 200%;
+}
+
+progressbar.horizontal progress.left {
 	/* Members: GtkProgressBar, GtkCellRendererProgress. */
-	background: -gtk-gradient(linear, 0 0, 0 0.5, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	background-image: -gtk-gradient(linear, 0 0, 0 0.5, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
 	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
 	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
 	                color-stop(0.52, rgba(0, 0, 0, 0))),
@@ -639,13 +811,20 @@ progressbar progress {
 	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
 	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
 	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
-	box-shadow: inset 0 0 0 2px alpha(shade(@entryselbg-color, 4.8), 0.4),
-	            inset 0 0 0 1px alpha(shade(@entryselbg-color, 0.5), 1.0);
-	border: 1px solid shade(@background-color, 0.5);
-	background-repeat: repeat-x;
-	background-size: 40px 200%;
-	color: @entryselfg-color;
-	min-height: 24px;
+}
+
+progressbar.horizontal progress.right, progressbar.horizontal progress.pulse {
+	background-image: -gtk-gradient(linear, 0 0, 0 0.5, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
+	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
+	                color-stop(0.52, rgba(0, 0, 0, 0))),
+
+	            -gtk-gradient(linear, 0 1, 1 0,
+	                color-stop(0.0, @entryselbg-color),
+	                color-stop(0.25, @entryselbg-color), color-stop(0.26, shade(@entryselbg-color, 0.90)),
+	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
+	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
+	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
 }
 
 progressbar.horizontal trough {
@@ -653,7 +832,14 @@ progressbar.horizontal trough {
 }
 
 progressbar.vertical progress {
-	background: -gtk-gradient(linear, 0 0, 0.5 0, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	min-width: 24px;
+	min-height: 0px;
+	background-repeat: repeat-y;
+	background-size: 200% 40px;
+}
+
+progressbar.vertical progress.bottom {
+	background-image: -gtk-gradient(linear, 0 0, 0.5 0, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
 	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
 	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
 	                color-stop(0.52, rgba(0, 0, 0, 0))),
@@ -664,14 +850,60 @@ progressbar.vertical progress {
 	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
 	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
 	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
-	background-repeat: repeat-y;
-	background-size: 200% 40px;
-	min-width: 24px;
+}
+
+progressbar.vertical progress.top {
+	background-image: -gtk-gradient(linear, 0 0, 0.5 0, color-stop(0.0, alpha(shade(@entryselbg-color, 1.6), 0.5) ),
+	                color-stop(0.50,alpha(shade(@entryselbg-color,1.7), 0.5)),
+	                color-stop(0.51,alpha(shade(@entryselbg-color,2.0), 0.5)),
+	                color-stop(0.52, rgba(0, 0, 0, 0))),
+
+	            -gtk-gradient(linear, 0 1, 1 0,
+	                color-stop(0.0, @entryselbg-color),
+	                color-stop(0.25, @entryselbg-color), color-stop(0.26, shade(@entryselbg-color, 0.90)),
+	                color-stop(0.50, shade(@entryselbg-color, 0.90)), color-stop(0.51, @entryselbg-color),
+	                color-stop(0.75, @entryselbg-color), color-stop(0.76, shade(@entryselbg-color, 0.90)),
+	                color-stop(1.00, shade(@entryselbg-color, 0.90)));
 }
 
 progressbar.vertical trough {
 	min-width: 24px;
 }
+
+progressbar.vertical text  {
+	margin-right: 36px;
+	margin-left: -36px;
+}
+
+@keyframes vstripe_move
+{
+	0% {background-position:  left top, 0 0;}
+	100% {background-position:  left top, 0 40px;}
+}
+
+@keyframes hstripe_move
+{
+	0% {background-position:  left top, 0 0;}
+	100% {background-position:  left top, 40px 0;}
+}
+
+/*
+progressbar.vertical progress.top {
+	animation: vstripe_move 1s linear infinite;
+}
+
+progressbar.vertical progress.bottom {
+	animation: vstripe_move 1s linear reverse infinite;
+}
+
+progressbar.horizontal progress.right {
+	animation: hstripe_move 1s linear infinite;
+}
+
+progressbar.horizontal progress.left {
+	animation: hstripe_move 1s linear reverse infinite;
+}
+*/
 
 .arrow {
 	/* Members: GtkArrow. */
@@ -688,13 +920,22 @@ label, label:disabled {
 	background:none;
 }
 
-selection
+selection, combobox entry selection
 {
 	color: @entryselfg-color;
 	background: @entryselbg-color;
 }
 
-menu menuitem:hover, menubar>menuitem:hover, menubar menuitem:hover
+popover.menu box {
+	background:none;
+}
+
+popover.menu modelbutton {
+	padding:4px;
+}
+
+menu menuitem:hover, menubar>menuitem:hover, menubar menuitem:hover,
+popover.menu modelbutton:hover
 /*.cell:selected, GtkComboBox .cell:hover*/
 {
 	color: @entryselfg-color;
@@ -720,6 +961,7 @@ menu menuitem:hover, menubar>menuitem:hover, menubar menuitem:hover
 }
 
 treeview.view:selected,
+iconview.view:selected,
 .sidebar-row:selected *
 {
 	color: @entryselfg-color;
@@ -730,6 +972,8 @@ treeview.view:selected,
 
 treeview.view:active,
 treeview.view:selected:focus,
+iconview.view:active,
+iconview.view:selected:focus,
 .sidebar-row:selected:focus *
 {
 	color: @entryselfg-color;
@@ -738,25 +982,71 @@ treeview.view:selected:focus,
 	                color-stop(1.0, shade(@entryselbg-color, 0.9)));
 }
 
+menubar {
+	background: @background-color;
+}
+
+menubar > menuitem {
+	background: none;
+	padding: 4px;
+}
+
+menubar > menuitem > label  {
+	color: @foreground-color;
+}
+
 menu menuitem:hover > label,
-menu menuitem:hover > image
+menu menuitem:hover > label > accelerator,
+menu menuitem:hover > image,
+popover.menu :hover label
 {
 	background: none;
 	color: @entryselfg-color;
 }
 
 menu > menubar > menuitem:hover,
-menubar > menuitem:hover > label {
+menubar > menuitem:hover > label,
+menuitem:hover > arrow 
+{
 	background: none;
 	color: @entryselfg-color;
 	transition: 150ms ease-in-out;
 }
 
-menuitem label, menubar label {
+menuitem > label,
+menuitem > label > accelerator,
+combobox menuitem:not(:hover) *
+{
 	border: none;
+	color: @menufg-color;
 }
 
-textview.view text, entry {
+menu menuitem arrow {
+	min-height: 16px;
+	min-width: 16px; 
+	background: none
+}
+
+menu menuitem arrow:dir(ltr) {
+	-gtk-icon-source: image(
+		-gtk-recolor(url("assets/pan-symbolic.svg")),
+		-gtk-recolor(url("assets/pan-symbolic.png"))
+	);
+	-gtk-icon-transform: rotate(-90deg);
+	margin-left: 8px;
+}
+
+menu menuitem arrow:dir(rtl) {
+	-gtk-icon-source: image(
+		-gtk-recolor(url("assets/pan-symbolic.svg")),
+		-gtk-recolor(url("assets/pan-symbolic.png"))
+	);
+	-gtk-icon-transform: rotate(90deg);
+	margin-right: 8px;
+}
+
+
+textview.view text, entry, entry.combo {
 	/* Members: GtkEntry. */
 	color: @entryfg-color;
 	background-color: @entrybg-color;
@@ -774,17 +1064,22 @@ entry:disabled {
 	/*background-color: shade(@entrybg-color,0.85);*/
 }
 
-.expander {
-	/* Members: GtkExpander. */
+/* Members: GtkExpander. */
+expander > title > arrow {
+	min-width: 16px;
+	min-height: 16px;
+	background: -gtk-icontheme('pan-end-symbolic');
 }
 
+expander > title > arrow:checked {
+	background: -gtk-icontheme('pan-down-symbolic');
+}
 
 combobox button.combo {
 	background: inherit;
 }
 
 combobox entry.combo + button.combo {
-	padding: 10px;
 }
 
 combobox *:disabled {
@@ -793,18 +1088,46 @@ combobox *:disabled {
 
 combobox * {
 	background: none;
+	border: none;
 }
 
 combobox menuitem:hover * {
 	color: @entryselfg-color;
 }
 
-GtkSwitch.trough {
+button.combo:first-child arrow {
+	background: image(
+		-gtk-recolor(url("assets/combodrop-symbolic.svg")),
+		-gtk-recolor(url("assets/combodrop-symbolic.png"))
+	);
+	max-height: 8px;
+	min-width: 8px;
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+entry.combo + button.combo arrow {
+	background: image(
+		-gtk-recolor(url("assets/combodrop-symbolic.svg")),
+		-gtk-recolor(url("assets/combodrop-symbolic.png"))
+	);
+	min-height: 16px;
+	min-width: 12px;
+	background-size: 100% 100%;
+	background-position: center;
+	padding: 0px;
+}
+
+switch slider {
 	border-radius: 0px;
 }
 
-switch:focus {
-	box-shadow: inset 0px 0px 0 10px alpha(@entryselbg-color, 0.2),
+switch {
+	box-shadow: inset 0 0 4px 2px shade(@background-color, 0.5);
+}
+
+switch:focus slider {
+	box-shadow: inset 0px 0px 0 13px alpha(@entryselbg-color, 0.2),
 	            inset 0px 0px 0 1px @entryselbg-color;
 }
 
@@ -837,6 +1160,14 @@ scrolledwindow undershoot,
 scrolledwindow overshoot
 {
 	background: none;
+}
+
+stackswitcher button {
+	padding: 4px 8px;
+}
+
+popover, overlay > toolbar {
+	border: 1px solid shade(@background-color, 3);
 }
 
 /*
