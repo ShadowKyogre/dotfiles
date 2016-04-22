@@ -16,41 +16,47 @@ shopt -s checkwinsize #checks after each command to see how large window is
 stty -ctlecho
 
 ###VARS###
+export QT_SELECT=4
+export USE_CCACHE=1
 export GREP_COLOR="1;33"
 export HISTCONTROL=ignoredups
 #export EDITOR=geany
-export EDITOR=nano
+export EDITOR=vim
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'
 export XMODIFIERS=@im='uim'
 export PYTHONSTARTUP=~/.pythonrc
-PATH="$HOME/bin:$HOME/bin/compiz_pipes:$PATH"
+export SAL_USE_VCLPLUGIN=gtk
+PATH="$HOME/bin:$HOME/bin/compiz_utils:$HOME/bin/compiz_pipes:$PATH"
 ###Aliases###
+alias tree="tree -C"
+alias nhalt="sudo ninit-shutdown -o"
+alias nreboot="sudo ninit-shutdown -r"
 alias ytmp4="youtube-dl -f mp4 -a"
 alias ytmp3="youtube-dl -x --audio-format mp3 -a"
 alias pyserve="python -m http.server"
 alias reload='source ~/.bashrc'
-alias ls='ls --color=auto -X --block-size=MB'
-alias udb='yaourt -Sy'
-alias pkgin='yaourt -S'
+alias ls='ls --color=auto -X --human-readable -s -p'
+alias udb='pacaur -Sy'
+alias pkgin='pacaur -S'
 #alias abbin='sudo bauerbill -S --aur --abs --editor $EDITOR'
-alias pkgq='yaourt -Si'
-alias pkgs='yaourt -Ss'
-alias pkgis='yaourt -Qs'
-alias pkgi='yaourt -Q'
-alias pkgiq='yaourt -Qi'
-alias lspkg='yaourt -Ql'
-alias rmpkg='sudo yaourt -R'
-alias rmpkgr='sudo yaourt -Rsnc'
-alias pkgu='yaourt -Syua'
-#alias lsaur='bauerbill -Ss --aur $(yaourt -Qm) | grep 'AUR/' | grep installed'
-alias lsorphs='yaourt -Qdt'
-alias rmorphs='yaourt -Qdtq | sudo yaourt -Rs -'
-alias whichpkg='yaourt -Qo'
-alias getpkg='yaourt -G'
-alias lpkgin='sudo yaourt -U'
-alias nicc='sudo yaourt -Sc'
-alias allcc='sudo yaourt -Scc'
+alias pkgq='pacaur -Si'
+alias pkgs='pacaur -Ss'
+alias pkgis='pacaur -Qs'
+alias pkgi='pacaur -Q'
+alias pkgiq='pacaur -Qi'
+alias lspkg='pacaur -Ql'
+alias rmpkg='sudo pacaur -R'
+alias rmpkgr='sudo pacaur -Rsnc'
+alias pkgu='pacaur -Syu'
+#alias lsaur='bauerbill -Ss --aur $(pacaur -Qm) | grep 'AUR/' | grep installed'
+alias lsorphs='pacaur -Qdt'
+alias rmorphs='pacaur -Qdtq | sudo pacaur -Rs -'
+alias whichpkg='pacaur -Qo'
+alias getpkg='pacaur -d'
+alias lpkgin='sudo pacaur -U'
+alias nicc='sudo pacaur -Sc'
+alias allcc='sudo pacaur -Scc'
 alias ftype='file -b --mime-type'
 alias ftail='tail -n+1'
 alias xml2xsd='java -jar /usr/share/java/trang.jar'
@@ -68,13 +74,13 @@ alias less='less -r'
 # alias lspkg='spaceman -l'
 # alias rmpkg='sudo spaceman -R'
 # alias bbu='sudo spaceman -u'
-# alias lsaur='bauerbill -Ss --aur $(yaourt -Qm) | grep '\''AUR/'\'' | grep installed'
-# #alias lsorphs='yaourt -Qdt'
+# alias lsaur='bauerbill -Ss --aur $(pacaur -Qm) | grep '\''AUR/'\'' | grep installed'
+# #alias lsorphs='pacaur -Qdt'
 # alias whichpkg='spaceman -o'
 # alias getpkg='spaceman --get-pkgbuild'
 # alias dbgpkg='spaceman -b --keep'
 # alias bldpkg='spaceman -b'
-# #alias nicc='sudo yaourt -Sc'
+# #alias nicc='sudo pacaur -Sc'
 # alias allcc='sudo rm -rfv /var/cache/spaceman/pkg/*'
 
 alias saneperms='find . -type f -exec chmod a-x -v {} \;'
@@ -330,6 +336,40 @@ list_exe_icons() {
     wrestool -l "$1" | grep group_icon | awk '{ print $2}' | cut -f2 -d=
 }
 
+psd2tiff()
+{
+    convert "${1}"  -channel RGBA -alpha Set -colorspace rgb "${2}"
+}
+
+newwineprefix()
+{
+    if [[ -z "${1}" ]];then
+        echo "Sorry, can't make another wine prefix without a parameter"
+        return 1
+    fi
+    WINEPREFIX="${HOME}/.local/share/wineprefixes/${1}" WINEARCH="${2:-win32}" wine wineboot
+}
+
+if [ "$TERM" == "linux" ];then
+	echo -ne "\e]P00d0815"
+	echo -ne "\e]P1bf0053"
+	echo -ne "\e]P253bf00"
+	echo -ne "\e]P3bf6c00"
+	echo -ne "\e]P40053bf"
+	echo -ne "\e]P56c00bf"
+	echo -ne "\e]P600bf6c"
+	echo -ne "\e]P7bfb49f"
+	echo -ne "\e]P844365d"
+	echo -ne "\e]P9ff62a6"
+	echo -ne "\e]Paa6ff62"
+	echo -ne "\e]Pbffbb62"
+	echo -ne "\e]Pc62a6ff"
+	echo -ne "\e]Pdbb62ff"
+	echo -ne "\e]Pe62ffbb"
+	echo -ne "\e]Pfdcd6c2"
+	clear
+fi
+
 ###Colors for reference###
 black='\[\e[0;30m\]'
 blue='\[\e[0;34m\]'
@@ -359,5 +399,5 @@ violet="\[\033[0;38;5;55m\]"
 #PS1="$violet[$red\u@\h$violet]─[$red\t$violet]─[$red$(date '+%a %b %d %Y')$violet]─[$red\W$violet|$green\$$violet]──>$nc"
 
 ##ASCII SNAKE
-PS1="$violet _____/[$red\u@\h$violet|$red\t$violet|$red$(date '+%a %b %d %Y')$violet]\______________)\n$violet(_/[$red\W$violet]\_____________/($red($yellow\$$red)$violet>$red--< $nc"
+PS1="$violet _____/[$lightred\u@\h$violet|$lightred\t$violet|$lightred$(date '+%a %b %d %Y')$violet]\______________)\n$violet(_/[$lightred\W$violet]\_____________/($lightred($yellow\$$lightred)$violet>$lightred--< $nc"
 PS2="-> "
