@@ -257,6 +257,30 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
 	command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
 
+	function! RegToTmux(...) " {{{2
+		if a:0 == 0
+			let l:reggy = '"'
+		else
+			let l:reggy = a:1
+		endif
+
+		call system('xargs -0 tmux set-buffer -b vim_reg', getreg(l:reggy, 1))
+		call system('xargs -0 tmux set-buffer -b vim_reg_type', getregtype(l:reggy))
+	endfunction " }}}
+
+	function! TmuxToReg(...) "{{{2
+		if a:0 == 0
+			let l:reggy = '"'
+		else
+			let l:reggy = a:1
+		endif
+
+		let reg_contents = system('tmux show-buffer -b vim_reg')
+		let reg_type = system('tmux show-buffer -b vim_reg_type -')
+
+		call setreg(l:reggy, reg_contents, reg_type)
+	endfunction "}}}
+
 	" Only vipJ on paragraphs that use two or more lines
 	command! HardSoftWrap :%g/^\s*\n.*\S\n.*\S$/+norm! jvipJ
 
