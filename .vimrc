@@ -264,8 +264,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 			let l:reggy = a:1
 		endif
 
-		call system('xargs -0 tmux set-buffer -b vim_reg', getreg(l:reggy, 1))
 		call system('xargs -0 tmux set-buffer -b vim_reg_type', getregtype(l:reggy))
+		call system('xargs -0 tmux set-buffer -b vim_reg', getreg(l:reggy, 1))
 	endfunction " }}}
 
 	function! TmuxToReg(...) "{{{2
