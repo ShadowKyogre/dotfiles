@@ -50,6 +50,13 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" go back to last insert keybindings
 	nnoremap <C-i> gi
 
+	" Tab navigation {{{2
+		nnoremap <Tab> gt
+		nnoremap <S-Tab> gT
+		nnoremap <C-N> :tabnew<CR>
+		nnoremap <C-P> :tabnew
+	" }}}
+
 	" always center current line after movement {{{2
 		nnoremap <ScrollWheelUp> 3k
 		nnoremap <ScrollWheelDown> 3j
