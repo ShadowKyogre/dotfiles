@@ -351,22 +351,7 @@ newwineprefix()
 }
 
 if [ "$TERM" == "linux" ];then
-	echo -ne "\e]P00d0815"
-	echo -ne "\e]P1bf0053"
-	echo -ne "\e]P253bf00"
-	echo -ne "\e]P3bf6c00"
-	echo -ne "\e]P40053bf"
-	echo -ne "\e]P56c00bf"
-	echo -ne "\e]P600bf6c"
-	echo -ne "\e]P7bfb49f"
-	echo -ne "\e]P844365d"
-	echo -ne "\e]P9ff62a6"
-	echo -ne "\e]Paa6ff62"
-	echo -ne "\e]Pbffbb62"
-	echo -ne "\e]Pc62a6ff"
-	echo -ne "\e]Pdbb62ff"
-	echo -ne "\e]Pe62ffbb"
-	echo -ne "\e]Pfdcd6c2"
+	setcolors ~/.setcolorsrc
 	clear
 fi
 
