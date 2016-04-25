@@ -1,0 +1,5 @@
+set show-all-if-ambiguous on
+set visible-stats on
+TAB: menu-complete
+set bell-style none
+"\e[Z": menu-complete-backward
