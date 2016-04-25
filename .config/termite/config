@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Monospace 9
+font = Monospace 10
 scrollback_lines = 1000
 search_wrap = true
 icon_name = terminal
@@ -20,7 +20,7 @@ cursor_blink = system
 cursor_shape = block
 
 # $BROWSER is used by default
-#browser = firefox
+browser = firefox
 
 # set size hints for the window
 #size_hints = false
@@ -33,13 +33,14 @@ cursor_shape = block
 foreground      = #dcd6c2
 foreground_bold = #dcd6c2
 cursor          = #dcd6c2
-highlight       = #1E1230
+#highlight       = #1E1230
+highlight        =
 background = #0D0815
 background = rgba(13, 8, 21, 0.9)
 
 # black
-color0  = #162a37
-color8  = #314551
+color0  = #190e22
+color8  = #30233a
 
 # red
 color1  = #bf0053
