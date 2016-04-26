@@ -44,8 +44,6 @@ bind-key a tcl {
 }
 
 bind-key C tcl {
-	set user_home $::env(HOME)
-
 	choose-from-list \
 	-val "<<new>>" \
 	-val "<<new w/a pwd>>" \
@@ -55,9 +53,9 @@ bind-key C tcl {
 		if { "$_" eq "<<new>>" } {
 			command-prompt -p "new-session name" "new-session -A -s %1"
 		} elseif { "$_" eq "<<new w/a pwd>>" } {
-			command-prompt -p "new-session name,new-session pwd" -I,$user_home  "new-session -A -s %1 -c %2"
+			command-prompt -p "new-session name,new-session pwd" -I,~ "new-session -A -s %1 -c %2"
 		} elseif { "$_" eq "<<attach w/a pwd>>" } {
-			command-prompt -p "session pwd" -I$user_home  "attach-session -t %1 -c %2"
+			command-prompt -p "session pwd" -I~ "attach-session -t %1 -c %2"
 		} else {
 			attach-session -t "$_"
 		}
