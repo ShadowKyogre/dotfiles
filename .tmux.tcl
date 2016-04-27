@@ -69,7 +69,6 @@ proc session_manager {} {
 			-onselect {
 				command-prompt -p "session pwd" -I~ "attach-session -t $_ -c \[file normalize %2\]"
 			}
-			
 		} elseif { "$_" eq "<<kill>>" } {
 			choose-from-list -list $items \
 			-onselect {
