@@ -1,16 +1,21 @@
 #set tcl
 
 bind-key A tcl {
+	set cur_vol  [exec ponymix get-volume]
+
 	choose-from-list \
-		mute \
+		-tag set-volume -val "volume: $cur_vol" \
+		toggle \
 		increase \
 		decrease \
-	-selected-idx 0 \
+	-selected-idx 1 \
 	-onselect {
 		if { "$_" eq "increase" || "$_" eq "decrease" } {
-			command-prompt -p "$_" -I 5 "run-shell 'ponymix %%'"
+			command-prompt -p "$_" -I 10 "run-shell \"ponymix $_ %1 > /dev/null\""
+		} elseif { "$_" eq "set-volume" } {
+			command-prompt -p "$_" -I $cur_vol "run-shell \"ponymix $_ %1 > /dev/null\""
 		} else {
-			exec ponymix "$_"
+			exec ponymix "$_" > /dev/null
 		}
 	}
 }
