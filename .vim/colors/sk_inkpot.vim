@@ -128,3 +128,11 @@ hi user1 guifg=#00ff8b guibg=#3e3e5e guisp=#3e3e5e gui=NONE ctermfg=48 ctermbg=6
 hi doxygenspecialonelinedesc guifg=#ad600b guibg=NONE guisp=NONE gui=NONE ctermfg=130 ctermbg=NONE cterm=NONE
 hi doxygencomment guifg=#ad7b20 guibg=NONE guisp=NONE gui=NONE ctermfg=130 ctermbg=NONE cterm=NONE
 hi cspecialcharacter guifg=#c080d0 guibg=#404040 guisp=#404040 gui=NONE ctermfg=176 ctermbg=238 cterm=NONE
+
+hi link TabWinNumSel SpecialChar
+hi link TabNumSel FoldColumn
+hi clear TabLineFill
+hi link TabLineFill StatusLine
+hi clear TabLineSel
+hi link TabLineSel String
+hi TabLine term=underline ctermfg=15 ctermbg=242 gui=underline guibg=#6C6C6C

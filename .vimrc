@@ -51,8 +51,6 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	nnoremap <C-i> gi
 
 	" Tab navigation {{{2
-		nnoremap <Tab> gt
-		nnoremap <S-Tab> gT
 		nnoremap <C-N> :tabnew<CR>
 		nnoremap <C-P> :tabnew
 	" }}}
@@ -86,6 +84,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 	" Undo remap changes {{{2
 		nnoremap U <C-r>
+		nnoremap <C-r> echo "I confuse people"<CR>
 		inoremap <c-u> <c-g>u<c-u>
 		inoremap <c-w> <c-g>u<c-w>
 	"}}}
@@ -474,13 +473,6 @@ if exists("+showtabline")
 	endfunction
 	set stal=1
 	set tabline=%!MyTabLine()
-	hi link TabWinNumSel SpecialChar
-	hi link TabNumSel FoldColumn
-	hi clear TabLineFill
-	hi link TabLineFill StatusLine
-	hi clear TabLineSel
-	hi link TabLineSel String
-	hi TabLine term=underline ctermfg=15 ctermbg=242 gui=underline guibg=#6C6C6C
 endif
 " }}}
 
