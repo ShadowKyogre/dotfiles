@@ -1,5 +1,5 @@
 # ~/.bash_logout
 
-#if [[ "$TERM" = "linux" ]];then
-#fi
-pulseaudio --kill
+if [ "$TERM" = "linux" ];then
+	pulseaudio --kill
+fi
