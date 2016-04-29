@@ -618,4 +618,36 @@ endif
 	\ })
 " }}}
 
+" ---- Window submode {{{1
+	let g:submode_always_show_submode = 1
+
+	" We're taking over the default <C-w> setting. Don't worry we'll do
+	" our best to put back the default functionality.
+	call submode#enter_with('window', 'n', '', '<C-w>')
+
+	" Go through every letter
+	for key in ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+	\           'n','o','p','q','r','s','t','u','v','w','x','y','z']
+	  " maps lowercase, uppercase and <C-key>
+	  call submode#map('window', 'n', '', key, '<C-w>' . key)
+	  call submode#map('window', 'n', '', toupper(key), '<C-w>' . toupper(key))
+	  call submode#map('window', 'n', '', '<C-' . key . '>', '<C-w>' . '<C-'.key . '>')
+	endfor
+
+	" Go through symbols. Sadly, '|', not supported in submode plugin.
+	for key in ['=','_','+','-','<','>']
+	  call submode#map('window', 'n', '', key, '<C-w>' . key)
+	endfor
+
+	" Resize faster
+	call submode#map('window', 'n', '', '+', '3<C-w>+')
+	call submode#map('window', 'n', '', '-', '3<C-w>-')
+	call submode#map('window', 'n', '', '<', '10<C-w><')
+	call submode#map('window', 'n', '', '>', '10<C-w>>')
+
+
+	" Old way, just in case.
+	nnoremap <Leader>w <C-w>
+" }}}
+
 " vim: foldmethod=marker
