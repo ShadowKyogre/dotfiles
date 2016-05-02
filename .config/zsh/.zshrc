@@ -20,6 +20,8 @@ setopt no_complete_aliases
 	zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34;1=31;1=33;1'
 	zstyle ':completion:*:(options|values)' list-colors \
 		'=(#b)(*)-- (*)=35;1=31;1=33;1' '=*=31;1'
+	eval "$(dircolors -b)"
+	zstyle ':completion:*' list-colors "${LS_COLORS}"
 }
 
 # file completion in middle
