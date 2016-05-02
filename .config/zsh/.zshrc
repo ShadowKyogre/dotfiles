@@ -24,7 +24,7 @@ setopt no_complete_aliases
 
 zstyle :compinstall filename '/home/shadowkyogre/.zshrc'
 
-fpath=(~/.config/zsh/functions $fpath)
+fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.config/zsh/history
@@ -33,9 +33,7 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
-for f in ~/.config/zsh/functions/*;do
-	autoload -Uz "${f:t}"
-done
+autoload -Uz ~/.config/zsh/functions/*(:t)
 
 prompt sk 8bit magenta red red
 
