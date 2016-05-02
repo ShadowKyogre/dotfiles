@@ -3,7 +3,6 @@ setopt no_complete_aliases
 
 # completion opts
 () {
-	zstyle ':completion:*' list-colors ''
 	zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 	zstyle ':completion:*' menu select=1
 	zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -14,6 +13,10 @@ setopt no_complete_aliases
 	zstyle ':completion:*:man:*' menu yes select
 	zstyle ':completion:*:manuals' separate-sections true
 	zstyle ':completion:*:manuals.*' insert-sections true
+}
+
+# Completion menu styling
+() {
 }
 
 # file completion in middle
