@@ -1,0 +1,16 @@
+funcsave() {
+	local store_override="${ZFUNC_DIR:-${HOME}/.config/zsh/functions}"
+	if ! [ -d "${store_override}" ];then
+		mkdir -p "${store_override}"
+	fi
+	if ! [ -d "${store_override}" ];then
+		2>&1 echo "Can't store overrides at ${store_override}"
+		return 1
+	fi
+
+	for arg in $@;do
+		if functions "${arg}" > /dev/null;then
+			which "${arg}" > "${store_override}/${arg}"
+		fi
+	done
+}

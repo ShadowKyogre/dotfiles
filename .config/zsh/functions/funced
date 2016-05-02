@@ -1,0 +1,41 @@
+funced() {
+	if [ -z "$1" ];then
+		2>&1 echo "Can't edit undefined function $1"
+		return 1
+	fi
+	autoload -Uz zed
+
+	if [ -z "$EDITOR" ];then
+		zed -f "$1"
+		return "$?"
+	else
+		local tmpname="$(mktemp -t zsh_funced.XXXXXXXXXXXX)"
+		if functions "$1" > /dev/null;then
+			which "$1" > "$tmpname"
+		else
+			echo -e "$1() {\n\n}" > "$tmpname"
+		fi
+
+		while true;do
+			$EDITOR "$tmpname"
+			source "$tmpname"
+			local retcode="$?"
+
+			if [ "$retcode" -ne 0 ];then
+				local answer=""
+				echo "$retcode"
+				while test -z "$answer";do
+					printf "Edit the file again? [Y/n] "
+					read -r answer
+				done
+				if ! [[ "$answer" =~ [Nn][Oo]? ]];then
+					continue
+				fi
+			fi
+			break
+		done
+
+		rm -f "$tmpname" > /dev/null
+		return "${retcode:-0}"
+	fi
+}
