@@ -17,6 +17,9 @@ setopt no_complete_aliases
 
 # Completion menu styling
 () {
+	zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34;1=31;1=33;1'
+	zstyle ':completion:*:(options|values)' list-colors \
+		'=(#b)(*)-- (*)=35;1=31;1=33;1' '=*=31;1'
 }
 
 # file completion in middle
