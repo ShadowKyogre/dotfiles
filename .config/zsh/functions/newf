@@ -1,0 +1,14 @@
+newf() {
+	if [ -n "$1" ];then
+		local func_file="$HOME/.config/zsh/functions/$1"
+		if ! [ -e "$func_file" ];then
+			echo "$1() {" > "$HOME/.config/zsh/functions/$1"
+			echo "}" >> "$HOME/.config/zsh/functions/$1"
+		fi
+		$EDITOR $func_file
+		if [ -e "$func_file" ];then
+			unfunction "$1" 2> /dev/null
+			autoload -Uz "$1"
+		fi
+	fi
+}

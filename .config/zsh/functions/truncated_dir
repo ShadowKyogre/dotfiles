@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+truncated_dir() {
+	local n=${1:-1}
+	if [[ -z "$2" ]];then
+		local target_dir=$(collapse_path $(pwd))
+	else
+		local target_dir=$(collapse_path $2)
+	fi
+
+	local dirs=("${(s:/:)target_dir}")
+	local dirs_length=$#dirs
+
+	if [[ $dirs_length -ge $n ]];then
+		local max=$((dirs_length - n))
+		local i
+		for ((i = 1; i <= $max; i++ ));do
+			step="$dirs[$i]"
+			if [[ -z $step ]];then
+				continue
+			fi
+			if [[ $step =~ "^\." ]];then
+				dirs[$i]="$step[0,2]"
+			else
+				dirs[$i]="$step[0,1]"
+			fi
+		done
+	fi
+
+	echo ${(j:/:)dirs}
+}
+
+#PROMPT='%{$(truncated_pwd 4)%}'

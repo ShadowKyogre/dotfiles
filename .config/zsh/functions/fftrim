@@ -1,0 +1,8 @@
+fftrim() {
+	if [ "$#" -ge 3 ];then
+		local path_noext="${1%.*}"
+		local path_ext="${1##*.}"
+		local trimmed_path="${path_noext}.trimmed.${path_ext}"
+		ffmpeg -i "$1" -ss "$2" -t "$3" "$trimmed_path"
+	fi
+}

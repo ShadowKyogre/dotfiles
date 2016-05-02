@@ -1,0 +1,5 @@
+new_wine_prefix() {
+	if [ -n "$1" ];then
+		env WINEPREFIX="$HOME/.local/share/wineprefixes/$1" WINEARCH="${2:-win32}" wine wineboot
+	fi
+}

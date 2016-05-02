@@ -1,0 +1,5 @@
+pb() {
+	for arg in $@;do
+		curl -H "Accept: application/json" -F "c=@$arg" https://ptpb.pw|jshon -e url -u
+	done
+}

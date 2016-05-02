@@ -1,0 +1,26 @@
+oneshot() {
+	local -a termdown_args
+	termdown_args=(
+		-c
+		5
+		-a
+		-f
+		3x5
+	)
+
+	if [ "$1" -ne 0 ];then
+		pane_and_window_fmt
+	fi
+
+	local time="$2"
+	local termtitle="$3"
+	local notititle="${4:-${3}}"
+
+	if [ -n "$termtitle" ];then
+		termdown "$time" "${termdown_args[@]}" -T "$termtitle"
+		notify-send "$notititle"
+		tmux-notify-all.sh "$notititle"
+	else
+		termdown "$time" "${termdown_args[@]}"
+	fi
+}

@@ -1,0 +1,7 @@
+transfer() {
+	local -a transfersh_args
+	for fname in $@;do
+		transfersh_args+=('-F' "filedata=@$fname")
+	done
+	curl "${transfersh_args[@]}" https://transfer.sh
+}

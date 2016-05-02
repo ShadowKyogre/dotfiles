@@ -1,0 +1,20 @@
+wgit() {
+	for arg in $@;do
+		if [[ "$arg" =~ ^[a-zA-Z0-9_-]\+$ ]];then
+			git clone "git@github.com:ShadowKyogre/${arg}.git"
+		elif [[ "$arg" =~ ^[a-zA-Z0-9_-]\+/[a-zA-Z0-9_-]\+$ ]];then
+			local owner="${arg%%/*}"
+			local repo="${${arg##*/}%%\#*}"
+			git clone "git@github.com:ShadowKyogre/${arg}.git"
+		elif [[ "$arg" =~ ^[a-zA-Z0-9_-]\+\#.*$ ]];then
+			local repo="${${arg##*/}%%\#*}"
+			local branch="${arg##*\#}"
+			git clone "git@github.com:ShadowKyogre/${repo}.git" -b "${branch}"
+		elif [[ "$arg" =~ ^[a-zA-Z0-9_-]\+/[a-zA-Z0-9_-]\+\#.*$ ]];then
+			local owner="${arg%%/*}"
+			local repo="${${arg##*/}%%\#*}"
+			local branch="${arg##*\#}"
+			git clone "git@github.com:${owner}/${repo}.git" -b "${branch}"
+		fi
+	done
+}

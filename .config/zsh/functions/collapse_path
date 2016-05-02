@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+collapse_path() {
+	echo "$1"|sed -e "s,^$HOME,~,"
+}
