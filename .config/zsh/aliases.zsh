@@ -7,6 +7,7 @@
 	alias ftype='file -b --mime-type'
 	alias ftail='tail -n+1'
 	alias ll='ls -l --color=auto -X --indicator-style=classify --human-readable -s --group-directories-first -u'
+	alias grep='grep --color=auto'
 	alias less='less -r'
 }
 
@@ -44,4 +45,5 @@
 () {
 	alias wgit='noglob wgit'
 	alias ezrc="${EDITOR:-vim} ~/.config/zsh/.zshrc"
+	alias reload="source ~/.config/zsh/.zshrc"
 }
