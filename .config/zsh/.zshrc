@@ -4,7 +4,7 @@ setopt no_complete_aliases
 # completion opts
 () {
 	zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-	zstyle ':completion:*' menu select=1
+	zstyle ':completion:*' menu yes select
 	zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 }
 
