@@ -27,6 +27,7 @@ export QT_IM_MODULE='uim'
 export XMODIFIERS=@im='uim'
 export PYTHONSTARTUP=~/.pythonrc
 export SAL_USE_VCLPLUGIN=gtk
+export ZDOTDIR="${HOME}/.config/zsh"
 PATH="$HOME/bin:$HOME/bin/compiz_utils:$HOME/bin/compiz_pipes:$PATH"
 ###Aliases###
 alias tree="tree -C"
