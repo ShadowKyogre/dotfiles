@@ -46,9 +46,15 @@ setopt no_complete_aliases
 zstyle :compinstall filename '/home/shadowkyogre/.zshrc'
 
 fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.config/zsh/history
+
+# history opts
+() {
+	setopt HIST_IGNORE_DUPS
+	setopt APPEND_HISTORY
+	HISTSIZE=1000
+	SAVEHIST=1000
+	HISTFILE=~/.config/zsh/history
+}
 
 autoload -Uz compinit promptinit
 compinit
@@ -57,13 +63,13 @@ promptinit
 # aesthetics
 () {
 	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=4"
-	prompt sk 8bit magenta red red
+	prompt sk 8bit magenta red red white yellow
 }
 
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source /home/shadowkyogre/.config/zsh/aliases.zsh

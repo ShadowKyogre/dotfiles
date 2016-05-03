@@ -42,6 +42,11 @@ bindkey -e
 
 # Fish-like history subsearch
 () {
-	bindkey "\e[A" history-substring-search-up
-	bindkey "\e[B" history-substring-search-up
+	# Use for prioritized cwd history
+	bindkey '\e[A' history-substring-search-up
+	bindkey '\e[B' history-substring-search-down
+
+	# Use for restricted cwd history
+	bindkey '^j' directory-history-search-backward
+	bindkey '^k' directory-history-search-forward
 }
