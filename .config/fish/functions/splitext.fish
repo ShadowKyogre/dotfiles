@@ -1,4 +1,8 @@
 function splitext
-	set pycode "import sys, os, shlex;print('\n'.join([shlex.quote(s) for s in os.path.splitext(sys.argv[1])]))" 
-	python -c "$pycode" "$argv[1]"
+	set fname (basename "$argv[1]")
+	if expr "$fname" : '\.' > /dev/null
+		echo "$fname"|cut -d'.' -f3-
+	else
+		echo "$fname"|cut -d'.' -f2-
+	end
 end
