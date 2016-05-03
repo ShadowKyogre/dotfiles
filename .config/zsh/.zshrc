@@ -5,7 +5,7 @@ setopt no_complete_aliases
 () {
 	zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 	zstyle ':completion:*' menu yes select
-	zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+	zstyle ':completion:*' select-prompt "%B%K{blue}%F{yellow}Scrolling active: current selection at %p%k%b"
 }
 
 # man page completions
@@ -24,6 +24,7 @@ setopt no_complete_aliases
 		'=(#b)(*)-- (*)=35;1=31;1=33;1' '=*=31;1'
 	eval "$(dircolors -b)"
 	zstyle ':completion:*' list-colors "${LS_COLORS}"
+	zstyle ':completion:*:default' list-colors 'ma=44;33;1'
 }
 
 # file completion in middle
