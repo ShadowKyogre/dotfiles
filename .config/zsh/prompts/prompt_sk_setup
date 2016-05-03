@@ -82,7 +82,7 @@ prompt_sk_setup () {
 
   prompt_line_2="$prompt_gfx_bbox"
 
-  prompt_vcs_indicator="%K{red}%B%F{yellow}##%k%b%f"
+  prompt_vcs_indicator="%K{red}%B%F{yellow}|%k%b%f "
 
   prompt_char="{%B%F{$prompt_sk_color3}(%F{yellow}$%B%F{$prompt_sk_color3})%b%F{$prompt_sk_color1})>%B%F{$prompt_sk_color3}-<"
 
@@ -100,10 +100,10 @@ prompt_sk_precmd() {
   if [[ -z "${vcs_info_msg_0_}" ]];then
     prompt_vcs=""
   else
-    prompt_vcs="$prompt_vcs_indicator"'${vcs_info_msg_0_}'"$prompt_newline"
+    prompt_vcs="$prompt_newline$prompt_vcs_indicator"'${vcs_info_msg_0_}'"$prompt_newline"
   fi
 
-  PS1="$prompt_vcs$prompt_line_0$prompt_line_1$prompt_line_2$prompt_char %b%f%k"
+  PS1="$prompt_line_0$prompt_line_1$prompt_vcs$prompt_line_2$prompt_char %b%f%k"
   PS2="$prompt_line_2$prompt_gfx_bbox_to_mbox%_>  %b%f%k"
   PS3="$prompt_line_2$prompt_gfx_bbox_to_mbox%B%F{white}?# %b%f%k"
   zle_highlight[(r)default:*]="default:fg=$prompt_sk_color4,bold"
