@@ -1,8 +1,8 @@
 function splitext
 	set fname (basename "$argv[1]")
 	if expr "$fname" : '\.' > /dev/null
-		echo "$fname"|cut -d'.' -f3-
+		echo "$fname"|grep -Eo '(\.[^_.-])+$'
 	else
-		echo "$fname"|cut -d'.' -f2-
+		echo "$fname"|grep -Eo '(\.[^_.-])+$'
 	end
 end
