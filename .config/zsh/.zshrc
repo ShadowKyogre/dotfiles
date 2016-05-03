@@ -3,9 +3,9 @@ setopt no_complete_aliases
 
 # completion opts
 () {
-	zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+	zstyle ':completion:*' list-prompt "%B%K{blue}%F{yellow}At %p: Hit TAB for more, or the character to insert%k%b%f"
 	zstyle ':completion:*' menu yes select
-	zstyle ':completion:*' select-prompt "%B%K{blue}%F{yellow}Scrolling active: current selection at %p%k%b"
+	zstyle ':completion:*' select-prompt "%B%K{blue}%F{yellow}Scrolling active: current selection at %p%k%b%f"
 }
 
 # man page completions
