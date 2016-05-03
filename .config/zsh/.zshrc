@@ -54,13 +54,19 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
+# aesthetics
+() {
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=4"
+	prompt sk 8bit magenta red red
+}
+
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
-prompt sk 8bit magenta red red
-
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source /home/shadowkyogre/.config/zsh/aliases.zsh
 source /home/shadowkyogre/.config/zsh/completions.zsh
 source /home/shadowkyogre/.config/zsh/keybindings.zsh
+
