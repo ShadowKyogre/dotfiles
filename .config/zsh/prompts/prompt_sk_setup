@@ -194,4 +194,14 @@ function +vi-git-remotebranch() {
     fi
 }
 
+prompt_sk_preview() {
+	if (( ! $#* ));then
+		prompt_preview_theme sk
+		print
+		prompt_preview_theme sk 8bit
+	else
+		prompt_preview_theme sk "$@"
+	fi
+}
+
 prompt_sk_setup "$@"
