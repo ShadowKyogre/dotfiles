@@ -66,6 +66,35 @@ promptinit
 	prompt sk 8bit magenta red red white yellow
 }
 
+# actually set up help
+() {
+	autoload -Uz run-help
+	autoload -Uz run-help-git
+	autoload -Uz run-help-svn
+	autoload -Uz run-help-svk
+	unalias run-help
+	alias help=run-help
+}
+
+# terminal title setting
+() {
+	typeset -A terms_no_titles
+	terms_no_titles[fbpad-256]=y
+	terms_no_titles[linux]=y
+
+	precmd() {
+		if [ -z "${terms_no_titles[$TERM]}"  ];then
+			print -Pn "\e]0;zsh %~\a"
+		fi
+	}
+
+	preexec() {
+		if [ -z "${terms_no_titles[$TERM]}" ];then
+			printf "\033]0;%s\a" "$1"
+		fi
+	}
+}
+
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
