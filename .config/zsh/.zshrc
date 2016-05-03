@@ -74,3 +74,4 @@ source /home/shadowkyogre/.config/zsh/aliases.zsh
 source /home/shadowkyogre/.config/zsh/completions.zsh
 source /home/shadowkyogre/.config/zsh/keybindings.zsh
 
+eval "$(direnv hook zsh)"
