@@ -1,41 +1,52 @@
-funced() {
-	if [ -z "$1" ];then
-		2>&1 echo "Can't edit undefined function $1"
+funced () {
+	if [ -z "$1" ]
+	then
+		echo "Can't edit function with no name" 2>&1
 		return 1
 	fi
 	autoload -Uz zed
-
-	if [ -z "$EDITOR" ];then
-		zed -f "$1"
+	local name_type="$(type -w "$1"|cut -d':' -f2)" 
+	if [ -z "$EDITOR" ]
+	then
+		[ "$name_type" = " function" ] && zed -f "$1"
 		return "$?"
 	else
-		local tmpname="$(mktemp -t zsh_funced.XXXXXXXXXXXX)"
-		if functions "$1" > /dev/null;then
+		local tmpname="$(mktemp -t zsh_funced.XXXXXXXXXXXX)" 
+		if [ "$name_type" = " function" ] > /dev/null
+		then
 			which "$1" > "$tmpname"
-		else
+		elif [ "$name_type" = " command" ]
+		then
+			echo -e "$1() {\n\tcommand ${1} \$@\n\n}" > "$tmpname"
+		elif [ "$name_type" = " none" ]
+		then
 			echo -e "$1() {\n\n}" > "$tmpname"
+		else
+			echo "I can't edit an alias :|" 2>&1
+			return 1
 		fi
-
-		while true;do
+		while true
+		do
 			$EDITOR "$tmpname"
 			source "$tmpname"
-			local retcode="$?"
-
-			if [ "$retcode" -ne 0 ];then
-				local answer=""
+			local retcode="$?" 
+			if [ "$retcode" -ne 0 ]
+			then
+				local answer="" 
 				echo "$retcode"
-				while test -z "$answer";do
+				while test -z "$answer"
+				do
 					printf "Edit the file again? [Y/n] "
 					read -r answer
 				done
-				if ! [[ "$answer" =~ [Nn][Oo]? ]];then
+				if ! [[ "$answer" =~ [Nn][Oo]? ]]
+				then
 					continue
 				fi
 			fi
 			break
 		done
-
-		rm -f "$tmpname" > /dev/null
+		rm -vi -vi -vi -vi -f "$tmpname" > /dev/null
 		return "${retcode:-0}"
 	fi
 }
