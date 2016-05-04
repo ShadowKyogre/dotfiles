@@ -101,9 +101,9 @@ promptinit
 
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source /home/shadowkyogre/.config/zsh/aliases.zsh
 source /home/shadowkyogre/.config/zsh/completions.zsh
