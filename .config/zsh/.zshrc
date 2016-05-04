@@ -67,7 +67,6 @@ promptinit
 
 # aesthetics
 () {
-	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=4"
 	prompt sk 8bit magenta red red white yellow
 }
 
@@ -109,5 +108,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/shadowkyogre/.config/zsh/aliases.zsh
 source /home/shadowkyogre/.config/zsh/completions.zsh
 source /home/shadowkyogre/.config/zsh/keybindings.zsh
+source /home/shadowkyogre/.config/zsh/plugin-overrides.zsh
 
 eval "$(direnv hook zsh)"
