@@ -1,1 +1,3 @@
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=4"
+
+ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=magenta"
