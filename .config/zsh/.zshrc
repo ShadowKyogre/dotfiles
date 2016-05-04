@@ -1,8 +1,12 @@
-setopt appendhistory autocd extendedglob
-setopt no_complete_aliases
+# file browsing opts
+() {
+	setopt autocd
+	setopt extendedglob
+}
 
 # completion opts
 () {
+	setopt no_complete_aliases
 	zstyle ':completion:*' list-prompt "%B%K{blue}%F{yellow}At %p: Hit TAB for more, or the character to insert%k%b%f"
 	zstyle ':completion:*' menu yes select
 	zstyle ':completion:*' select-prompt "%B%K{blue}%F{yellow}Scrolling active: current selection at %p%k%b%f"
@@ -50,8 +54,8 @@ fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
 
 # history opts
 () {
-	setopt HIST_IGNORE_DUPS
-	setopt APPEND_HISTORY
+	setopt histignorealldups
+	setopt appendhistory
 	HISTSIZE=1000
 	SAVEHIST=1000
 	HISTFILE=~/.config/zsh/history
