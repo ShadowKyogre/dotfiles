@@ -11,9 +11,22 @@ funced () {
 		[ "$name_type" = " function" ] && zed -f "$1"
 		return "$?"
 	else
-		local tmpname="$(mktemp -t zsh_funced.XXXXXXXXXXXX)" 
+		local tmppath="$(mktemp -d "${TMPPREFIX}-${USER}XXXX")"
+
+		if [ "$?" -ne 0 ];then
+			2>&1 echo "Can't create tmp dir for tmp func, exiting"
+			return 1
+		fi
+
+		local tmpname="${tmppath}/$1"
+
 		if [ "$name_type" = " function" ] > /dev/null
 		then
+			if which "$1" | grep -q "^ \+# undefined"
+			then
+				echo "Forcing definition load of $1"
+				autoload -Uz +X "$1"
+			fi
 			which "$1" > "$tmpname"
 		elif [ "$name_type" = " command" ]
 		then
@@ -25,28 +38,17 @@ funced () {
 			echo "I can't edit an alias :|" 2>&1
 			return 1
 		fi
-		while true
-		do
-			$EDITOR "$tmpname"
-			source "$tmpname"
-			local retcode="$?" 
-			if [ "$retcode" -ne 0 ]
-			then
-				local answer="" 
-				echo "$retcode"
-				while test -z "$answer"
-				do
-					printf "Edit the file again? [Y/n] "
-					read -r answer
-				done
-				if ! [[ "$answer" =~ [Nn][Oo]? ]]
-				then
-					continue
-				fi
-			fi
-			break
-		done
-		rm -vi -vi -vi -vi -f "$tmpname" > /dev/null
+
+		$EDITOR "$tmpname"
+
+		fpath=("$tmppath" $fpath)
+		unfunction "$1"
+		autoload -Uz +X "$1"
+
+		rm -f "$tmpname" > /dev/null
+		rmdir "$tmppath" > /dev/null
+		fpath[1]=()
+
 		return "${retcode:-0}"
 	fi
 }
