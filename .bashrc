@@ -23,6 +23,7 @@ export GREP_COLOR="1;33"
 export HISTCONTROL=ignoredups
 #export EDITOR=geany
 export EDITOR=vim
+export PAGER=less
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'
 export XMODIFIERS=@im='uim'
