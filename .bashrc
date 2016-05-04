@@ -12,6 +12,7 @@ shopt -s cdspell          # autocorrects cd misspellings
 shopt -s cmdhist          # save multi-line commands in history as single line
 shopt -s dotglob          # include dotfiles in pathname expansion
 shopt -s extglob
+shopt -s autocd
 shopt -s checkwinsize #checks after each command to see how large window is
 stty -ctlecho
 
