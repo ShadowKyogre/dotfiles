@@ -1,0 +1,6 @@
+highlight_styles () {
+	for k in "${(@k)ZSH_HIGHLIGHT_STYLES}"
+	do
+		echo "$k: ${ZSH_HIGHLIGHT_STYLES[$k]}"
+	done
+}
