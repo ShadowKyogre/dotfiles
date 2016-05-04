@@ -82,18 +82,18 @@ promptinit
 
 # terminal title setting
 () {
-	typeset -A terms_no_titles
-	terms_no_titles[fbpad-256]=y
-	terms_no_titles[linux]=y
+	typeset -gA TERMS_NO_TITLES
+	TERMS_NO_TITLES[fbpad-256]=y
+	TERMS_NO_TITLES[linux]=y
 
 	precmd() {
-		if [ -z "${terms_no_titles[$TERM]}"  ];then
+		if [[ -z "${TERMS_NO_TITLES[$TERM]}"  ]];then
 			print -Pn "\e]0;zsh %~\a"
 		fi
 	}
 
 	preexec() {
-		if [ -z "${terms_no_titles[$TERM]}" ];then
+		if [[ -z "${TERMS_NO_TITLES[$TERM]}" ]];then
 			printf "\033]0;%s\a" "$1"
 		fi
 	}
