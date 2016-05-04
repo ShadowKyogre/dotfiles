@@ -25,6 +25,11 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set nocp
 " }}}
 
+" --- set sane defaults for truecolor codes {{{1
+    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+" }}}
+
 " set clipboard=autoselectplus,exclude:cons\|linux
 
 " ---- mappings for usual stuff {{{1
