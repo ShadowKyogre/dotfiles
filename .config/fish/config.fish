@@ -22,17 +22,34 @@ function fish_vi_mode_display
 end
 
 function fish_prompt
-	printf "%s _____/[%s" (set_color purple) (set_color -o red)
-	fish_vi_mode_display (printf "%s@%s" $USER (hostname))
-	printf "%s%s|%s%s" (set_color normal) (set_color purple) (set_color -o red) (date "+%F %T")
-	printf "%s%s]\______________)\n(_/[%s%s" (set_color normal) (set_color purple) (set_color -o red) (prompt_pwd)
-	printf '%s%s]\_____________/(%s' (set_color normal) (set_color purple) (set_color -o red)
-	if git rev-parse --git-dir >/dev/null ^/dev/null
-		printf "(%s%s%s)" (set_color yellow) (git rev-parse --abbrev-ref HEAD ^/dev/null) (set_color -o red)
-	else
-		printf "(%s\$%s)" (set_color yellow) (set_color -o red)
+
+	set -l _user $USER
+	if set -q FAKEUSER
+		set -l _user $FAKEUSER
 	end
-	printf "%s%s>%s--< %s" (set_color normal) (set_color purple) (set_color -o red) (set_color normal)
+
+	set -l _prompt_meta (printf "%s-[%s" (set_color purple) (set_color -o red))
+	set _prompt_meta (printf "%s%s" "$_prompt_meta" (fish_vi_mode_display (printf "%s@%s" $_user (hostname))))
+	set _prompt_meta (printf "%s%s%s|%s%s" "$_prompt_meta" (set_color normal) (set_color purple) (set_color -o red) (date "+%F %T"))
+	set _prompt_meta (printf "%s%s%s]-\\" "$_prompt_meta" (set_color normal) (set_color purple))
+
+	set_color purple
+	repeat_str (expr "$COLUMNS" - (no_ansi_wc "$_prompt_meta")) "-"
+	set_color normal
+	printf "%s\n" "$_prompt_meta"
+
+	set -l _prompt_pwd (printf "%s%s-[%s%s%s%s]-/" (set_color normal) (set_color purple) (set_color -o red) (prompt_pwd) (set_color normal) (set_color purple))
+	printf "%s/" (set_color purple)
+	repeat_str (expr "$COLUMNS" - (no_ansi_wc "$_prompt_pwd") - 1) "-"
+	printf '%s' "$_prompt_pwd"
+
+	__fish_git_prompt '\n'(set_color -b red -o yellow)\|(set_color normal)' %s\n'(set_color normal)
+	if test "$status" -ne 0
+		printf "\n"
+	end
+
+	printf "%s\\-(%s(%s\$%s)" (set_color purple) (set_color red -o) (set_color yellow -o) (set_color -o red)
+	printf "%s%s>%s-< %s" (set_color normal) (set_color purple) (set_color -o red) (set_color normal)
 end
 
 #alias completions
@@ -55,4 +72,10 @@ complete -c qpdfview -xa '(__fish_complete_suffix pdf)'
 complete -c lowriter -xa '(__fish_complete_suffix odt)'
 complete -c localc -xa '(__fish_complete_suffix ods)'
 
+
+complete -c newf -xa "(functions -na)" --description "Create and save functions"
+
 fish_vi_mode
+fish_git_settings
+
+eval (direnv hook fish)
