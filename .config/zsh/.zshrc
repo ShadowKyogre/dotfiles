@@ -55,7 +55,7 @@ fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
 # history opts
 () {
 	setopt histignorealldups
-	setopt appendhistory
+	setopt incappendhistory
 	HISTSIZE=1000
 	SAVEHIST=1000
 	HISTFILE=~/.config/zsh/history
