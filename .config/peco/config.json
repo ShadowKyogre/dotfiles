@@ -1,0 +1,14 @@
+{
+	"Keymap": {
+		"C-h": "peco.ScrollLeft",
+		"C-l": "peco.ScrollRight",
+		"C-j": "peco.ToggleSelectionAndSelectNext"
+	},
+	"Style": {
+		"Query": ["on_red", "yellow", "bold"],
+		"Basic": ["on_black", "white", "bold"],
+		"Selected": ["on_magenta", "white", "bold"],
+		"SavedSelection": ["on_cyan", "black", "bold"],
+		"Matched": ["on_red", "yellow", "bold"]
+	}
+}
