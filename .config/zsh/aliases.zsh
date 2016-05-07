@@ -43,7 +43,6 @@
 
 # misc
 () {
-	alias wgit='noglob wgit'
 	alias ezrc="${EDITOR:-vim} ~/.config/zsh/.zshrc"
 	alias reload="source ~/.config/zsh/.zshrc"
 }
