@@ -11,18 +11,17 @@ funced () {
 		[ "$name_type" = " function" ] && zed -f "$1"
 		return "$?"
 	else
-		local tmppath="$(mktemp -d "${TMPPREFIX}-${USER}XXXX")"
-
-		if [ "$?" -ne 0 ];then
-			2>&1 echo "Can't create tmp dir for tmp func, exiting"
+		local tmppath="$(mktemp -d "${TMPPREFIX}-${USER}XXXX")" 
+		if [ "$?" -ne 0 ]
+		then
+			echo "Can't create tmp dir for tmp func, exiting" 2>&1
 			return 1
 		fi
-
-		local tmpname="${tmppath}/$1"
-
+		local tmpname="${tmppath}/$1" 
 		if [ "$name_type" = " function" ] > /dev/null
 		then
-			if which "$1" | grep -q "^ \+# undefined"
+			local UNKNOWN_FMT="$1 \(\) {\n(?:\t# undefined\n)?\tbuiltin autoload -XUz\n}" 
+			if which "$1" | pcregrep -Mnq "$UNKNOWN_FMT"
 			then
 				echo "Forcing definition load of $1"
 				autoload -Uz +X "$1"
@@ -38,17 +37,13 @@ funced () {
 			echo "I can't edit an alias :|" 2>&1
 			return 1
 		fi
-
 		$EDITOR "$tmpname"
-
-		fpath=("$tmppath" $fpath)
+		fpath=("$tmppath" $fpath) 
 		unfunction "$1"
 		autoload -Uz +X "$1"
-
 		rm -f "$tmpname" > /dev/null
 		rmdir "$tmppath" > /dev/null
-		fpath[1]=()
-
+		fpath[1]=() 
 		return "${retcode:-0}"
 	fi
 }
