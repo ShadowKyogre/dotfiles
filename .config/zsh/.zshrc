@@ -88,11 +88,28 @@ promptinit
 	}
 }
 
+percol_select_history()
+{
+	local OLDBUFFER="${BUFFER}"
+	local EXTRANULL="\0"
+	local DIRHISTY="$(echo -E "$(dirhist -a -d "${PWD}")${EXTRANULL}"|tr '\0\n' '\n\0'|head -n-1)"
+	local SELECTION="$(echo -E "$DIRHISTY"|tac|percol --query="${OLDBUFFER}")"
+	if [ "$?" -ne 0 ];then
+		BUFFER="${OLDBUFFER}"
+	else
+		BUFFER="$(echo -E "$SELECTION"|tr '\0\n' '\n\0'|tr -d '\0'|tail -n+2)"
+	fi
+
+	CURSOR="${#BUFFER}"
+	zle -R -c
+}
+
+
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
-source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
 
 source /home/shadowkyogre/.config/zsh/aliases.zsh
 source /home/shadowkyogre/.config/zsh/completions.zsh

@@ -50,3 +50,9 @@ bindkey -e
 	bindkey '^j' directory-history-search-backward
 	bindkey '^k' directory-history-search-forward
 }
+
+# history menu powers go!
+() {
+	zle -N percol_select_history
+	bindkey '^R' percol_select_history
+}
