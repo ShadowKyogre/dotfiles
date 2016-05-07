@@ -1,0 +1,559 @@
+<menu>
+	<!-- test comment -->
+	<separator icon="~/.face" name="sh -c 'echo &quot;$(whoami)@$(hostname): $(date)&quot;'" mode="exec" mode1="file"/>
+	<item type="launcher">
+		<command>gimp ~/.face</command>
+		<name>Change my face</name>
+		<icon>kolourpaint</icon>
+	</item>
+	<item type="launcher">
+		<name>Terminal</name>
+		<icon>konsole</icon>
+		<command>termite -e 'zsh -i'</command>
+	</item>
+	<item type="launcher">
+		<command>spacefm ~</command>
+		<icon>file-manager</icon>
+		<name>File Manager</name>
+	</item>
+	<separator name="Applications" icon="package"/>
+	<menu name="Development" icon="applications-development">
+		<item type="launcher">
+			<command>gvim</command>
+			<name>GVim</name>
+			<icon>gvim</icon>
+		</item>
+		<item type="launcher">
+			<name>Python</name>
+			<command>termite -t python -e 'python'</command>
+			<icon>python</icon>
+		</item>
+		<item type="launcher">
+			<name>IDLE</name>
+			<command>idle</command>
+			<icon>python</icon>
+		</item>
+	</menu>
+	<menu name="Games" icon="applications-games">
+		<menu name="Arcade" icon="package_games_arcade">
+			<item type="launcher">
+				<name>Icebreaker</name>
+				<command>icebreaker</command>
+				<icon>kbounce</icon>
+			</item>
+			<item type="launcher">
+				<name>Frozen Bubble</name>
+				<command>frozen-bubble</command>
+				<icon>frozen-bubble</icon>
+			</item>
+			<item type="launcher">
+				<name>Zuma's Revenge!</name>
+				<command>sh -c 'cd "/home/shadowkyogre/.wine/drive_c/Program Files/PopCap Games/Zuma'\''s Revenge" &amp;&amp; wine ZumasRevenge.exe'</command>
+				<icon>6927_zumasrevenge.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Peggle World of Warcraft Edition</name>
+				<command>wine start /ProgIDOpen PeggleWoW.ReplayFile.1 %f</command>
+				<icon>de07_pegglewow.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Peggle Nights Deluxe</name>
+				<command>sh -c 'cd "/home/shadowkyogre/.wine/drive_c/Program Files/PopCap Games/Peggle Nights Deluxe" &amp;&amp; wine PeggleNights.exe'</command>
+				<icon>5c19_pegglenights.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Chuzzle Christmas Edition</name>
+				<command>sh -c 'cd "/home/shadowkyogre/.wine/drive_c/Program Files/Raptisoft/Chuzzle Christmas Edition" &amp;&amp; wine Chuzzle.exe'</command>
+				<icon>cd19_chuzzle.0</icon>
+			</item>
+			<item type="launcher">
+				<name>LTris</name>
+				<command>ltris</command>
+				<icon>klotski</icon>
+			</item>
+		</menu>
+		<menu name="Card" icon="package_games_card">
+			<item type="launcher">
+				<name>PySolFC</name>
+				<command>pysol</command>
+				<icon>kpat</icon>
+			</item>
+			<item type="launcher">
+				<name>Edit Magic: the Gathering decks</name>
+				<command>wine "/home/shadowkyogre/.wine/drive_c/Program Files/Magic Workstation/MagicWorkstation.exe" &amp;</command>
+				<icon>b855_magicworkstation.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Play Magic: the Gathering online</name>
+				<command>sh -c 'wine "/home/shadowkyogre/.wine/drive_c/Program Files/Magic Workstation/MWSPlay.exe"'</command>
+				<icon>b855_mwsplay.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Yu-Gi-Oh! Virtual Desktop</name>
+				<command>wine /home/shadowkyogre/.wine/drive_c/Program\ Files/Yugioh\ Virtual\ Dueling/Yugioh\ Virtual\ Desktop\ 9.exe</command>
+				<icon>yvd</icon>
+			</item>
+		</menu>
+		<menu name="Puzzle" icon="package_games_logic">
+			<item type="launcher">
+				<name>Plants vs. Zombies</name>
+				<command>sh -c 'cd "/home/shadowkyogre/.wine/drive_c/Program Files/PopCap Games/Plants vs. Zombies" &amp;&amp; wine PlantsVsZombies.exe'</command>
+				<icon>5881_plantsvszombies.0</icon>
+			</item>
+			<item type="launcher">
+				<name>Simsu</name>
+				<command>simsu</command>
+				<icon>simsu</icon>
+			</item>
+			<item type="launcher">
+				<icon>Bejeweled3</icon>
+				<command>wine ~/portable_wine_apps/Bejeweled\ 3/Bejeweled3.exe</command>
+				<name>Bejeweled 3</name>
+			</item>
+			<item type="launcher">
+				<name>Pipewalker</name>
+				<command>pipewalker</command>
+				<icon>pipewalker</icon>
+			</item>
+			<item type="launcher">
+				<command>tanglet</command>
+				<name>Tanglet</name>
+				<icon>tanglet</icon>
+			</item>
+			<item type="launcher">
+				<name>Sins of a Solar Empire: Rebellion</name>
+				<command>sh -c 'cd "ar/home/shadowkyogre/portable_wine_apps/SoaSE/Sins of a Solar Empire Rebellion/" &amp;&amp; wine "Sins of a Solar Empire Rebellion.exe"'</command>
+				<icon>SoaSE</icon>
+			</item>
+			<item type="launcher">
+				<name>nonogram-qt</name>
+				<command>nonogram-qt</command>
+				<icon>nonogram-qt</icon>
+			</item>
+		</menu>
+		<menu name="Emulators" icon="emulators_section">
+			<item type="launcher">
+				<name>ZSnes</name>
+				<command>zsnes</command>
+				<icon>zsnes</icon>
+			</item>
+			<item type="launcher">
+				<icon>m64py</icon>
+				<name>M64Py</name>
+				<command>m64py</command>
+			</item>
+			<item type="launcher">
+				<name>Visualboy Advance</name>
+				<command>gvbam</command>
+				<icon>vbam</icon>
+			</item>
+		</menu>
+		<menu name="MMO" icon="web-browser">
+			<item type="launcher">
+				<name>Steam</name>
+				<icon>steam</icon>
+				<command>steam</command>
+			</item>
+			<item type="launcher">
+				<name>Arc Client</name>
+				<icon>8E96_ArcLauncher.0</icon>
+				<command>env PWD="/home/shadowkyogre/.local/share/wineprefixes/arc_games/dosdevices/c:/Program Files/Perfect World Entertainment/Arc" WINEPREFIX="/home/shadowkyogre/.local/share/wineprefixes/arc_games" wine C\:\\windows\\command\\start.exe /Unix /home/shadowkyogre/.local/share/wineprefixes/arc_games/dosdevices/c\:/users/Public/Start\ Menu/Programs/Perfect\ World\ Entertainment/Arc/Arc.lnk</command>
+			</item>
+			<item type="launcher">
+				<icon>8E96_ArcLauncher.0</icon>
+				<command>env PWD="/home/shadowkyogre/.local/share/wineprefixes/arc_games/dosdevices/c:/Program Files/Perfect World Entertainment/Arc" WINEPREFIX="/home/shadowkyogre/.local/share/wineprefixes/arc_games" wine C\:\\windows\\command\\start.exe /Unix /home/shadowkyogre/.local/share/wineprefixes/arc_games/dosdevices/c\:/users/Public/Start\ Menu/Programs/Perfect\ World\ Entertainment/Arc/Repair\ Arc.lnk</command>
+				<name>Repair Arc</name>
+			</item>
+		</menu>
+	</menu>
+	<menu name="Graphics" icon="applications-graphics">
+		<item type="launcher">
+			<icon>gpick</icon>
+			<name>gpick</name>
+			<command>gpick</command>
+		</item>
+		<item type="launcher">
+			<name>Magic Set Editor</name>
+			<command>magicseteditor</command>
+			<icon mode1="file">~/Pictures/mse.png</icon>
+		</item>
+		<item type="launcher">
+			<icon>nomacs</icon>
+			<name>nomacs</name>
+			<command>nomacs</command>
+		</item>
+		<item type="launcher">
+			<name>Qosmic</name>
+			<command>qosmic</command>
+			<icon>qosmicicon</icon>
+		</item>
+		<item type="launcher">
+			<name>The GIMP</name>
+			<command>gimp</command>
+			<icon>gimp</icon>
+		</item>
+		<item type="launcher">
+			<name>XSane - Scanning</name>
+			<command>xsane</command>
+			<icon>xsane</icon>
+		</item>
+		<item type="launcher">
+			<icon>okular</icon>
+			<name>Qpdfview</name>
+			<command>qpdfview</command>
+		</item>
+		<item type="launcher">
+			<name>MyPaint</name>
+			<command>mypaint</command>
+			<icon>mypaint</icon>
+		</item>
+	</menu>
+	<menu name="Multimedia" icon="multimedia_section">
+		<item type="launcher">
+			<name>ALSA mixer</name>
+			<command>termite -t alsamixer -e 'alsamixer'</command>
+			<icon>volume-knob</icon>
+		</item>
+		<item type="launcher">
+			<icon>volume-knob</icon>
+			<name>Volume Icon</name>
+			<command>volumeicon</command>
+		</item>
+		<item type="launcher">
+			<name>Asunder CD Ripper</name>
+			<command>asunder</command>
+			<icon>asunder</icon>
+		</item>
+		<item type="launcher">
+			<name>Hyper Converter</name>
+			<command>hypervc</command>
+			<icon>hypervclogo</icon>
+		</item>
+		<item type="launcher">
+			<icon>mpv</icon>
+			<name>MPV</name>
+			<command>mpv</command>
+		</item>
+		<item type="launcher">
+			<icon>k3b</icon>
+			<name>cdw</name>
+			<command>termite -t cdw -e 'cdw'</command>
+		</item>
+		<item type="launcher">
+			<name>cmus</name>
+			<command>termite -t cmus -e 'cmus'</command>
+			<icon>music-player</icon>
+		</item>
+	</menu>
+	<menu name="Network" icon="package_network">
+		<item type="launcher">
+			<name>Skype</name>
+			<icon>skype</icon>
+			<command>skype</command>
+		</item>
+		<item type="launcher">
+			<name>FireFox</name>
+			<command>firefox</command>
+			<icon>mozilla-firefox</icon>
+		</item>
+		<item type="launcher">
+			<name>Pidgin Internet Messenger</name>
+			<command>pidgin</command>
+			<icon>pidgin</icon>
+		</item>
+		<item type="launcher">
+			<name>Thunderbird</name>
+			<command>thunderbird</command>
+			<icon>thunderbird</icon>
+		</item>
+		<item type="launcher">
+			<name>Transmission</name>
+			<command>transmission</command>
+			<icon>transmission</icon>
+		</item>
+	</menu>
+	<menu name="Office" icon="applications-office">
+		<item type="launcher">
+			<command>libreoffice</command>
+			<name>Libre Office</name>
+			<icon>libreoffice-main</icon>
+		</item>
+		<item type="launcher">
+			<name>Libre Office From Template</name>
+			<command>lofromtemplate</command>
+			<icon>twf</icon>
+		</item>
+		<item type="launcher">
+			<name>Libre Office Base</name>
+			<icon>libreoffice-base</icon>
+			<command>lobase</command>
+		</item>
+		<item type="launcher">
+			<name>Libre Office Calc</name>
+			<command>localc</command>
+			<icon>libreoffice-calc</icon>
+		</item>
+		<item type="launcher">
+			<command>lodraw</command>
+			<name>Libre Office Draw</name>
+			<icon>libreoffice-draw</icon>
+		</item>
+		<item type="launcher">
+			<name>Libre Office Impress</name>
+			<command>loimpress</command>
+			<icon>impress</icon>
+		</item>
+		<item type="launcher">
+			<name>Libre Office Math</name>
+			<command>lomath</command>
+			<icon>libreoffice-math</icon>
+		</item>
+		<item type="launcher">
+			<name>Libre Office Writer</name>
+			<command>lowriter</command>
+			<icon>libreoffice-writer</icon>
+		</item>
+	</menu>
+	<menu name="Shells" icon="Terminal">
+		<item type="launcher">
+			<command>stjerm</command>
+			<icon>guake</icon>
+			<name>Stjerm</name>
+		</item>
+		<item type="launcher">
+			<icon>virtualbox</icon>
+			<name>VirtualBox</name>
+			<command>VirtualBox</command>
+		</item>
+		<item type="launcher">
+			<icon>konsole</icon>
+			<command>termite -e 'zsh -i'</command>
+			<name>Termite</name>
+		</item>
+	</menu>
+	<menu name="System" icon="system_section">
+		<menu name="Settings" icon="package_settings">
+			<item type="launcher">
+				<name>GTK Appearance</name>
+				<command>lxappearance</command>
+				<icon>style</icon>
+			</item>
+			<item type="launcher">
+				<name>Qt Config</name>
+				<command>qtconfig</command>
+				<icon>qt4logo</icon>
+			</item>
+			<item type="launcher">
+				<icon>colors</icon>
+				<command>geany ~/.gtkrc-2.0-gnome-color-chooser</command>
+				<name>Edit Your Colors</name>
+			</item>
+			<separator/>
+			<item type="launcher">
+				<name>Preferred Applications</name>
+				<command>exo-preferred-applications</command>
+				<icon>preferences-desktop-default-applications</icon>
+			</item>
+			<item type="launcher">
+				<name>Bluetooth Manager</name>
+				<command>blueman-manager</command>
+				<icon>bluetooth</icon>
+			</item>
+			<item type="launcher">
+				<name>Manage Print Jobs</name>
+				<command>xdg-open localhost:631</command>
+				<icon>printer</icon>
+			</item>
+			<item type="launcher">
+				<name>Monitor Settings</name>
+				<command>lxrandr</command>
+				<icon>grandr</icon>
+			</item>
+			<separator/>
+			<item type="launcher">
+				<name>Change Screensaver</name>
+				<command>xscreensaver-command -prefs</command>
+				<icon>preferences-desktop-screensaver</icon>
+			</item>
+			<item type="launcher">
+				<name>Configure wine</name>
+				<command>winecfg</command>
+				<icon>wine</icon>
+			</item>
+		</menu>
+		<item type="launcher">
+			<name>Font Manager</name>
+			<command>font-manager</command>
+			<icon>fonts</icon>
+		</item>
+		<item type="launcher">
+			<icon>filelight</icon>
+			<name>ncdu</name>
+			<command>termite -t ncdu -e 'ncdu'</command>
+		</item>
+		<item type="launcher">
+			<name>CCleaner</name>
+			<command>env WINEPREFIX="/home/shadowkyogre/.wine" wine "C:\\Program Files\\CCleaner\\CCleaner.exe"</command>
+			<icon>0a28_ccleaner.0</icon>
+		</item>
+		<item type="launcher">
+			<name>Hardware Information</name>
+			<command>hardinfo</command>
+			<icon>hardware</icon>
+		</item>
+		<item type="launcher">
+			<name>Bleachbit</name>
+			<command>bleachbit</command>
+			<icon>bleachbit</icon>
+		</item>
+		<item type="launcher">
+			<name>Htop</name>
+			<command>termite -t Htop -e 'htop'</command>
+			<icon>ksysguard</icon>
+		</item>
+	</menu>
+	<menu name="Utilities" icon="applications-utilities">
+		<item type="launcher">
+			<name>GLX-Dock (Cairo-Dock with OpenGL)</name>
+			<command>cairo-dock -o</command>
+			<icon>cairo-dock</icon>
+		</item>
+		<item type="launcher">
+			<icon>sticky-notes</icon>
+			<command>mikidown</command>
+			<name>mikidown</name>
+		</item>
+		<item type="launcher">
+			<name>Kupfer</name>
+			<icon>kupfer</icon>
+			<command>kupfer</command>
+		</item>
+		<item type="launcher">
+			<icon>spacefm-48-pyramid-blue</icon>
+			<command>spacefm</command>
+			<name>spacefm</name>
+		</item>
+		<item type="launcher">
+			<name>Virus Scanner</name>
+			<command>clamtk</command>
+			<icon>clamtk</icon>
+		</item>
+		<item type="launcher">
+			<name>Disable XScreenSaver</name>
+			<command>xscreensaver-command -exit</command>
+			<icon>screensaver</icon>
+		</item>
+		<item type="launcher">
+			<name>Enable XScreenSaver</name>
+			<command>xscreensaver</command>
+			<icon>xscreensaver</icon>
+		</item>
+		<item type="launcher">
+			<name>Qalculate!</name>
+			<command>qalculate-gtk</command>
+			<icon mode1="file">/usr/share/pixmaps/qalculate.png</icon>
+		</item>
+		<item type="launcher">
+			<icon>glipper</icon>
+			<name>CopyQ</name>
+			<command>copyq</command>
+		</item>
+		<item type="launcher">
+			<icon>file-roller</icon>
+			<command>file-roller</command>
+			<name>File-Roller</name>
+		</item>
+		<item type="launcher">
+			<name>QTarot</name>
+			<command>qtarot</command>
+			<icon mode1="file">/usr/share/icons/hicolor/scalable/apps/qtarot.svg</icon>
+		</item>
+		<item type="launcher">
+			<icon mode1="file">/usr/share/chronoslnx/themes/DarkGlyphs/misc/chronoslnx.png</icon>
+			<name>ChronosLNX</name>
+			<command>chronoslnx</command>
+		</item>
+	</menu>
+	<separator name="System" icon="system"/>
+	<item type="launcher">
+		<command mode2="pipe">~/bin/compiz_pipes/cpzplaces_icons.sh thunar</command>
+		<name>Places</name>
+		<icon>stock_bookmark</icon>
+	</item>
+	<item type="launcher">
+		<command mode2="pipe">~/bin/compiz_pipes/cpztrash_icons</command>
+		<icon>user-trash</icon>
+		<name>Trash</name>
+	</item>
+	<item type="documents">
+		<icon>document-open-recent</icon>
+		<command>xdg-open</command>
+		<sort>most used</sort>
+		<age>28</age>
+		<quantity>20</quantity>
+	</item>
+	<menu name="Compiz" icon="fusion-icon">
+		<item type="launcher">
+			<name>CompizConfig Settings Manager</name>
+			<command>ccsm</command>
+			<icon>ccsm</icon>
+		</item>
+		<item type="launcher">
+			<name>Emerald Theme Manager</name>
+			<command>emerald-theme-manager</command>
+			<icon>emerald-theme-manager</icon>
+		</item>
+		<item type="launcher">
+			<name>Edit Menu</name>
+			<icon>gtk-edit</icon>
+			<command>compiz-boxmenu-editor</command>
+		</item>
+		<item type="launcher">
+			<name>Edit Autostart</name>
+			<command>ob-autostart</command>
+			<icon>startupmanager</icon>
+		</item>
+		<item type="viewportlist">
+			<wrap>true</wrap>
+			<icon>network-workgroup</icon>
+			<vpicon>user-desktop</vpicon>
+		</item>
+		<item type="windowlist">
+			<icon>gnome-panel-window-list</icon>
+		</item>
+		<item type="reload">
+			<icon>reload</icon>
+		</item>
+		<separator/>
+		<item type="launcher">
+			<command>xscreensaver-command -lock</command>
+			<name>Lock Screen</name>
+			<icon>lock</icon>
+		</item>
+		<!--<item type="launcher">
+			<name>Suspend</name>
+			<icon>gnome-session-suspend</icon>
+			<command>sudo pm-suspend</command>
+		</item>
+		<item type="launcher">
+			<name>Hibernate</name>
+			<icon>gnome-session-hibernate</icon>
+			<command>sudo pm-hibernate</command>
+		</item>-->
+		<item type="launcher">
+			<name>Halt</name>
+			<icon>gnome-session-halt</icon>
+			<command>termite -t "Power Off" -e 'sudo poweroff'</command>
+		</item>
+		<item type="launcher">
+			<name>Logout</name>
+			<icon>gnome-session-logout</icon>
+			<command>~/bin/xlogout.sh</command>
+		</item>
+		<item type="launcher">
+			<name>Reboot</name>
+			<icon>gnome-session-reboot</icon>
+			<command>termite -t "Reboot" -e 'sudo reboot'</command>
+		</item>
+	</menu>
+</menu>

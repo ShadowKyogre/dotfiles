@@ -1,0 +1,74 @@
+<menu>
+	<menu name="Uncensored">
+		<item type="launcher">
+			<icon>desktop</icon>
+			<name>Whole Desktop (5 second delay)</name>
+			<command>censored_screenshot.sh 5 no</command>
+		</item>
+		<item type="launcher">
+			<icon>desktop</icon>
+			<name>Whole Desktop (10 second delay)</name>
+			<command>censored_screenshot.sh 10 no</command>
+		</item>
+		<item type="launcher">
+			<icon>desktop</icon>
+			<name>Whole Desktop (15 second delay)</name>
+			<command>censored_screenshot.sh 15 no</command>
+		</item>
+		<item type="launcher">
+			<icon>desktop</icon>
+			<name>Whole Desktop (20 second delay)</name>
+			<command>censored_screenshot.sh 20 no</command>
+		</item>
+		<item type="launcher">
+			<icon>desktop</icon>
+			<name>Whole Desktop (25 second delay)</name>
+			<command>censored_screenshot.sh 25 no</command>
+		</item>
+	</menu>
+	
+	<item type="launcher">
+		<icon>desktop</icon>
+		<name>Whole Desktop (5 second delay)</name>
+		<command>censored_screenshot.sh 5 yes</command>
+	</item>
+	<item type="launcher">
+		<icon>desktop</icon>
+		<name>Whole Desktop (10 second delay)</name>
+		<command>censored_screenshot.sh 10 yes</command>
+	</item>
+	<item type="launcher">
+		<icon>desktop</icon>
+		<name>Whole Desktop (15 second delay)</name>
+		<command>censored_screenshot.sh 15 yes</command>
+	</item>
+	<item type="launcher">
+		<icon>desktop</icon>
+		<name>Whole Desktop (20 second delay)</name>
+		<command>censored_screenshot.sh 20 yes</command>
+	</item>
+	<item type="launcher">
+		<icon>desktop</icon>
+		<name>Whole Desktop (25 second delay)</name>
+		<command>censored_screenshot.sh 25 yes</command>
+	</item>
+	<item type="launcher">
+		<icon>windowlist2</icon>
+		<name>Choose Window</name>
+		<command>sh -c 'sleep 5 &amp;&amp; maim -sl -c 0,0.5,1,0.6 --opengl --magnify "/tmp/$(date +%F-%H%M%S).png"'</command>
+	</item>
+	<item type="launcher">
+		<command>sh -c 'sleep 5 &amp;&amp; maim -i $(xdotool getactivewindow) "/tmp/$(date +%F-%H%M%S).png"'</command>
+		<name>Current Window</name>
+	</item>
+	<item type="launcher">
+		<name>Start Streaming</name>
+		<icon>media-record</icon>
+		<command>ytstream.sh</command>
+	</item>
+	<item type="launcher">
+		<icon>media-playback-stop</icon>
+		<name>Stop Streaming</name>
+		<command>pkill -f ytstream.sh</command>
+	</item>
+</menu>
