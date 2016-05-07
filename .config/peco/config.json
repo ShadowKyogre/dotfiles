@@ -1,7 +1,7 @@
 {
 	"Keymap": {
-		"C-h": "peco.ScrollLeft",
-		"C-l": "peco.ScrollRight",
+		"C-a": "peco.ScrollLeft",
+		"C-d": "peco.ScrollRight",
 		"C-j": "peco.ToggleSelectionAndSelectNext"
 	},
 	"Style": {
