@@ -55,4 +55,7 @@ bindkey -e
 () {
 	zle -N percol_select_history
 	bindkey '^R' percol_select_history
+
+	# redundant with percol menu
+	bindkey -r '^S'
 }
