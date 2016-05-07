@@ -8,6 +8,7 @@
 	alias ftail='tail -n+1'
 	alias grep='grep --color=auto'
 	alias less='less -r'
+	alias - -='cd -'
 }
 
 # Package Administration
