@@ -23,7 +23,7 @@
 () {
 	zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34;1=31;1=33;1'
 	zstyle ':completion:*:(functions|aliases)' list-colors \
-		'=(#b)(*)-- (*)=35;1=31;1=33;1' '=*=31;1'
+		'=(#b)(*)-- (*)=35;1=31;1=33;1'
 	zstyle ':completion:*:(options|values)' list-colors \
 		'=(#b)(*)-- (*)=35;1=31;1=33;1' '=*=31;1'
 	eval "$(dircolors -b)"
