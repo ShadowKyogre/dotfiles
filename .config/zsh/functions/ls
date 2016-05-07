@@ -1,0 +1,9 @@
+ls () {
+	local ARGUMENTS=(--color=auto -X) 
+	local LS_UI_ARGS=(--indicator-style=classify --human-readable -s --group-directories-first -u) 
+	if [ -t 1 -a -t 0 ]
+	then
+		ARGUMENTS+=("${LS_UI_ARGS[@]}") 
+	fi
+	command ls "${ARGUMENTS[@]}" "$@"
+}
