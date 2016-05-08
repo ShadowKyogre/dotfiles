@@ -17,19 +17,19 @@ function wgit
 
 	for arg in $argv
 		for idx in (count REPO_FORMATS)
-			echo "$REPO_FORMATS[$idx]"
 			if echo "$arg"|sgrep -q "$REPO_FORMATS[$idx]"
 
 				set -l repo_parts (echo "$arg"|sed -e "$EXTRACTORS[$idx]")
-				breakpoint
 				if test -z "$repo_parts[1]"
 					set repo_parts[1] "ShadowKyogre"
 				end
 
+				set -l repo_fmt
+
 				if echo "$repo_parts[1]"|sgrep -qi "ShadowKyogre"
-					set -l repo_fmt "git@github.com:$repo_parts[1]/$repo_parts[2].git"
+					set repo_fmt "git@github.com:$repo_parts[1]/$repo_parts[2].git"
 				else
-					set -l repo_fmt "https://github.com/$repo_parts[1]/$repo_parts[2].git"
+					set repo_fmt "https://github.com/$repo_parts[1]/$repo_parts[2].git"
 				end
 
 				if test -z "$repo_parts[3]"

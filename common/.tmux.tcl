@@ -1,4 +1,4 @@
-#set tcl
+set tcl 1
 
 proc volume_manager {} {
 	variable cur_vol  [exec ponymix get-volume]
@@ -80,7 +80,32 @@ proc session_manager {} {
 	}
 }
 
+proc resizer {} {
+	choose-from-list \
+		"Down" \
+		"Up" \
+		"Right" \
+		"Left" \
+		-onselect {
+			switch "$_" {
+				"Down" {
+					command-prompt -p "$_" -I 5 "resize-pane -D %1"
+				}
+				"Up" {
+					command-prompt -p "$_" -I 5 "resize-pane -D %1"
+				}
+				"Left" {
+					command-prompt -p "$_" -I 5 "resize-pane -L %1"
+				}
+				"Right" {
+					command-prompt -p "$_" -I 5 "resize-pane -R %1"
+				}
+			}
+		}
+}
+
 
 bind-key A tcl volume_manager
 bind-key a tcl cmus_control
 bind-key C tcl session_manager
+bind-key R tcl resizer

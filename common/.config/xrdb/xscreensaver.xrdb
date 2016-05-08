@@ -5,6 +5,6 @@ xscreensaver.Dialog.bottomShadowColor: #0d0815
 xscreensaver.Dialog.Button.foreground: #bf6c00
 xscreensaver.Dialog.Button.background: #6c00bf
 xscreensaver.Dialog.text.foreground: #dcd6c2
-xscreensaver.Dialog.text.background: #162a37
+xscreensaver.Dialog.text.background: #190E22
 xscreensaver.passwd.thermometer.foreground: #bf0053
 xscreensaver.dateFormat: %Y-%m-%d %H:%M:%S

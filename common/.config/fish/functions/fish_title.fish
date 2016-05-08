@@ -1,4 +1,6 @@
 function fish_title
-	echo $_ " "
-	prompt_pwd
+	if test $TERM != fbpad-256
+		echo $_ " "
+		prompt_pwd
+	end
 end

@@ -41,6 +41,8 @@ except ImportError:
 	except ImportError:
 		print("Readline is not installed either. No tab completion is enabled.")
 
+import importlib as ilib
+
 def sample_multi(entries, min=0, max=None):
 	if max is None:
 		max = len(entries)

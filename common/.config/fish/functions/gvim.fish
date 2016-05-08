@@ -1,3 +1,3 @@
 function gvim
-	command gvim -p $argv; 
+	command gvim $argv;
 end

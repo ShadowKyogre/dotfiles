@@ -2,4 +2,5 @@
 .config/fish/fish_read_history
 .config/fish/fishd.[a-f0-9]+
 .config/fish/generated_completions/
+.config/zsh/history
 *.swp

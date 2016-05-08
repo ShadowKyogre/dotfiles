@@ -16,8 +16,10 @@ function countdown
 		vlc --qt-start-minimized --qt-notification=0 --qt-minimal-view $argv[2] >/dev/null ^/dev/null &
 	end
 
-	while test $secs -gt 0
-		printf "\r%02d:%02d:%02d" (math $secs / 3600) (math \($secs / 60\) \% 60) (math $secs \% 60)
+	while test $secs -ge 0
+		set secs_output (printf "%02d:%02d:%02d" (math $secs / 3600) (math \($secs / 60\) \% 60) (math $secs \% 60))
+		printf "\r$secs_output"
+		echo -ne "\033]2;$secs_output\007"
 		set secs (math $secs - 1)
 		sleep 1
 	end
@@ -28,6 +30,5 @@ function countdown
 		kill -s SIGTERM %2
 	end
 
-	printf "\r%02d:%02d:%02d" (math $secs / 3600) (math \($secs / 60\) \% 60) (math $secs \% 60)
 	ffplay -autoexit $ALARM_SOUND -nodisp -hide_banner
 end

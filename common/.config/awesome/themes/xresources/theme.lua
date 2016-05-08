@@ -110,10 +110,10 @@ local wallpaper_alt_fg = xrdb.color3
 if not is_dark_bg then
     wallpaper_bg, wallpaper_fg = wallpaper_fg, wallpaper_bg
 end
-theme.wallpaper = theme_assets.wallpaper(
-    wallpaper_bg, wallpaper_fg, wallpaper_alt_fg
-)
--- theme.wallpaper = "/home/shadowkyogre/Pictures/WallPaper/sample_f6cac1a1c6ff90f0b8f2952eb405f8448649eca6.jpg"
+-- theme.wallpaper = theme_assets.wallpaper(
+--     wallpaper_bg, wallpaper_fg, wallpaper_alt_fg
+-- )
+theme.wallpaper = "/home/shadowkyogre/Pictures/WallPaper/Hell-Flower.jpg"
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

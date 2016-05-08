@@ -1,12 +1,12 @@
 stjerm.key:        f12
 stjerm.emulation:  xterm-256color
-stjerm.opacity:    70
+stjerm.opacity:    80
 stjerm.width:      1840
 stjerm.foreground: #0064FF
 stjerm.scrollbar:  right
 stjerm.height:     50%
 stjerm.shell:      /bin/fish
 stjerm.scroll:     false
-stjerm.font:       monospace
+stjerm.font:       monospace 10
 stjerm.lines:      -1
 stjerm.autohide:   false

@@ -4,3 +4,4 @@ Xcursor.theme: Azenis
 #include "stjerm.xrdb"
 #include "xscreensaver.xrdb"
 #include "urxvt.xrdb"
+#include "xterm.xrdb"

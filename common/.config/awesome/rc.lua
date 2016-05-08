@@ -120,57 +120,57 @@ for s = 1, screen.count() do
         awful.tag.add('♅', {
             screen = s,
             tooltip = "Astrology",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/kill_la_kill___matoi_ryuko_by_kirukatocchi-darkened-d7b0n3g.png"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/kill_la_kill___matoi_ryuko_by_kirukatocchi-darkened-d7b0n3g.png"),
             }),
         -- Internet
         awful.tag.add('⛓', {
             screen = s,
             tooltip = "Internet",
             layout = layouts[2],
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/lelouch_-_custom_wallpaper.png"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/lelouch_-_custom_wallpaper.png"),
             }),
         -- Art
         awful.tag.add('⛧', {
             screen = s,
             tooltip = "Art",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/merric-wallpaper-minimal.png"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/merric-wallpaper-minimal.png"),
             }),
         -- Games
         awful.tag.add('♛', {
             screen = s,
             tooltip = "Games",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/sample_f6cac1a1c6ff90f0b8f2952eb405f8448649eca6.jpg"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/sample_f6cac1a1c6ff90f0b8f2952eb405f8448649eca6.jpg"),
             }),
         -- Development
         awful.tag.add('⚡', {
             screen = s,
             tooltip = "Development",
             layout = layouts[4],
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pacgraph.png"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pacgraph.png"),
             }),
         -- Books
         awful.tag.add('☬', {
             screen = s,
             tooltip = "Books",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pokemon__horizon_by_reaper_bunny-d55wyw0.jpg"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/pokemon__horizon_by_reaper_bunny-d55wyw0.jpg"),
             }),
         -- References
         awful.tag.add('⛏', {
             screen = s,
             tooltip = "References",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/thepaperwall_-_just_after_sunset.jpg"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/thepaperwall_-_just_after_sunset.jpg"),
             }),
         -- Rituals
         awful.tag.add('⚖', {
             screen = s,
             tooltip = "Rituals",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/one_of_my_favorite_quotes_by_vovina_de_micaloz-d77xbkl.png"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/one_of_my_favorite_quotes_by_vovina_de_micaloz-d77xbkl.png"),
             }),
         -- Writing
         awful.tag.add('✒', {
             screen = s,
             tooltip = "Writing",
-            wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/glowingSnakePurpleBlue.jpg"),
+            -- wallpaper = gears.surface.load_uncached("/home/shadowkyogre/Pictures/WallPaper/glowingSnakePurpleBlue.jpg"),
             }),
     }
 
@@ -191,11 +191,11 @@ end
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         set_wallpaper_for_tag(scr)
-        screen[s]:connect_signal("tag::history::update", function()
-           for scr = 1, screen.count() do
-               set_wallpaper_for_tag(scr)
-           end
-        end)
+        -- screen[s]:connect_signal("tag::history::update", function()
+        --    for scr = 1, screen.count() do
+        --        set_wallpaper_for_tag(scr)
+        --    end
+        -- end)
     end
 end
 -- }}}
