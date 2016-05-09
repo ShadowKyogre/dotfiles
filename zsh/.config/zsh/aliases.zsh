@@ -2,6 +2,7 @@
 () {
 	alias rm='rm -vi'
 	alias rmdir='rmdir -v'
+	alias mkdir='mkdir -v'
 	alias cp='cp -uvi'
 	alias mv='mv -uvi'
 	alias chmod='chmod -v'
