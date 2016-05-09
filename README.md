@@ -4,6 +4,7 @@ What ARE these for?
 
 - **asciidoc**: Anything related to writing setup
 - **awesome**: Awesome WM settings
+- **bash**: bash configuration
 - **common**: Things that I'm not sure if they should go into their own package
 - **compiz-boxmenu**: Menu files for Compiz-Boxmenu
 - **compiz-reloaded**: [Compiz-Reloaded](https://github.com/compiz-reloaded/) settings.
