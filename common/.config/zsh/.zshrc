@@ -40,6 +40,7 @@
 zstyle :compinstall filename '/home/shadowkyogre/.zshrc'
 
 fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
+path=(~/bin ~/bin/compiz_utils ~/bin/compiz_pipes $path)
 
 # history opts
 () {
