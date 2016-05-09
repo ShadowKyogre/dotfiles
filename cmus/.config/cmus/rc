@@ -1,0 +1,9 @@
+#set dsp.alsa.device=default
+#set mixer.alsa.channel=Master
+#set mixer.alsa.device=default
+#set output_plugin=alsa
+set output_plugin=pulse
+set mouse=true
+
+bind -f common 0 shell ~/bin/cmus_edit_tags.sh
+bind -f common 9 shell ~/bin/cmus_mark_impressive.sh
