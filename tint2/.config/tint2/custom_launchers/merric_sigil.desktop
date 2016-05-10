@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Merric
+Comment=
+Exec=nomacs /home/shadowkyogre/Dropbox/sigils/demons/merrics_sigil.jpg
+Icon=/home/shadowkyogre/Dropbox/sigils/demons/merrics_sigil.jpg
+Path=
+Terminal=false
+StartupNotify=false

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sapphira
+Comment=
+Exec=nomacs /home/shadowkyogre/Dropbox/sigils/demons/sapphiras_sigil.png
+Icon=/home/shadowkyogre/Dropbox/sigils/demons/sapphiras_sigil.png
+Path=
+Terminal=false
+StartupNotify=false
