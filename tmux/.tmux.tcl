@@ -51,7 +51,7 @@ proc cmus_control {} {
 }
 
 proc session_manager {} {
-	variable items [output-of-list { list-sessions -F "#S" } ]
+	variable items [output-of-list { list-sessions -F "#S" }]
 
 	choose-from-list \
 	-val "<<new>>" \
@@ -102,6 +102,19 @@ proc resizer {} {
 				}
 			}
 		}
+}
+
+proc correct_theme {} {
+	variable total_match ""
+	variable n_colors ""
+	variable term_colors [output-of-txt { server-info }]
+	regexp -line "\[0-9\]+: colors: \\(number\\) (\[0-9\]+)" "$term_colors" total_match n_colors
+
+	if { "$n_colors" eq "256" } {
+		source-file .tmux-theme256.conf
+	} else {
+		source-file .tmux-theme16.conf
+	}
 }
 
 
