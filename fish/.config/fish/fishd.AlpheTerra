@@ -3,6 +3,7 @@
 SET ALARM_SOUND:/home/shadowkyogre/Music/Bayonetta/Bayonetta_\x2d_Lets_Dance_Boys\x2emp3\x1e\x2dss\x1e3\x1e\x2dt\x1e71\x2e5
 SET_EXPORT EDITOR:vim
 SET __fish_classic_git_prompt_initialized:\x1d
+SET __fish_git_prompt_showcleanstate:yes
 SET __fish_init_1_22_0:\x1d
 SET __fish_init_1_50_0:\x1d
 SET fish_color_autosuggestion:969896
