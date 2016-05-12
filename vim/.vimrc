@@ -23,6 +23,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	set background=dark
 	set backspace=indent,eol,start
 	set nocp
+	set nojoinspaces
 " }}}
 
 " --- set sane defaults for truecolor codes {{{1
