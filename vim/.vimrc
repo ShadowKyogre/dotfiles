@@ -52,8 +52,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" Quit all one-handed mapping
 	nnoremap ZA :qa<CR>
 
-	" go back to last insert keybindings
-	nnoremap <C-i> gi
+	" quick mappings for search and Subvert {{{2
+		nnoremap s :s###<Left><Left>
+		nnoremap S :S###<Left><Left>
+	" }}}
 
 	" Tab navigation {{{2
 		nnoremap <C-N> :tabnew<CR>
