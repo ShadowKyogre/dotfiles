@@ -37,6 +37,11 @@
 	zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 }
 
+# vcs info general options
+() {
+	zstyle ':vcs_info:*' enable git cvs svn
+}
+
 zstyle :compinstall filename '/home/shadowkyogre/.zshrc'
 
 fpath=(~/.config/zsh/functions ~/.config/zsh/prompts $fpath)
