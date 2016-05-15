@@ -23,6 +23,7 @@ unknown_cmds=(
 	dzone
 	strptime
 	percol
+	ag
 )
 
 compdef _gnu_generic ${unknown_cmds[@]}

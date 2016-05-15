@@ -39,7 +39,7 @@
 
 # vcs info general options
 () {
-	zstyle ':vcs_info:*' enable git cvs svn
+	zstyle ':vcs_info:*' enable git cvs svn hg
 }
 
 zstyle :compinstall filename '/home/shadowkyogre/.zshrc'
