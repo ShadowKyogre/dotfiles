@@ -7,12 +7,11 @@ import random
 import sys
 
 MAX_LEN = 9
-
-urandom = random.SystemRandom()
-rnum = urandom.randint(0, 63**MAX_LEN-1)
-
 ALPHABET='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 LEN_ALPHA=len(ALPHABET)
+
+urandom = random.SystemRandom()
+rnum = urandom.randint(0, LEN_ALPHA**MAX_LEN-1)
 
 def base62(a):
 	baseit = (
