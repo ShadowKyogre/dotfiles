@@ -27,13 +27,26 @@ prompt_sk_setup () {
   autoload -Uz truncated_dir
   autoload -Uz vcs_info
 
+  # https://github.com/pegasd/configs/blob/4fbe2c6cee4b784204e94026d4c7b65772916055/zsh/dot.zsh-prompt#L26-L27
   zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' get-revision true
+
   zstyle ':vcs_info:*' nvcsformats ''
   zstyle ':vcs_info:*' formats '%c%u%B%F{yellow}%b%f%m'
   zstyle ':vcs_info:*' stagedstr '%B%F{green}!%f%b'
   zstyle ':vcs_info:*' unstagedstr '%B%F{yellow}!%f%b'
   zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
   zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
+  zstyle ':vcs_info:hg*+set-message:*' hooks hg-untracked
+
+  # https://github.com/pegasd/configs/blob/4fbe2c6cee4b784204e94026d4c7b65772916055/zsh/dot.zsh-prompt#L35-L41
+  zstyle ':vcs_info:hg*:*' get-bookmarks true
+  zstyle ':vcs_info:hg*:*' get-mq true
+  zstyle ':vcs_info:hg*:*' get-unapplied true
+  zstyle ':vcs_info:hg*:*' patch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' nopatch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' hgrevformat "%r"
+  zstyle ':vcs_info:hg*:*' branchformat "%b"
 
   prompt_gfx_tlc='/'
   prompt_gfx_mlc='|'
@@ -185,6 +198,12 @@ function +vi-git-untracked(){
     fi
 }
 
+function +vi-hg-untracked() {
+	if hg root 2> /dev/null && [ -n "$(hg status -u)" ];then
+		hook_com[unstaged]+='%B%F{magenta}?%f%b'
+	fi
+}
+
 ### git: Show remote branch name for remote-tracking branches
 # Make sure you have added staged to your 'formats':  %b
 function +vi-git-remotebranch() {
@@ -202,6 +221,7 @@ function +vi-git-remotebranch() {
         hook_com[branch]="${hook_com[branch]}(%F{cyan}${remote}%f)"
     fi
 }
+
 
 prompt_sk_preview() {
 	if (( ! $#* ));then
