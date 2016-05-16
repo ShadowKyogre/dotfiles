@@ -199,7 +199,7 @@ function +vi-git-untracked(){
 }
 
 function +vi-hg-untracked() {
-	if hg root 2> /dev/null && [ -n "$(hg status -u)" ];then
+	if hg root 2>&1 > /dev/null && [ -n "$(hg status -u)" ];then
 		hook_com[unstaged]+='%B%F{magenta}?%f%b'
 	fi
 }
