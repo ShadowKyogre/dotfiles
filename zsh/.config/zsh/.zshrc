@@ -2,6 +2,8 @@
 () {
 	setopt autocd
 	setopt extendedglob
+	setopt globcomplete
+	setopt globstarshort
 }
 
 # completion opts
