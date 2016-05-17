@@ -1,7 +1,7 @@
 putlut () {
 	for arg in $@
 	do
-		local img_short=$(curl -F format=json -F "file=@$arg" https://lut.im|jshon -e msg -e short -u) 
+		local img_short=$(curl -F format=json -F "file=@$arg" https://lut.im|jq '.msg.short' -r)
 		echo "https://lut.im/$img_short"
 	done
 }
