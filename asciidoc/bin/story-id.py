@@ -7,7 +7,7 @@ import random
 import sys
 
 MAX_LEN = 9
-ALPHABET='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ALPHABET='0123456789abcdefghijklmnopqrstuvwxyz'
 LEN_ALPHA=len(ALPHABET)
 
 urandom = random.SystemRandom()
