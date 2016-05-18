@@ -1,6 +1,6 @@
 set tcl 1
 
-proc volume_manager {} {
+proc volume-manager {} {
 	variable cur_vol  [exec ponymix get-volume]
 
 	choose-from-list \
@@ -22,7 +22,7 @@ proc volume_manager {} {
 
 
 
-proc cmus_control {} {
+proc cmus-control {} {
 	variable cur_repeat [exec sh -c "cmus-remote -Q|grep repeat_current|cut -d' ' -f3"]
 	variable cur_status [exec sh -c "cmus-remote -Q|grep status|cut -d' ' -f2"]
 
@@ -50,7 +50,7 @@ proc cmus_control {} {
 	}
 }
 
-proc session_manager {} {
+proc session-manager {} {
 	variable items [output-of-list { list-sessions -F "#S" }]
 
 	choose-from-list \
@@ -104,7 +104,7 @@ proc resizer {} {
 		}
 }
 
-proc correct_theme {} {
+proc correct-theme {} {
 	variable total_match ""
 	variable n_colors ""
 	variable term_colors [output-of-txt { server-info }]
@@ -118,7 +118,7 @@ proc correct_theme {} {
 }
 
 
-bind-key A tcl volume_manager
-bind-key a tcl cmus_control
-bind-key C tcl session_manager
+bind-key A tcl volume-manager
+bind-key a tcl cmus-control
+bind-key C tcl session-manager
 bind-key R tcl resizer
