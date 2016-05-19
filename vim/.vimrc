@@ -66,6 +66,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 	" always center current line after movement {{{2
 		nnoremap <ScrollWheelUp> 3k
 		nnoremap <ScrollWheelDown> 3j
+		nnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+		nnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+		vnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+		vnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 		nnoremap <C-U> 11k
 		nnoremap <C-D> 11j
 		nnoremap <Down> gj
