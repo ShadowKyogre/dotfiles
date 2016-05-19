@@ -1,0 +1,60 @@
+storytime() {
+	local START_HERE="${START_HERE:-${HOME}/art/stories/projects}"
+	local CREATE_VAL="$(printf "\0+")"
+	local CD_VAL="$(printf "\0=")"
+	local GOBACK_VAL="$(printf "\0\0^")"
+
+	local stories="$(
+
+	for fname in "${START_HERE}/"*/*/__init__.adoc;do
+		local part_title="$(grep -o '^= [^=]\+' "$fname")"
+		local part_count="$(grep -o '^include::.*\[\]$' "$fname"|wc -l)"
+		local plural > /dev/null
+		if [ "$part_count" -ne "1" ];then
+			plural="s"
+		fi
+		printf '%s (%s part%s)\0%s\n' "$part_title" "$part_count" "$plural" "$fname"
+	done
+
+	printf "%s\0%s\n" "<<Create new story>>" "$CREATE_VAL"
+	)"
+
+	story_dir="$(echo -E "$stories"|peco --null)"
+	if [ -z "$story_dir" ];then
+		return 1
+	fi
+
+	if [ "$story_dir" = "$(printf '\0')" ];then
+		2>&1 echo "You wanna make another story, fine"
+	else
+		story_dir="$(dirname "$story_dir")"
+		local parts_paths=("${story_dir}/"part_[^a-z0-9]*/__init__.adoc)
+
+		local story_parts="$(
+
+		printf "%s\0%s\n" "<<Go back>>" "$GOBACK_VAL"
+		printf "%s\0%s\n" "<<Go into story dir>>" "$CD_VAL"
+		for part_path in "${parts_paths[@]}";do
+			local part_title="$(grep -o '^= [^=]\+' "$part_path")"
+			local filler="<<Unknown>> $(dirname "$part_path")"
+			printf '%s\0%s\n' "${part_title:-$filler}" "$part_path"
+		done
+
+		printf "%s\0%s\n" "<<Create new part>>" "$CREATE_VAL"
+		)"
+
+		story_part="$(echo -E "$story_parts"|peco --null)"
+		if [ "$story_part" = "$CREATE_VAL" ];then
+			2>&1 echo "You wanna make another story part, fine"
+		elif [ "$story_part" = "$CD_VAL" ];then
+			cd "$story_dir"
+		elif [ "$story_part" = "$GOBACK_VAL" ];then
+			storytime
+		else
+			if [ "$#" -ge 1 ];then
+				"$@" "$story_part"
+			fi
+		fi
+	fi
+}
+

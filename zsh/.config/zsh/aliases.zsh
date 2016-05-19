@@ -11,6 +11,9 @@
 	alias grep='grep --color=auto'
 	alias less='less -r'
 	alias - -='cd -'
+
+	alias coms_collabs="START_HERE=~/art/stories/coms_collabs storytime"
+	alias rps="START_HERE=~/art/stories/rp storytime"
 }
 
 # Package Administration
