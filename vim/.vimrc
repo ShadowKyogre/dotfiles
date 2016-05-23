@@ -501,6 +501,8 @@ endif
 		au FileType asciidoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=tcqn complete+=k
 		au FileType asciidoc setlocal comments=:// commentstring=//\ %s
 		au FileType asciidoc setlocal formatlistpat=^\\s*[-*+.]\\+\\s\\+\\%\\(\\S\\+\\)\\@=\\\\|^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
+		au FileType asciidoc noremap <buffer> <LocalLeader>w <Esc>:SemanticLinebreaks!<CR>
+		au FileType asciidoc noremap <buffer> <LocalLeader>W <Esc>:SemanticLinebreaks<CR>
 		au FileType asciidoc call SuperTabSetDefaultCompletionType("<c-n>")
 	"}}}
 
