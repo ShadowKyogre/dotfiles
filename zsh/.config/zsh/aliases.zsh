@@ -19,6 +19,7 @@
 # Package Administration
 () {
 	alias udb='pacaur -Sy'
+	alias ufdb='pacaur -Fy'
 	alias pkgin='pacaur -S'
 	alias pkgq='pacaur -Si'
 	alias pkgs='pacaur -Ss'
