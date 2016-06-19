@@ -1,6 +1,7 @@
 # Can't find any completions here?
 
 unknown_cmds=(
+	asciinema
 	qpdfview
 	termite
 	dadd
