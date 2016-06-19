@@ -5,6 +5,9 @@
     <!--The GUID for a joystick is included for informational purposes only.-->
     <guid>030000006f0e00002801000011010000</guid>
     <profilename>Controller as Mouse</profilename>
+    <names>
+        <buttonname index="13">Window Switcher</buttonname>
+    </names>
     <sets>
         <set index="1">
             <axis index="1">
@@ -56,6 +59,8 @@
             <axis index="3">
                 <throttle>normal</throttle>
                 <axisbutton index="1">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>6</code>
@@ -64,6 +69,8 @@
                     </slots>
                 </axisbutton>
                 <axisbutton index="2">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>7</code>
@@ -75,6 +82,8 @@
             <axis index="4">
                 <throttle>normal</throttle>
                 <axisbutton index="1">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>4</code>
@@ -83,6 +92,8 @@
                     </slots>
                 </axisbutton>
                 <axisbutton index="2">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>5</code>
@@ -95,7 +106,7 @@
                 <dpadbutton index="1">
                     <slots>
                         <slot>
-                            <code>0x1000016</code>
+                            <code>0x1000013</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -103,7 +114,15 @@
                 <dpadbutton index="2">
                     <slots>
                         <slot>
-                            <code>0x1000011</code>
+                            <code>0x1000014</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+                <dpadbutton index="3">
+                    <slots>
+                        <slot>
+                            <code>0x1000014</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -111,7 +130,15 @@
                 <dpadbutton index="4">
                     <slots>
                         <slot>
-                            <code>0x1000017</code>
+                            <code>0x1000015</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+                <dpadbutton index="6">
+                    <slots>
+                        <slot>
+                            <code>0x1000015</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -119,7 +146,23 @@
                 <dpadbutton index="8">
                     <slots>
                         <slot>
-                            <code>0x1000010</code>
+                            <code>0x1000012</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+                <dpadbutton index="9">
+                    <slots>
+                        <slot>
+                            <code>0x1000013</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+                <dpadbutton index="12">
+                    <slots>
+                        <slot>
+                            <code>0x1000012</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -221,8 +264,40 @@
                 </slots>
             </button>
             <button index="13">
-                <setselect>3</setselect>
-                <setselectcondition>while-held</setselectcondition>
+                <slots>
+                    <slot>
+                        <code>500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000020</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x57</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>10</code>
+                        <mode>release</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x57</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>490</code>
+                        <mode>release</mode>
+                    </slot>
+                </slots>
             </button>
         </set>
         <set index="2">
@@ -275,6 +350,8 @@
             <axis index="3">
                 <throttle>normal</throttle>
                 <axisbutton index="1">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>6</code>
@@ -283,6 +360,8 @@
                     </slots>
                 </axisbutton>
                 <axisbutton index="2">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>7</code>
@@ -294,6 +373,8 @@
             <axis index="4">
                 <throttle>normal</throttle>
                 <axisbutton index="1">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>4</code>
@@ -302,6 +383,8 @@
                     </slots>
                 </axisbutton>
                 <axisbutton index="2">
+                    <wheelspeedx>13</wheelspeedx>
+                    <wheelspeedy>13</wheelspeedy>
                     <slots>
                         <slot>
                             <code>5</code>
@@ -314,7 +397,7 @@
                 <dpadbutton index="1">
                     <slots>
                         <slot>
-                            <code>0x4b</code>
+                            <code>0x1000016</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -322,7 +405,7 @@
                 <dpadbutton index="2">
                     <slots>
                         <slot>
-                            <code>0x4c</code>
+                            <code>0x1000011</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -330,7 +413,7 @@
                 <dpadbutton index="4">
                     <slots>
                         <slot>
-                            <code>0x4a</code>
+                            <code>0x1000017</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -338,7 +421,7 @@
                 <dpadbutton index="8">
                     <slots>
                         <slot>
-                            <code>0x48</code>
+                            <code>0x1000010</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -355,7 +438,7 @@
             <button index="2">
                 <slots>
                     <slot>
-                        <code>0x1000071</code>
+                        <code>0x1000070</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -371,7 +454,7 @@
             <button index="4">
                 <slots>
                     <slot>
-                        <code>0x1000080</code>
+                        <code>0x1000072</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -419,7 +502,7 @@
             <button index="11">
                 <slots>
                     <slot>
-                        <code>0x1000004</code>
+                        <code>0x1000080</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -427,28 +510,22 @@
             <button index="12">
                 <slots>
                     <slot>
-                        <code>0x1000003</code>
+                        <code>0x1000071</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
             </button>
-        </set>
-        <set index="3">
-            <axis index="1">
-                <throttle>normal</throttle>
-            </axis>
-            <axis index="2">
-                <throttle>normal</throttle>
-            </axis>
-            <axis index="3">
-                <throttle>normal</throttle>
-            </axis>
-            <axis index="4">
-                <throttle>normal</throttle>
-            </axis>
             <button index="13">
-                <setselect>1</setselect>
-                <setselectcondition>while-held</setselectcondition>
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x45</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
             </button>
         </set>
     </sets>
