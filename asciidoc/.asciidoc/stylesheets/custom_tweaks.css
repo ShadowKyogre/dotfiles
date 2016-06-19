@@ -5,6 +5,9 @@ p {
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
+dd > p {
+	text-indent: 0em;
+}
 li > p {
 	margin-bottom: 0.5em;
 	text-indent: 0em;
