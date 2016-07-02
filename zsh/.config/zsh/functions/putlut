@@ -1,7 +1,18 @@
 putlut () {
+	local images=()
+
 	for arg in $@
 	do
 		local img_short=$(curl -F format=json -F "file=@$arg" https://lut.im|jq '.msg.short' -r)
-		echo "https://lut.im/$img_short"
+		if [ "$#" -lt 2 ];then
+			echo "https://lut.im/$img_short"
+		else
+			images+=("$img_short")
+		fi
 	done
+
+	if [ "$#" -gt 1 ];then
+		echo "Gallery link: https://lut.im/gallery#${(j:,:)images}"
+		echo "zip link: https://lut.im/zip?i=${(j:&i=:)images}"
+	fi
 }
