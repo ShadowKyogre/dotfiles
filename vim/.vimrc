@@ -43,13 +43,13 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 	" don't force set clipboard to always clip {{{2
 	" instead, use these convenience bindings
-		noremap ty "+y
-		vnoremap tY "+y
-		nnoremap tY "+y$
-		noremap tp "+p
-		noremap tP "+P
-		noremap td "+d
-		noremap tD "+D
+		noremap <Leader>y "+y
+		vnoremap <Leader>Y "+y
+		nnoremap <Leader>Y "+y$
+		noremap <Leader>p "+p
+		noremap <Leader>P "+P
+		noremap <Leader>d "+d
+		noremap <Leader>D "+D
 	"}}}
 
 	" Quit all one-handed mapping
@@ -586,18 +586,18 @@ endif
 	" }}}
 
 	" ------ Word lookups {{{2
-		nnoremap <Leader>d   :Wordnet <C-r>=expand('<cword>')<CR><CR>
-		nnoremap <Leader>dd  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
-		nnoremap <Leader>de  :Etymology<CR>
-		nnoremap <Leader>dr  :ReverseDict<CR>
-		nnoremap <Leader>ds  :SoundsLike<CR>
-		nnoremap <Leader>dss :SpelledLike<CR>
-		vnoremap <Leader>d   <Esc>:Wordnet <C-r>=WordStudy#GetVisualSelection()<CR><CR>
-		vnoremap <Leader>dd  <Esc>:WordnetSyns <C-r>=WordStudy#GetVisualSelection()<CR><CR>
-		vnoremap <Leader>de  :EtymologyV<CR>
-		vnoremap <Leader>dr  :ReverseDictV<CR>
-		vnoremap <Leader>ds  :SoundsLikeV<CR>
-		vnoremap <Leader>dss :SpelledLikeV<CR>
+		nnoremap <Leader>/   :Wordnet <C-r>=expand('<cword>')<CR><CR>
+		nnoremap <Leader>/d  :WordnetSyns <C-r>=expand('<cword>')<CR><CR>
+		nnoremap <Leader>/e  :Etymology<CR>
+		nnoremap <Leader>/r  :ReverseDict<CR>
+		nnoremap <Leader>/s  :SoundsLike<CR>
+		nnoremap <Leader>/ss :SpelledLike<CR>
+		vnoremap <Leader>/   <Esc>:Wordnet <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+		vnoremap <Leader>/d  <Esc>:WordnetSyns <C-r>=WordStudy#GetVisualSelection()<CR><CR>
+		vnoremap <Leader>/e  :EtymologyV<CR>
+		vnoremap <Leader>/r  :ReverseDictV<CR>
+		vnoremap <Leader>/s  :SoundsLikeV<CR>
+		vnoremap <Leader>/ss :SpelledLikeV<CR>
 	" }}}
 
 	" ------ Distraction free mode config {{{2
