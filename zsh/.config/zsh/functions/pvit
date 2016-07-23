@@ -1,0 +1,5 @@
+pvit () {
+	local TASK_PROFILE="$1" 
+	shift
+	TASKRC="${HOME}/.config/taskwarrior/${TASK_PROFILE}/.taskrc" vit $*
+}
