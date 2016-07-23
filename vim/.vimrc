@@ -494,6 +494,7 @@ endif
 	let g:xml_syntax_folding=1
 	au FileType xml  setlocal foldmethod=syntax
 	au FileType yaml setlocal expandtab ts=2
+	au FileType python setlocal expandtab ts=4
 	au FileType cpp  setlocal tags+=~/.vim/tags/cpp
 	au FileType voomtree setlocal wrap
 	au FileType tsv setlocal nowrap tabstop=20 list
