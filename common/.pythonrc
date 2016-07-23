@@ -1,28 +1,20 @@
+import datetime
+import math
+import pprint
+import random
 import rlcompleter, readline
+import re
+import sys
+
 try:
 	import dateutil
 except ImportError as e:
 	pass
 
 try:
-	import datetime
-except ImportError as e:
-		pass
-
-try:
 	import swisseph
 except ImportError as e:
-		pass
-
-try:
-	import random
-except ImportError as e:
 	pass
-
-import pprint
-import sys
-import random
-import re
 
 sys.displayhook = pprint.pprint
 # readline.parse_and_bind('tab: complete')
