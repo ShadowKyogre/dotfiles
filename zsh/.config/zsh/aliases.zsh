@@ -51,4 +51,5 @@
 () {
 	alias ezrc="${EDITOR:-vim} ~/.config/zsh/.zshrc"
 	alias reload="source ~/.config/zsh/.zshrc"
+	alias ptpython="ptpython --config-dir=${HOME}/.config/ptpython"
 }
