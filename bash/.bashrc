@@ -27,7 +27,7 @@ export PAGER=less
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'
 export XMODIFIERS=@im='uim'
-export PYTHONSTARTUP=~/.pythonrc
+export PYTHONSTARTUP="${HOME}/.config/python/config.py"
 export SAL_USE_VCLPLUGIN=gtk
 export ZDOTDIR="${HOME}/.config/zsh"
 PATH="$HOME/bin:$HOME/bin/compiz_utils:$HOME/bin/compiz_pipes:$PATH"
