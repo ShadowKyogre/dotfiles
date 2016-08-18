@@ -368,32 +368,14 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 		if &buftype != 'terminal' && (&modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc)
 			let g:lastmode_wc = currentmode
-			let l:old_position = getpos('.')
-			"let l:old_status = v:statusmsg
-			
-			redir => wordCountMsg
-				if currentmode == 's'
-					silent execute "insert \<C-o>"
-				endif
-				silent execute "normal! g\<C-g>"
-			redir END
+			let wc_info = wordcount()
 
-			if wordCountMsg =~ '--No lines in buffer--'
-				let b:wordcount = 0
+			if has_key(wc_info, 'visual_words')
+				let b:wordcount = wc_info['visual_words']
 			else
-				let b:split_wc = split(wordCountMsg)
-				if len(b:split_wc) == 0
-					let b:wordcount = 0
-				else
-					if index(b:split_wc, 'Selected') < 0
-						let b:wordcount = str2nr(b:split_wc[11])
-					else
-						let b:wordcount = str2nr(b:split_wc[5])
-					endif
-				endif
-				"let v:statusmsg = l:old_status
+				let b:wordcount = wc_info['words']
 			endif
-			call setpos('.', l:old_position)
+
 			return b:wordcount
 		elseif &buftype != 'terminal'
 			return b:wordcount
