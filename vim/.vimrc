@@ -221,10 +221,16 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " }}}
 
 " Wailing setup
-let g:wailing_alert_fpath="~/Music/barn_owl_screech_modded.mp3"
-let g:wailing_reward_fpath="~/Music/Bayonetta/Bayonetta_-_Lets_Dance_Boys.mp3"
-let g:wailing_reward_start=3
-let g:wailing_reward_end=71.5
+let g:wailing_opts = {
+	\ 'alert': {
+		\ 'fpath' : '~/Music/barn_owl_screech_modded.mp3',
+	\ },
+	\ 'award': {
+		\ 'fpath' : "~/Music/Bayonetta/Bayonetta_-_Lets_Dance_Boys.mp3",
+		\ 'start' : 3,
+		\ 'length' : 71.5,
+	\ },
+\ }
 
 " ---- Autopairs and Sparkup co-op {{{1
 	let g:sparkupMaps = 0
