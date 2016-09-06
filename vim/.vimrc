@@ -336,6 +336,16 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
+	function! ShowTooLong(...) " {{{2
+		let cols = 80
+
+		if a:0 > 0
+			let cols = a:1
+		endif
+
+		exec 'normal! /\v^.{' . cols . '}\zs.*$' . "\<CR>"
+	endfunction " }}}
+
 	" http://vim.wikia.com/wiki/Word_frequency_statistics_for_a_file
 	function! WordFrequency(caseSensitive) range " {{{2
 		let all = split(join(getline(a:firstline, a:lastline)), '\A\+')
