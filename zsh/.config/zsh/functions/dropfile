@@ -1,0 +1,10 @@
+dropfile () {
+	upload_server="$(curl https://dropfile.to/getuploadserver)" 
+	if [ -n "${upload_server}" ]
+	then
+		for arg in $*
+		do
+			curl -F "file=@${arg}" "${upload_server}" | jq '.url' -r
+		done
+	fi
+}
