@@ -1,0 +1,17 @@
+#kupfer {
+	box-shadow: inset 0px 0px 9px 3px @entryselbg-color;
+}
+
+.matchview
+{
+	background: mix(@entryselbg-color, @background-color, 0.9);
+	border: 1px solid mix(@entryselbg-color, @background-color, 0.8);
+	box-shadow: inset 0px 0px 9px 3px mix(@entryselbg-color, @background-color, 0.5);
+}
+
+.matchview:selected
+{
+	background: mix(@entryselbg-color, @background-color, 0.8);
+	border: 1px solid @entryselbg-color;
+	box-shadow: inset 0px 0px 9px 3px @entryselbg-color;
+}
