@@ -26,7 +26,6 @@
 			<command>censored_screenshot.sh 25 no</command>
 		</item>
 	</menu>
-	
 	<item type="launcher">
 		<icon>desktop</icon>
 		<name>Whole Desktop (5 second delay)</name>
@@ -55,7 +54,7 @@
 	<item type="launcher">
 		<icon>windowlist2</icon>
 		<name>Choose Window</name>
-		<command>sh -c 'sleep 5 &amp;&amp; maim -sl -c 0,0.5,1,0.6 --opengl --magnify "/tmp/$(date +%F-%H%M%S).png"'</command>
+		<command>sh -c 'sleep 5 &amp;&amp; maim -sl -c 0.75,0.0,0.33,0.6 -r crosshair "/tmp/$(date +%F-%H%M%S).png"'</command>
 	</item>
 	<item type="launcher">
 		<command>sh -c 'sleep 5 &amp;&amp; maim -i $(xdotool getactivewindow) "/tmp/$(date +%F-%H%M%S).png"'</command>
