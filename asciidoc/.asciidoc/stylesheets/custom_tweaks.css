@@ -87,3 +87,16 @@ body hr {
 .titlepage hr {
 	border: none;
 }
+
+/* better hdlist readability */
+div.hdlist > table {
+  border-collapse: collapse;
+}
+
+div.hdlist > table > tbody > tr > td {
+  border-bottom: 1px solid #ddd;
+}
+
+div.hdlist > table > tbody > tr:last-child > td {
+  border-bottom: none;
+}
