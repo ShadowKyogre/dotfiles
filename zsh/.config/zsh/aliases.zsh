@@ -53,3 +53,9 @@
 	alias reload="source ~/.config/zsh/.zshrc"
 	alias ptpython="ptpython --config-dir=${HOME}/.config/ptpython"
 }
+
+# network
+() {
+	alias mypubip="dig +short myip.opendns.com @resolver1.opendns.com"
+	alias mylanip="ip addr show enp5s0|grep 'inet '"
+}
