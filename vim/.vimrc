@@ -275,6 +275,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 " ---- FUNCS AND CMDS {{{1
 	command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
 	command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
+	command! -nargs=1 TabRename :call settabvar(tabpagenr(), 'tabname', <q-args>)|redraw!
+	command! Reload :source $MYVIMRC
 
 	function! RegToTmux(...) " {{{2
 		if a:0 == 0
@@ -466,6 +468,12 @@ if exists("+showtabline")
 			let bufnr = buflist[winnr - 1]
 			let file = bufname(bufnr)
 			let buftype = getbufvar(bufnr, 'buftype')
+			let tabname = gettabvar(i, 'tabname')
+
+			if tabname != ''
+				let s .= '[' . tabname . ']::'
+			endif
+
 			if buftype == 'nofile'
 				if file =~ '\/.'
 					let file = substitute(file, '.*\/\ze.', '', '')
@@ -473,9 +481,11 @@ if exists("+showtabline")
 			else
 				let file = fnamemodify(file, ':p:t')
 			endif
+
 			if file == ''
 				let file = '[No Name]'
 			endif
+
 			let s .= file
 			let s .= (i == t ? '%m' : '')
 			let i = i + 1
