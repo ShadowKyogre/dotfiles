@@ -2,7 +2,7 @@
 [ -z "$PS1" ] && return
 #for pkg in *; do ( cd "$pkg"; makepkg -i ); done
 stty stop ''
-source "${HOME}/.bash_private"
+[ -f "${HOME}/.bash_private" ] && source "${HOME}/.bash_private"
 
 ###One-Time Greetings###
 #img2txt $HOME/.face.icon -H 20 -W 40 -f utf8 > .avatar.txt;cat .avatar.txt
