@@ -119,9 +119,9 @@ autoload -Uz ~/.config/zsh/functions/*(:t)
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
 
-source /home/shadowkyogre/.config/zsh/aliases.zsh
-source /home/shadowkyogre/.config/zsh/completions.zsh
-source /home/shadowkyogre/.config/zsh/keybindings.zsh
-source /home/shadowkyogre/.config/zsh/plugin-overrides.zsh
+source "${HOME}/.config/zsh/aliases.zsh"
+source "${HOME}/.config/zsh/completions.zsh"
+source "${HOME}/.config/zsh/keybindings.zsh"
+source "${HOME}/.config/zsh/plugin-overrides.zsh"
 
 eval "$(direnv hook zsh)"
