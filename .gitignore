@@ -1,8 +1,8 @@
-.config/fish/fish_history
-.config/fish/fish_read_history
-.config/fish/fishd.[a-f0-9]+
-.config/fish/generated_completions/
-/*/.config/ptpython/history
-/*/.config/zsh/history
-/*/.config/zsh/.zcompdump
+*/.config/fish/fish_history
+*/.config/fish/fish_read_history
+*/.config/fish/fishd.[a-f0-9]+
+*/.config/fish/generated_completions/
+*/.config/ptpython/history
+*/.config/zsh/history
+*/.config/zsh/.zcompdump
 *.swp
