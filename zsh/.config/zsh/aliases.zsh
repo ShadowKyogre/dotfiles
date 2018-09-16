@@ -45,6 +45,7 @@
 	alias testmkpkg='makepkg -C --noarchive'
 	alias aurcheck='aurman -k'
 	alias bigpkgs="expac -Q -H M '%m\t%n'|sort  -n -r|less"
+	alias mksrcinfo="makepkg --printsrcinfo"
 }
 
 # Sys admin
