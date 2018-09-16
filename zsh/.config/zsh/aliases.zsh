@@ -16,6 +16,11 @@
 	alias rps="START_HERE=~/art/stories/rp storytime"
 }
 
+# Development
+() {
+	alias git-status-rec='find . -maxdepth 2 -name .git -execdir git rev-parse --show-toplevel \; -execdir git status -s \;'
+}
+
 # Package Administration
 () {
 	alias udb='aurman -Sy'
