@@ -507,6 +507,7 @@ endif
 	au FileType voomtree setlocal wrap
 	au FileType tsv setlocal nowrap tabstop=20 list
 	" ---- Prose Types {{{2
+		au FileType text setlocal foldmethod=marker
 		au FileType markdown setlocal complete+=k
 		au FileType markdown call SuperTabSetDefaultCompletionType("<c-n>")
 		au FileType asciidoc setlocal autoindent textwidth=70 wrapmargin=0 formatoptions=tcqn complete+=k
