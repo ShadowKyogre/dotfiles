@@ -251,6 +251,10 @@ let g:wailing_opts = {
 	let g:jedi#auto_initialization = 0
 " }}}
 
+" ---- UltiSnips {{{1
+	let g:UltiSnipsEditSplit = "vertical"
+" }}}
+
 " ---- Printing options {{{1
 set pdev=Virtual_PDF_Printer
 set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,top:0.5in,bottom:0.5in

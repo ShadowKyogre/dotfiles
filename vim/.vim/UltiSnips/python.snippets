@@ -1,0 +1,29 @@
+snippet ify "... if ... else ..."
+${0:item} if ${1:condition} else ${2:alt}
+endsnippet
+
+snippet if "if ... :" i
+if ${1:condition}:
+	${0:pass}
+endsnippet
+
+snippet deff "def ... (...)"
+def ${1:funcy}(${2:self, }${3:*args}${4:, **kwargs}):
+	${0:pass}
+endsnippet
+
+snippet class "class ... (...)"
+class ${2:MyClass}(${1:object}):
+	def __init__(self${3:, *args}${4:, **kwargs}):
+		pass
+endsnippet
+
+snippet for "for ... in ..."
+for ${2:item} in ${1:container}:
+	${0:pass}
+endsnippet
+
+snippet ifmain
+if __name__ == "__main__":
+	${0:pass}
+endsnippet
