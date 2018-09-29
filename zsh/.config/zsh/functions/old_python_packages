@@ -1,0 +1,16 @@
+old_python_packages () {
+	python_ver="$(pkg-config --modversion python3)" 
+	python_minor="$(( ${python_ver##*.} - 1 ))" 
+	for i in $(seq 1 ${python_minor})
+	do
+		pydir="/usr/lib/python3.${i}/site-packages" 
+		if [ ! -d "${pydir}" ]
+		then
+			continue
+		fi
+		for file in $(find "${pydir}" -type f)
+		do
+			echo "$(pacman -Qoq "${file}")"
+		done
+	done | sort | uniq
+}
