@@ -447,6 +447,21 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	endfunction
 	"}}}
 
+	function! ToggleReturn() "{{{2
+		" Kinda need to resist the temptation to ventilate when writing
+		if !exists('b:disable_return')
+			let b:disable_return = 1
+		else
+			let b:disable_return = !b:disable_return
+		endif
+		if b:disable_return
+			inoremap <buffer> <CR> <Nop>
+		else
+			silent iunmap <buffer> <CR>
+		endif
+	endfunction
+	" }}}
+
 	function! ToggleOnlyAddInInsertMode() "{{{2
 		" remove the previous mapping
 		if !exists('b:disable_del_and_bs')
@@ -629,6 +644,8 @@ endif
 
 		" map \<BS> to toggling disabling the BS and del keys in insert mode
 		nnoremap <Leader><BS> :call ToggleOnlyAddInInsertMode()<CR>
+		" map \<CR> to disabling return in insert mode
+		nnoremap <Leader><CR> :call ToggleReturn()<CR>
 	" }}}
 
 	" ------ Spelling / Grammar {{{2
