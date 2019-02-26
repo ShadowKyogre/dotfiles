@@ -279,6 +279,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 " ---- FUNCS AND CMDS {{{1
 	command! SpaceEqs :'<,'>s/\([^><!= ]\)=\([^= ]\)/\1 = \2/g
 	command! SpaceCommas :'<,'>s/\([^ ]\),\([^ ]\)/\1, \2/g
+	command! Unventilate :set tw=1000000|normal! gggqG\<Esc\>:set tw=0\<CR\>
+	command! Ventilate :call Ventilate()
 	command! -nargs=1 TabRename :call settabvar(tabpagenr(), 'tabname', <q-args>)|redraw!
 	command! Reload :source $MYVIMRC
 
@@ -305,9 +307,6 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 		call setreg(l:reggy, reg_contents, reg_type)
 	endfunction "}}}
-
-	" Only vipJ on paragraphs that use two or more lines
-	command! HardSoftWrap :%g/^\s*\n.*\S\n.*\S$/+norm! jvipJ
 
 	command! -nargs=* Hc call DoPrint('<args>') " {{{2
 	function! DoPrint(args)
@@ -341,6 +340,48 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 			set laststatus=2
 		endif
 	endfunction " }}}
+
+	function! Ventilate() " {{{2
+		" https://www.english-grammar-revolution.com/list-of-conjunctions.html
+		let l:save = winsaveview()
+		let l:old = @/
+
+		" break up at vital punctuation marks
+		%s/\([.,?!;:]"\?\) /\1\r/ge
+
+		" for, and, nor, but, or, yet, so
+		%s/ \<\(for\|and\|nor\|but\|or\|yet\|so\)\>/\r\1/ge
+
+		" after, although
+		" once
+		" since
+		" than
+		" till
+		" unless
+		" until
+		%s/ \<\(after\|although\|once\|since\|than\|till\|unless\|until\)\>/\r\1/ge
+
+		" as, as if, as long as, as much as, as soon as, as though
+		%s/ \<as\>\( \<\%\(if\|long as\|much as\|soon as\|though\)\>\?\)\?/\ras\1/ge
+
+		" even if, even though, if, only if, though
+		%s/ \(\<\%\(even\|only\)\?\> \)\?\(\<\%\(if\|though\)\>\)/\r\1\2/ge
+
+		" in order that, in case
+		%s/ in \(\<order that\>\|\<case\>\)/\r in \1/ge
+
+		" provided that, so that, that
+		%s/ \(\%\(\<provided\>\|\<so\>\|\<in order\>\) \)\?that/\r\1that/ge
+
+		" when, whenever, where, whenever, while
+		%s/ \<wh\(en\%\(ever\)\?\|ere\%\(ver\)\?\|ile\)\>/\rwh\1/ge
+
+		call winrestview(l:save)
+		call histdel('search', -1)
+		let @/ = l:old
+
+	endfunction
+	" }}}
 
 	function! ShowTooLong(...) " {{{2
 		let cols = 80
