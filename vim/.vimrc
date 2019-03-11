@@ -218,6 +218,7 @@
 	" execute pathogen#helptags()
 	packadd goyo.vim
 	packadd vim-submode
+	packadd vim-abolish
 	" The following plugins are handled by pacman
 	" Uncomment in the case of a local copy
 	" vim-supertab:: https://github.com/ervandew/supertab.git
