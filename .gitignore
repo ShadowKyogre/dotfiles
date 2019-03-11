@@ -6,3 +6,4 @@
 */.config/zsh/history
 */.config/zsh/.zcompdump
 *.swp
+*/.vim/undo
