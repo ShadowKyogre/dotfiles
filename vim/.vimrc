@@ -1,4 +1,4 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+" runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " ---- don't clutter filesystem with lots of swap files {{{1
 	set directory=$HOME/.vim/swap//
@@ -214,8 +214,18 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " }}}
 
 " ---- Load plugins {{{1
-	execute pathogen#infect()
-	execute pathogen#helptags()
+	" execute pathogen#infect()
+	" execute pathogen#helptags()
+	packadd goyo.vim
+	packadd vim-submode
+	" The following plugins are handled by pacman
+	" Uncomment in the case of a local copy
+	" vim-supertab:: https://github.com/ervandew/supertab.git
+	" packadd supertab
+	" vim-jedi:: https://github.com/davidhalter/jedi-vim
+	" packadd jedi-vim
+	" vim-ultisnips:: https://github.com/SirVer/ultisnips
+	" packadd ultisnips
 	filetype plugin on
 	syntax on
 " }}}
