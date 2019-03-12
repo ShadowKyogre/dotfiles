@@ -485,6 +485,27 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 			silent iunmap <buffer> <CR>
 		endif
 	endfunction
+
+	function! ToggleNav() "{{{2
+		" Kinda need to resist the temptation to ventilate when writing
+		if !exists('b:disable_nav')
+			let b:disable_nav = 1
+		else
+			let b:disable_nav = !b:disable_nav
+		endif
+		if b:disable_nav
+			inoremap <buffer> <Left> <Nop>
+			inoremap <buffer> <Right> <Nop>
+			inoremap <buffer> <Up> <Nop>
+			inoremap <buffer> <Down> <Nop>
+		else
+			silent iunmap <buffer> <Left>
+			silent iunmap <buffer> <Right>
+			silent iunmap <buffer> <Up>
+			silent iunmap <buffer> <Down>
+		endif
+	endfunction
+	" }}}
 	" }}}
 
 	function! ToggleOnlyAddInInsertMode() "{{{2
