@@ -13,3 +13,6 @@
 [submodule "vim/.vim/pack/upstream/start/vim-lion"]
 	path = vim/.vim/pack/upstream/start/vim-lion
 	url = https://github.com/tommcdo/vim-lion.git
+[submodule "vim/.vim/pack/upstream/start/vim-eunuch"]
+	path = vim/.vim/pack/upstream/start/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch.git
