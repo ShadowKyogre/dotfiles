@@ -214,11 +214,8 @@
 " }}}
 
 " ---- Load plugins {{{1
-	" execute pathogen#infect()
-	" execute pathogen#helptags()
-	packadd goyo.vim
-	packadd vim-submode
-	packadd vim-abolish
+	packloadall
+
 	" The following plugins are handled by pacman
 	" Uncomment in the case of a local copy
 	" vim-supertab:: https://github.com/ervandew/supertab.git
@@ -227,6 +224,7 @@
 	" packadd jedi-vim
 	" vim-ultisnips:: https://github.com/SirVer/ultisnips
 	" packadd ultisnips
+
 	filetype plugin on
 	syntax on
 " }}}
