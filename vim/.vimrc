@@ -304,6 +304,22 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		call system('xargs -0 tmux set-buffer -b vim_reg', getreg(l:reggy, 1))
 	endfunction " }}}
 
+	function! WCGoal(...) " {{{2
+		if exists('b:pb')
+			let wc = WordCount()
+			let b:pb.cur_value = wc > b:pb.max_value ? b:pb.max_value : wc
+			call b:pb.paint()
+		endif
+	endfunction " }}}
+
+	function! WCGoalSetup(...) " {{{2
+		if !exists('b:pb')
+			let b:pb = vim#widgets#progressbar#NewSimpleProgressBar("WC: ", 500)
+		endif
+		let b:wcp_timer = timer_start(1000, 'WCGoal', {'repeat': -1})
+	endfunction
+	" }}}
+
 	function! TmuxToReg(...) "{{{2
 		if a:0 == 0
 			let l:reggy = '"'
