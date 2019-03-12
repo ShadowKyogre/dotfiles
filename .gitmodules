@@ -10,3 +10,6 @@
 [submodule "vim/.vim/pack/upstream/start/progressbar-widget"]
 	path = vim/.vim/pack/upstream/start/progressbar-widget
 	url = https://github.com/vim-scripts/progressbar-widget.git
+[submodule "vim/.vim/pack/upstream/start/vim-lion"]
+	path = vim/.vim/pack/upstream/start/vim-lion
+	url = https://github.com/tommcdo/vim-lion.git
