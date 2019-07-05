@@ -101,7 +101,11 @@ percol_select_history()
 	local OLDBUFFER="${BUFFER}"
 	local EXTRANULL="\0"
 	local DIRHISTY="$(echo -E "$(dirhist -a -d "${PWD}")${EXTRANULL}"|tr '\0\n' '\n\0'|head -n-1)"
-	local SELECTION="$(echo -E "$DIRHISTY"|tac|peco --query="${OLDBUFFER}" --layout=bottom-up)"
+	if [[ "${TERMINFO}" == "/usr/lib/kitty/terminfo" ]];then
+		local SELECTION="$(echo -E "$DIRHISTY"|tac|TERMINFO= peco --query="${OLDBUFFER}" --layout=bottom-up)"
+	else
+		local SELECTION="$(echo -E "$DIRHISTY"|tac|peco --query="${OLDBUFFER}" --layout=bottom-up)"
+	fi
 	if [ "$?" -ne 0 ];then
 		BUFFER="${OLDBUFFER}"
 	else
