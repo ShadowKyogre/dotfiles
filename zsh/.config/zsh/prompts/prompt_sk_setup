@@ -114,6 +114,9 @@ prompt_sk_precmd() {
   fi
 
   # main prompt
+  if [[ -n "${VIRTUAL_ENV}" ]];then
+    print -rP "${prompt_vcs_indicator} %B%F{${prompt_sk_color5}}$(truncated_dir 1 ${VIRTUAL_ENV})%b%f"
+  fi
   print -rP "$prompt_line_0"
   print -rP "$prompt_line_1"
   if [[ -n "${prompt_vcs}" ]];then
