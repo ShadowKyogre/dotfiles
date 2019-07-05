@@ -120,7 +120,7 @@ percol_select_history()
 autoload -Uz ~/.config/zsh/functions/*(:t)
 
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-directory-history/zsh-directory-history.zsh
 
 source "${HOME}/.config/zsh/aliases.zsh"
