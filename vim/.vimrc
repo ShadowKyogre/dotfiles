@@ -318,7 +318,8 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 
 	function! WCGoalSetup(...) " {{{2
 		if !exists('b:pb')
-			let b:pb = vim#widgets#progressbar#NewSimpleProgressBar("WC: ", 500)
+			let wc_goal = a:0 ? a:1 : 500
+			let b:pb = vim#widgets#progressbar#NewSimpleProgressBar("WC: ", wc_goal)
 		endif
 		let b:wcp_timer = timer_start(1000, 'WCGoal', {'repeat': -1})
 	endfunction
