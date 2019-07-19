@@ -19,3 +19,6 @@
 [submodule "vim/.vim/pack/upstream/start/vim-wordy"]
 	path = vim/.vim/pack/upstream/start/vim-wordy
 	url = https://github.com/reedes/vim-wordy.git
+[submodule "vim/.vim/pack/upstream/start/vim-doge"]
+	path = vim/.vim/pack/upstream/start/vim-doge
+	url = https://github.com/kkoomen/vim-doge.git

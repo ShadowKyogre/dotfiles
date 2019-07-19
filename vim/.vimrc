@@ -213,6 +213,10 @@
 	set display+=lastline
 " }}}
 
+" map \m to doge
+let g:doge_mapping = '<Leader>m'
+let g:doge_doc_standard_python = 'numpy'
+
 " ---- Load plugins {{{1
 	packloadall
 
