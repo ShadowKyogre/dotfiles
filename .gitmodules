@@ -22,3 +22,6 @@
 [submodule "vim/.vim/pack/upstream/start/vim-doge"]
 	path = vim/.vim/pack/upstream/start/vim-doge
 	url = https://github.com/kkoomen/vim-doge.git
+[submodule "vim/.vim/pack/upstream/start/vim-renpy"]
+	path = vim/.vim/pack/upstream/start/vim-renpy
+	url = https://github.com/chaimleib/vim-renpy
