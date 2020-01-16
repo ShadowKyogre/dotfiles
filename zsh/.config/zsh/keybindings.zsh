@@ -15,6 +15,8 @@ bindkey -e
 	bindkey "\eOd" emacs-backward-word
 	bindkey "\ee[C" forward-word
 	bindkey "\ee[D" backward-word
+	bindkey "^[[1;5C" forward-word
+	bindkey "^[[1;5D" backward-word
 	bindkey "^H" backward-delete-word
 
 	# for rxvt
