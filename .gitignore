@@ -7,3 +7,4 @@
 */.config/zsh/.zcompdump
 *.swp
 */.vim/undo
+*/.vim/swap
