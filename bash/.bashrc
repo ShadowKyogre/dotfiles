@@ -17,20 +17,8 @@ shopt -s checkwinsize #checks after each command to see how large window is
 stty -ctlecho
 
 ###VARS###
-export QT_SELECT=4
-export USE_CCACHE=1
-export GREP_COLOR="1;33"
-export HISTCONTROL=ignoredups
-#export EDITOR=geany
-export EDITOR=vim
-export PAGER=less
-export GTK_IM_MODULE='uim'
-export QT_IM_MODULE='uim'
-export XMODIFIERS=@im='uim'
-export PYTHONSTARTUP="${HOME}/.config/python/config.py"
-export SAL_USE_VCLPLUGIN=gtk
-export ZDOTDIR="${HOME}/.config/zsh"
-PATH="$HOME/bin:$HOME/bin/compiz_utils:$HOME/bin/compiz_pipes:$PATH"
+# migrated to ~/.bash_vars
+
 ###Less colors###
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'

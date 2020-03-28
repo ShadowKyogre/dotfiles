@@ -1,3 +1,4 @@
+source ~/.bash_vars
 source ~/.bashrc
 
 if [ "$TERM" = linux ];then
