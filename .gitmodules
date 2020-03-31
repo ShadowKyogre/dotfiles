@@ -25,3 +25,6 @@
 [submodule "vim/.vim/pack/upstream/start/vim-renpy"]
 	path = vim/.vim/pack/upstream/start/vim-renpy
 	url = https://github.com/chaimleib/vim-renpy
+[submodule "vim/.vim/pack/upstream/start/vim-clap"]
+	path = vim/.vim/pack/upstream/start/vim-clap
+	url = https://github.com/liuchengxu/vim-clap

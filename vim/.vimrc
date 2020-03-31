@@ -534,6 +534,14 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 			silent iunmap <buffer> <Del>
 		endif
 	endfunction "}}}
+
+	function! CurrentSpellSuggest()
+		return spellsuggest(expand('<cWORD>'))
+	endfunction
+
+	function! CurrentSwapWord(word)
+		exec 'normal! ciw' . a:word . "\<Esc>"
+	endfunction
 "}}}
 
 " ---- STATUSLINE {{{1
@@ -666,7 +674,7 @@ endif
 " ---- LEADER KEY MAPPINGS {{{1
 	" ------ MANAGE TABS AND BUFFERS {{{2
 		" map \b to buffers for tab and \w to tab list
-		nnoremap <Leader>b :Unite -buffer-name=bufs buffer -no-split -start-insert -quit<CR>
+		nnoremap <Leader>b :Clap buffers<CR>
 		" nnoremap <Leader>w :Unite -buffer-name=tabs tab -vertical -winwidth=40 -quit<CR>
 		" let unite be the tab sidebar
 		" set showtabline=0
@@ -690,8 +698,8 @@ endif
 		" map \g to Goyo
 		nnoremap <Leader>g :Goyo<CR>
 
-		" map \e to VimFilerSplit
-		nnoremap <Leader>e :VimFilerSplit<CR>
+		" map \e to Clap filer
+		nnoremap <Leader>e :Clap filer<CR>
 
 		" map \<BS> to toggling disabling the BS and del keys in insert mode
 		nnoremap <Leader><BS> :call ToggleOnlyAddInInsertMode()<CR>
@@ -704,8 +712,8 @@ endif
 		nnoremap <Leader>c :LanguageToolCheck<CR>
 		nnoremap <Leader>C :LanguageToolClear<CR>
 
-		" map z= to showing spell check panel
-		nnoremap z= :Unite spell_suggest -buffer-name=spell_suggest -toggle -vertical -winwidth=40<CR>
+		" map z= to showing spell check
+		nnoremap z= :Clap spellsuggest<CR>
 	" }}}
 
 	" ------ Word lookups {{{2
@@ -741,20 +749,7 @@ endif
 		\ 'asciidoc': 'asciidoc',
 		\ 'python': 'python'
 	\ }
-	let g:vimfiler_as_default_explorer = 1
 	let g:loaded_netrwPlugin = 1
-" }}}
-
-" ---- Shougo plugin default contexts {{{1
-	call vimfiler#custom#profile('default', 'context', {
-		\ 'simple': 1,
-		\ 'toggle': 1,
-		\ 'no_quit': 1,
-	\ })
-
-	call unite#custom#profile('default', 'context', {
-		\ 'wrap': 1,
-	\ })
 " }}}
 
 " ---- Window submode {{{1
@@ -799,6 +794,15 @@ let g:ale_linters = {
 let g:ale_fixers = {
 	\ 'dart': ['dartfmt'],
 \ }
+" }}}
+
+" ---- Clap {{{1
+
+let g:clap_provider_spellsuggest = {
+	\ 'source': function('CurrentSpellSuggest'),
+	\ 'sink': function('CurrentSwapWord'),
+\ }
+
 " }}}
 
 " vim: foldmethod=marker
