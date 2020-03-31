@@ -789,4 +789,16 @@ endif
 	nnoremap <Leader>w <C-w>
 " }}}
 
+" ---- ALE {{{1
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_linters = {
+	\ 'dart': ['language_server'],
+\ }
+
+let g:ale_fixers = {
+	\ 'dart': ['dartfmt'],
+\ }
+" }}}
+
 " vim: foldmethod=marker
