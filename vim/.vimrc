@@ -655,7 +655,7 @@ endif
 " ---- TAB VISIBILITY {{{1
 	highlight SpecialKey ctermfg=1
 	set list
-	set listchars=tab:▸⪢,eol:¬
+	set listchars=tab:▸⪢,eol:¬,nbsp:␣
 " }}}
 
 " ---- PERFORMANCE {{{1
