@@ -1,0 +1,8 @@
+fordir() {
+	for i in $(ls); do
+		cd $i
+		eval " $1"
+		cd -
+	done
+}
+
