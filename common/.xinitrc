@@ -19,7 +19,8 @@ fi
 if [ -x "$HOME/.config/awesome/autostart.sh" -a "$1" = "awesome" ];then
 	sleep 5 && "$HOME/.config/awesome/autostart.sh" &
 fi
-
+xrandr --output HDMI-A-1 --below DVI-D-0
+xrandr --output HDMI-A-1 --primary
 exec ${1:-compiz-alone-session}
 
 #exec compiz-alone-session
