@@ -1,0 +1,27 @@
+name: stories
+parent: default
+
+matches:
+  - trigger: ":mru"
+    replace: "(Motivation) $|$. (Thought). (Feeling). (Reaction). (Action). (Saying)."
+    word: true
+
+  - trigger: ":kstk"
+    replace: "(Ki - Theme) $|$. (Sho - Elaborate). (Ten - Twist). (Ketsu - Unify)."
+    word: true
+
+  - trigger: ":warc-f"
+    replace: "(Inner truth) $|$. (Solve problems). (Uphold truth at a cost). (Effects of upholding)."
+    word: true
+
+  - trigger: ":warc-p"
+    replace: "(Inner problem) $|$. (Superficial solve). (True solve). (Effects of solving)."
+    word: true
+
+  - trigger: ":warc-n"
+    replace: "(Inner problem) $|$. (Solve by denial). (Becomes central problem). (Effects of not solving)."
+    word: true
+
+  - trigger: ":sf-blurb"
+    replace: "A (adjective) (noun)$|$ must (action) to (stake 1), but doing so could (stake 2)."
+    word: true
