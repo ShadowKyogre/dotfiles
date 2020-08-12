@@ -11,7 +11,11 @@ matches:
     word: true
 
   - trigger: ":chara"
-    replace: "(name)$|$ (gender species) is (behavior-noun) that wants to (behavior-reason). (limit-behavior). (excesses-behavior). (background)."
+    replace: "(name) (gender species) is (behavior-noun) that wants to (behavior-reason). (limit-behavior). (excesses-behavior). (background)."
+    word: true
+
+  - trigger: ":cbehave"
+    replace: "When it comes to (place/situation/characters), s/he is (contradictory-action) instead."
     word: true
 
   - trigger: ":kstk"
