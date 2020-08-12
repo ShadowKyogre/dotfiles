@@ -6,6 +6,14 @@ matches:
     replace: "(Motivation) $|$. (Thought). (Feeling). (Reaction). (Action). (Saying)."
     word: true
 
+  - trigger: ":theme"
+    replace: "(character)$|$ (action) leads to (character) (insight)."
+    word: true
+
+  - trigger: ":chara"
+    replace: "(name)$|$ (gender species) is (behavior-noun) that wants to (behavior-reason). (limit-behavior). (excesses-behavior). (background)."
+    word: true
+
   - trigger: ":kstk"
     replace: "(Ki - Theme) $|$. (Sho - Elaborate). (Ten - Twist). (Ketsu - Unify)."
     word: true
