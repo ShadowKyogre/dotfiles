@@ -8,3 +8,4 @@
 *.swp
 */.vim/undo
 */.vim/swap
+*/.config/conky/scripts/private.lua
