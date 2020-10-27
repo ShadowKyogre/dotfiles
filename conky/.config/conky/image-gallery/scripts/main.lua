@@ -5,7 +5,7 @@ require 'math'
 require 'os'
 
 
-local pconfig = os.getenv('HOME') .. "/.config/conky/scripts/private.lua"
+local pconfig = os.getenv('HOME') .. "/.config/conky/image-gallery/scripts/private.lua"
 local ok, e = pcall(dofile, pconfig)
 if not ok then
     imgs = {}
