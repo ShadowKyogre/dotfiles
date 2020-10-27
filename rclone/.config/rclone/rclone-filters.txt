@@ -1,0 +1,6 @@
+.git/
+.hg/
+[tT]humbs.db
+[dD]esktop.ini
+.DS_Store
+AlbumArt*.jpg
