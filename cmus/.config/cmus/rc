@@ -7,3 +7,4 @@ set mouse=true
 
 bind -f common 0 shell ~/bin/cmus_edit_tags.sh
 bind -f common 9 shell ~/bin/cmus_mark_impressive.sh
+cd ~/Music
