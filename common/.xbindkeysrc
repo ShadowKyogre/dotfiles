@@ -1,0 +1,18 @@
+#To catch these, you'll need to edit the following files
+
+# ~/.config/GIMP/<version>/menurc
+# ~/.config/inkscape/keys/default.xml
+# ~/.config/krita/kritashortcutsrc
+# ~/.config/kritashortcutsrc
+
+"xdotool key F25"
+b:11
+
+"xdotool key F26"
+b:12
+
+"xdotool key F27"
+b:13
+
+"xdotool key F28"
+b:14
