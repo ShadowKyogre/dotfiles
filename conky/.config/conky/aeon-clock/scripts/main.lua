@@ -185,6 +185,28 @@ function clock_hands(cr, opts)
   local shadow = opts.shadow or false
 
   local radius = opts.radius or .2875 * opts.canvas_height
+  local time = os.date("*t")
+
+  cairo_save(cr)
+  for i = 1, 60 do
+      angle = (i / 60.0) * 2 * math.pi
+      cos = math.cos(angle)
+      sin = math.sin(angle)
+      x = cos * opts.max_radius + cx
+      y = sin * opts.max_radius + cy
+      dx = cos * 20
+      dy = sin * 20
+      cairo_move_to(cr, x, y)
+      cairo_rel_line_to(cr, -dx, -dy)
+      if time.hour >= 12 then
+          cairo_set_source_rgba(cr, table.unpack(colors.pm_hour))
+      else
+          cairo_set_source_rgba(cr, table.unpack(colors.am_hour))
+      end
+      cairo_set_line_width(cr, 2)
+      cairo_stroke(cr)
+  end
+  cairo_restore(cr)
 
   cairo_save(cr)
   cairo_translate(cr, cx, cy)
@@ -199,7 +221,6 @@ function clock_hands(cr, opts)
   local hand_height = height * .8
   local sec_hand_width = width * .6
   local sec_hand_height = height * .6
-  local time = os.date("*t")
 
   cairo_save(cr)
   cairo_translate(cr, cx, cy)
