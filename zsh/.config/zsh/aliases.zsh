@@ -14,6 +14,7 @@
 
 	alias coms_collabs="START_HERE=~/art/stories/coms_collabs storytime"
 	alias rps="START_HERE=~/art/stories/rp storytime"
+	alias xournalpp='GTK_THEME=Blue-Submarine:dark xournalpp'
 }
 
 # Development
