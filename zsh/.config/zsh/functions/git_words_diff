@@ -1,0 +1,5 @@
+git_words_diff () {
+	# https://stackoverflow.com/questions/2874318/quantifying-the-amount-of-change-in-a-git-diff
+	revision=${1:-master} 
+	echo $(($(git_words_added $1) - $(git_words_removed $1)))
+}

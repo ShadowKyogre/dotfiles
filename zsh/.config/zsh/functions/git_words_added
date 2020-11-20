@@ -1,0 +1,5 @@
+git_words_added () {
+	# https://stackoverflow.com/questions/2874318/quantifying-the-amount-of-change-in-a-git-diff
+	revision=${1:-master} 
+	git diff --word-diff=porcelain $revision | grep -e "^+[^+]" | wc -w | xargs
+}
