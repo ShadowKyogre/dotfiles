@@ -297,6 +297,19 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	command! -nargs=1 TabRename :call settabvar(tabpagenr(), 'tabname', <q-args>)|redraw!
 	command! Reload :source $MYVIMRC
 
+	function! FontSizeIncrement(...) " {{{2
+		if !has('gui_running')
+			return
+		endif
+
+		let l:font_info = matchlist(&guifont, '\v(.*)( [0-9]*)')
+		let l:font_face = l:font_info[1]
+		let l:font_size = str2nr(l:font_info[2])
+		let l:font_size = l:font_size + str2nr(a:1)
+		let &guifont=l:font_face . ' ' .  l:font_size
+	endfunction
+	" }}}
+
 	function! RegToTmux(...) " {{{2
 		if a:0 == 0
 			let l:reggy = '"'
