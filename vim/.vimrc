@@ -384,6 +384,22 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
+	function! WriteMode() " {{{2
+		if has("gui_running")
+			set columns=999
+			set lines=999
+			set guifont=Monospace\ 32
+			Goyo 80x16
+		else
+			if exists("+lines")
+				set lines=999
+			endif
+			if exists("+columns")
+				set columns=999
+			endif
+		endif
+	endfunction " }}}
+
 	function! Ventilate() " {{{2
 		" https://www.english-grammar-revolution.com/list-of-conjunctions.html
 		let l:save = winsaveview()
