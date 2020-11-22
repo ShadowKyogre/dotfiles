@@ -617,6 +617,10 @@ if exists("+showtabline")
 endif
 " }}}
 
+" --- GVIM WINDOW TITLE {{{1
+set titlestring=%(%{gettabvar(tabpagenr(),'tabname')}\ %)%t\ %m\ (%{expand('%:p:h')})\ -\ %{v:servername}
+" }}}
+
 " ---- FTYPES {{{1
 	let g:xml_syntax_folding=1
 	au FileType xml  setlocal foldmethod=syntax
