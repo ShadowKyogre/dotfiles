@@ -31,3 +31,6 @@
 [submodule "vim/.vim/pack/upstream/start/limelight.vim"]
 	path = vim/.vim/pack/upstream/start/limelight.vim
 	url = https://github.com/junegunn/limelight.vim
+[submodule "vim/.vim/pack/upstream/start/VOoM"]
+	path = vim/.vim/pack/upstream/start/VOoM
+	url = https://github.com/vim-voom/VOoM
