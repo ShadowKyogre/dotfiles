@@ -384,12 +384,13 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 		endif
 	endfunction " }}}
 
-	function! WriteMode() " {{{2
+	function! WriteMode(...) " {{{2
+		" hi underlines gui=underline cterm=underline
+		" sign define wholeline linehl=underlines
 		if has("gui_running")
 			set columns=999
 			set lines=999
 			set guifont=Monospace\ 32
-			Goyo 80x16
 		else
 			if exists("+lines")
 				set lines=999
@@ -397,7 +398,15 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 			if exists("+columns")
 				set columns=999
 			endif
+			if getenv('TERM') =~ "xterm-kitty"
+				silent !kitty @ set-font-size 0
+				silent !kitty @ set-font-size +32
+				autocmd QuitPre * silent !kitty @ set-font-size 0
+			endif
 		endif
+		setlocal nospell
+		Goyo 80x16
+		Limelight
 	endfunction " }}}
 
 	function! Ventilate() " {{{2
