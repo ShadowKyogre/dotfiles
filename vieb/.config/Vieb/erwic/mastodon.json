@@ -1,0 +1,10 @@
+{
+    "name": "Mastodon",
+    "icon": "./icons/mastodon.png",
+    "apps": [
+        {
+            "container": "mastodon",
+            "url": "https://mastodon.social/"
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+vieb-app () {
+	vieb --erwic "${HOME}/.config/Vieb/erwic/${1}.json" --datafolder "${HOME}/.config/Vieb/erwic/app-data/${1}"
+}

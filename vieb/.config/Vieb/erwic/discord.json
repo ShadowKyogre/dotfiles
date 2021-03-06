@@ -1,0 +1,10 @@
+{
+    "name": "Discord",
+    "icon": "./icons/discord.png",
+    "apps": [
+        {
+            "container": "discord",
+            "url": "https://discord.com/app"
+        }
+    ]
+}

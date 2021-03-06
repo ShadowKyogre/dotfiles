@@ -1,0 +1,10 @@
+{
+    "name": "AI Dungeon",
+    "icon": "./icons/ai-dungeon.png",
+    "apps": [
+        {
+            "container": "aidungeon",
+            "url": "https://play.aidungeon.io/"
+        }
+    ]
+}

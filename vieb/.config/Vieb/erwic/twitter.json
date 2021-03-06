@@ -1,0 +1,10 @@
+{
+    "name": "Twitter",
+    "icon": "./icons/twitter.png",
+    "apps": [
+        {
+            "container": "twitter",
+            "url": "https://twitter.com/"
+        }
+    ]
+}
