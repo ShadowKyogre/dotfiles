@@ -34,7 +34,7 @@ alias nreboot="sudo ninit-shutdown -r"
 alias ytmp4="youtube-dl -f mp4 -a"
 alias ytmp3="youtube-dl -x --audio-format mp3 -a"
 alias pyserve="python -m http.server"
-alias reload='source ~/.bashrc'
+alias reload='source ~/.bashrc;source ~/.bash_vars'
 alias ls='ls --color=auto -X --human-readable -s -p'
 alias udb='yay -Sy'
 alias pkgin='yay -S'
