@@ -1,0 +1,10 @@
+{
+    "name": "Picarto",
+    "icon": "./icons/picarto.png",
+    "apps": [
+        {
+            "container": "picarto",
+            "url": "https://picarto.tv/"
+        }
+    ]
+}
