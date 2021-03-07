@@ -39,7 +39,9 @@ funced () {
 		fi
 		$EDITOR "$tmpname"
 		fpath=("$tmppath" $fpath) 
-		unfunction "$1"
+		if typeset -f "$1" > /dev/null; then
+			unfunction "$1"
+		fi
 		autoload -Uz +X "$1"
 		rm -f "$tmpname" > /dev/null
 		rmdir "$tmppath" > /dev/null
