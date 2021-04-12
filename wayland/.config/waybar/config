@@ -1,0 +1,79 @@
+{
+    // "layer": "top", // Waybar at top layer
+    "output": "HDMI-A-2",
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 48, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/menu"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "clock", "tray"],
+    // Modules configuration
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/Los_Angeles",
+        "format": "{:%Y-%m-%d %H:%M:%S}",
+        "tooltip-format": "<big>{:%Y %B %d}</big>\n<tt><small>{calendar}</small></tt>",
+        "interval": 1,
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "wlr/taskbar": {
+         "format": " {icon}",
+         "icon-size": 36,
+         "icon-theme": ["AwOken-255098166", "gnome", "hicolor"],
+         "tooltip-format": "{title}",
+         "on-click": "activate",
+         "on-click-right": "minimize",
+         "on-click-middle": "close"
+    },
+
+    "custom/menu": {
+        "format": " ",
+        "exec-on-click": true,
+        "tooltip": false,
+        "on-click": "rofi -location 7 -show combi -combi-modi drun,run -modi combi,calc,file-browser -sidebar-mode"
+    }
+}
