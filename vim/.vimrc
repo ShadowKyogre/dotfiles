@@ -580,6 +580,16 @@ set printoptions=number:y,syntax:y,paper:letter,wrap:y,left:0.5in,right:0.5in,to
 	function! CurrentSwapWord(word)
 		exec 'normal! ciw' . a:word . "\<Esc>"
 	endfunction
+
+	function! QuickRun()
+		let l:fpath = expand('%:p')
+		let l:bpath = substitute(l:fpath, '\.c\(pp\)\?$', '.bin', 'v')
+		echo l:bpath
+		let l:compile_cmd = 'g++ ' ..  shellescape(l:fpath) .. ' -o ' .. shellescape(l:bpath)
+		let l:run_cmd = shellescape(l:bpath)
+
+		execute 'terminal ++shell ' ..  l:compile_cmd .. ' && ' .. l:run_cmd
+	endfunction
 "}}}
 
 " ---- STATUSLINE {{{1
@@ -714,6 +724,19 @@ set titlestring=%(%{gettabvar(tabpagenr(),'tabname')}\ %)%t\ %m\ (%{expand('%:p:
 " }}}
 
 " ---- LEADER KEY MAPPINGS {{{1
+	" ------ dasht integration {{{2
+		nnoremap <Leader>k :Dasht<Space>
+		nnoremap <Leader><Leader>k :Dasht!<Space>
+		nnoremap <silent> <Leader>K :call Dasht(dasht#cursor_search_terms())<Return>
+		nnoremap <silent> <Leader><Leader>K :call Dasht(dasht#cursor_search_terms(), '!')<Return>
+		vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
+		vnoremap <silent> <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<Return>
+
+		let g:dasht_filetype_docsets = {}
+		let g:dasht_filetype_docsets['cpp'] = ['C', 'C++']
+		let g:dasht_results_window = 'botright vnew'
+	" }}}
+
 	" ------ MANAGE TABS AND BUFFERS {{{2
 		" map \b to buffers for tab and \w to tab list
 		nnoremap <Leader>b :Clap buffers<CR>

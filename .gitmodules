@@ -34,3 +34,9 @@
 [submodule "vim/.vim/pack/upstream/start/VOoM"]
 	path = vim/.vim/pack/upstream/start/VOoM
 	url = https://github.com/vim-voom/VOoM
+[submodule "vim/.vim/pack/upstream/start/coc.nvim"]
+	path = vim/.vim/pack/upstream/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim
+[submodule "vim/.vim/pack/upstream/start/vim-dasht"]
+	path = vim/.vim/pack/upstream/start/vim-dasht
+	url = https://github.com/sunaku/vim-dasht
