@@ -10,5 +10,11 @@ export VIEB_WINDOW_FRAME=1
 export PATH="${HOME}/bin:${PATH}"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
+for p in /tmp/ssh-*/agent.*; do
+	if [[ -S "${p}" && -r "${p}" && -w "${p}" ]]; then
+		export SSH_AUTH_SOCK="${p}"
+		break
+	fi
+done
 
 # vim: filetype=bash
