@@ -7,3 +7,5 @@ export PYTHONSTARTUP="${HOME}/.config/python/config.py"
 export SAL_USE_VCLPLUGIN=gtk
 export ZDOTDIR="${HOME}/.config/zsh"
 export VIEB_WINDOW_FRAME=1
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
