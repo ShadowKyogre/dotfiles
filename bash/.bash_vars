@@ -10,3 +10,5 @@ export VIEB_WINDOW_FRAME=1
 export PATH="${HOME}/bin:${PATH}"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
+
+# vim: filetype=bash
