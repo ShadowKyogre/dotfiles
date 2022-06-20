@@ -1,0 +1,10 @@
+detect-ssh-agent () {
+	for p in /tmp/ssh-*/agent.*
+	do
+		if [[ -S "${p}" && -r "${p}" && -w "${p}" ]]
+		then
+			export SSH_AUTH_SOCK="${p}" 
+			break
+		fi
+	done
+}
